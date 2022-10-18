@@ -2,8 +2,10 @@
 function App() {
   return (
     <>
-    THIS IS A APP.
-     
+    
+   Tuition Walah 
+    Work is under Progress  
+
     </>
   );
 }

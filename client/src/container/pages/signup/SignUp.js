@@ -1,44 +1,13 @@
+import React ,{ useState} from 'react';
 import {Link} from 'react-router-dom'
-import { AutoComplete, Button, Cascader, Checkbox,
-  Col, Form, Input, InputNumber, Row, Select,} from 'antd';
+import Style from './Style';
+import './Style.css'
+import popup from '../../popups/Message';
 
-import React, { useState } from 'react';
+import { Button,  Checkbox,
+  Col, Form, Input, InputNumber, Row, Select,} from 'antd';
 const { Option } = Select;
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
-const formItemLayout = {
+const formItemLayout = { 
   labelCol: {
     xs: {
       span: 24,
@@ -70,22 +39,25 @@ const tailFormItemLayout = {
 };
 
 const SignUp = () => {
+  const [sentOtp,setSentOtp] = useState(true);
+  const style = Style();
+   console.log("Style is ",style);
   const [form] = Form.useForm();
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
   
-  
+  // console.log(popup)
+ popup.success("Form submit ho gya  ")
   return (
-    <Form
+    <Row className="form"  >
+    <Col span={8} ></Col>
+    <Col span={16}> 
+    <Form 
       {...formItemLayout}
       form={form}
       name="register"
       onFinish={onFinish}
-      initialValues={{
-        residence: ['zhejiang', 'hangzhou', 'xihu'],
-        prefix: '86',
-      }}
       scrollToFirstError
     >
       <Form.Item
@@ -119,11 +91,10 @@ const SignUp = () => {
       </Form.Item>
 
 
-
-   
-      <Form.Item
+         <Form.Item
         name="phone"
         label="Phone Number"
+        tooltip="How we can contact you  ?"
         rules={[
           {
             required: true,
@@ -131,8 +102,8 @@ const SignUp = () => {
           },
         ]}
       >
-        <Input showCount maxLength={10} 
-          addonBefore='+91'
+        <InputNumber   maxLength={10} 
+          prefix='+91'
           style={{width: '100%',}}
         />
       </Form.Item>
@@ -155,8 +126,8 @@ const SignUp = () => {
       </Form.Item>
 
       <Form.Item label="Verify otp" extra="We must make sure that your are a human.">
-        <Row gutter={8}>
-          <Col span={24}>
+        <Row >
+          <Col span={16}>
             <Form.Item
               name="otp"
               noStyle
@@ -170,13 +141,13 @@ const SignUp = () => {
               <Input />
             </Form.Item>
           </Col>
-        </Row>
-       <Row style={{margin:"10px"}} >
-          <Col span={4}>
-            <Button>Send Otp </Button>
-          </Col>
-          <Col span={4}>
-            <Button>Verify Otp </Button>
+          <Col span={1}></Col>
+          <Col span={7}>
+          {sentOtp?<Button
+           onClick={() => setSentOtp(false)}>Sent Otp </Button>:
+          <Button
+          onClick={() => setSentOtp(true)}
+          >Verify Otp </Button>}
           </Col>
         
         </Row>
@@ -197,12 +168,15 @@ const SignUp = () => {
           I have read the <Link to="/agreement">agreement</Link>
         </Checkbox>
       </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
+      <Form.Item
+       {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Register
         </Button>
       </Form.Item>
     </Form>
+    </Col>
+    </Row>
   );
 };
 export default SignUp;

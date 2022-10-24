@@ -3,3 +3,6 @@ https://www.sitepoint.com/using-regular-expressions-to-check-string-length/
 
 # Form 
 https://stackoverflow.com/questions/57105076/how-do-i-implement-minimum-5-characters-validation-in-this-ant-design-login-form
+
+# message 
+https://ant.design/components/message/

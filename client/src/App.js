@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import {Routes ,Route} from 'react-router-dom';
 import Agreement from './container/pages/agreement/Agreement'
+import Index from './container/container/header/Index'
 import Header from './container/container/header/Header'
 import Login from './container/pages/login/Login'
 import SignUp from './container/pages/signup/SignUp'
@@ -21,6 +22,7 @@ function App() {
     <>
     <Header />
     <Routes> 
+    <Route path='menu'  element={ <Index /> } />
     <Route path='login'  element={<Login />}/>
     <Route path='signup'  element={<SignUp />}/>
     <Route path='agreement'  element={<Agreement /> } />

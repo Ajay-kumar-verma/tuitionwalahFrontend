@@ -11,7 +11,7 @@ const Login = () => {
   console.log(userName);
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-  };
+  };  
 
 
   return (
@@ -27,13 +27,15 @@ const Login = () => {
         name="username"
         rules={userName}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <Input showCount 
+         prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
       </Form.Item>
+
       <Form.Item
         name="password"
         rules={password}
       >
-        <Input
+        <Input showCount
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"

@@ -25,8 +25,6 @@ const Rules = _ => {
    { max: 50, message: 'Password must be maximum 50 characters.' },
     
   ]
- 
- 
 
   }
 

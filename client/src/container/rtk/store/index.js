@@ -4,6 +4,8 @@ import  {cakeReducer} from  '../features/cake/cakeSlice'
 import  {icecreamReducer} from  '../features/icecream/icecreamSlice'
 import  {userReducer} from  '../features/users/userSlice'
 import {loginReducer} from '../features/api/login/';
+import {signupReducer} from '../features/api/signUp/';
+
 // console.log(reducer)
 
 const store = configureStore({
@@ -11,7 +13,8 @@ const store = configureStore({
     cake:cakeReducer,
     icecream:icecreamReducer,
     user:userReducer,
-    login:loginReducer
+    login:loginReducer,
+    signup:signupReducer
   },
 
 })

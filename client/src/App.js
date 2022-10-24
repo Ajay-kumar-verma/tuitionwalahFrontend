@@ -1,27 +1,32 @@
 import { useEffect } from 'react';
-import {useSelector,useDispatch}  from 'react-redux'
-import { login , user } from './container/rtk/actions'
+import {Routes ,Route} from 'react-router-dom';
+import Header from './container/container/header/Header'
+import Login from './container/pages/login/Login'
+import SignUp from './container/pages/signup/SignUp'
+import Auth from './container/auth/Auth'
+import Home from './container/pages/home/Home'
+ 
+// import { login , user } from './container/rtk/actions'
 
 function App() {
 
-  const state = useSelector(state => state);
-  const dispatch = useDispatch();
-
-console.log("state is :",state);
-// console.log(login,user);
-// console.log("dispatch is :",dispatch);
-// console.log("obj is :",login);
-
  useEffect(()=>{
-  // dispatch(login({apiCall:true}));
-  dispatch(user({apiCall:false}));
-  
- },[])
+  // dispatch(login({apiCall:false}));
+  // dispatch(user({apiCall:false}));
+  },[])
+ 
 
-  return (
+
+ return (
     <>
-    Tuition Walah 
-    Work is under Progress  
+    <Header />
+    <Routes> 
+    <Route path='login'  element={<Login />}/>
+    <Route path='signup'  element={<SignUp />}/>
+    <Route path='home'  element={ <Auth><Home /></Auth> } />
+
+    </Routes>
+
     </>
   );
 }

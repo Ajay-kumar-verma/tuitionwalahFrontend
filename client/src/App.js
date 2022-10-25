@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import {Routes ,Route} from 'react-router-dom';
 import Agreement from './container/pages/agreement/Agreement'
-import Index from './container/container/header/Index'
-import Header from './container/container/header/Header'
+// import Index from './container/container/header/Index'
+// import AppHeader from './container/container/header/AppHeader'
+import Navbar from './container/container/header/Navbar'
 import Login from './container/pages/login/Login'
 import SignUp from './container/pages/signup/SignUp'
 import Auth from './container/auth/Auth'
@@ -20,9 +21,9 @@ function App() {
 
  return (
     <>
-    <Header />
+    <Navbar />
     <Routes> 
-    <Route path='menu'  element={ <Index /> } />
+    {/* <Route path='menu'  element={ <Index /> } /> */}
     <Route path='login'  element={<Login />}/>
     <Route path='signup'  element={<SignUp />}/>
     <Route path='agreement'  element={<Agreement /> } />

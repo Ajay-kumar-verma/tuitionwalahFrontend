@@ -7,5 +7,5 @@ https://stackoverflow.com/questions/57105076/how-do-i-implement-minimum-5-charac
 # message 
 https://ant.design/components/message/
 
-# Refer NavBar 
-https://github.com/bibeva/React-AntDesign-Project-Tech
+# Refer NavBar  and web site
+https://github.com/bibeva/React-AntDesign-Project-Tech 

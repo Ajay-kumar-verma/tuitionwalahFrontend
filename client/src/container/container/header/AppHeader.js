@@ -36,7 +36,7 @@ function AppHeader() {
           </Anchor>
         </div>
 
-        <div className="mobileVisible">
+        <div   className="mobileVisible">
           <Button type="primary" onClick={showDrawer}>
             <i className="fas fa-bars"></i>
           </Button>

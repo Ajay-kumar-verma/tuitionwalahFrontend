@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './Navbar.css'
 import { Anchor, Drawer, Button } from 'antd';
 import { AiOutlineBars ,AiOutlineClose } from "react-icons/ai";
-import { Layout } from 'antd';
 const { Link } = Anchor;
 
 function Navbar() {
@@ -17,12 +16,11 @@ function Navbar() {
   };
 
   return (
-    <Layout className="mainLayout">
     <div className="container-fluid">
       <div className="header">
           <div className="logo">
           <i className="fas fa-chalkboard-teacher"></i>
-          <a href="https://www.tuitionwalah.com">Tuition Walah</a>
+          <a href="https://www.tuitionwalah.com">TuitionWalah</a>
         </div>
 
         <div className="mobileHidden">
@@ -30,10 +28,7 @@ function Navbar() {
             <Link href="#hero" title="login" />
             <Link href="#createAccount" title="create Account" />
             <Link href="#about" title="About" />
-            <Link href="#feature" title="Features" />
-            <Link href="#works" title="How it works" />
             <Link href="#faq" title="FAQ" />
-            <Link href="#pricing" title="Pricing" />
             <Link href="#contact" title="Contact" />
           </Anchor>
         </div>
@@ -48,22 +43,22 @@ function Navbar() {
             onClose={onClose}
             visible={visible}
           >
-            <AiOutlineClose size={25}  onClick={onClose} />
-            <Anchor targetOffset="65">  
-              <Link href="#hero" title="Home" />
-              <Link href="#about" title="About" />
-              <Link href="#feature" title="Features" />
-              <Link href="#works" title="How it works" />
-              <Link href="#faq" title="FAQ" />
-              <Link href="#pricing" title="Pricing" />
-              <Link href="#contact" title="Contact" />
+            <AiOutlineClose style={{margin:"10px"}}    size={25} 
+             onClick={onClose} />
+           
+            <Anchor style={{margin:"10px"}} targetOffset="65">  
+         
+            <Link href="#hero" title="login" />
+            <Link href="#createAccount" title="create Account" />
+            <Link href="#about" title="About" />
+            <Link href="#faq" title="FAQ" />
+            <Link href="#contact" title="Contact" />
             </Anchor>
-            
           </Drawer>
         </div>
       </div>
     </div>
-    </Layout>
+ 
   );
 }
 

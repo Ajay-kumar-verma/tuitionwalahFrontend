@@ -7,7 +7,7 @@ import Navbar from './container/container/header/Navbar'
 import Login from './container/pages/login/Login'
 import SignUp from './container/pages/signup/SignUp'
 import Auth from './container/auth/Auth'
-import Home from './container/pages/home/Home'
+import Home from './home/Home'
 // import { login , user } from './container/rtk/actions'
 
 function App() {
@@ -21,14 +21,14 @@ function App() {
 
  return (
     <>
-    <Navbar />
-    <Routes> 
-    {/* <Route path='menu'  element={ <Index /> } /> */}
+    <Home />
+    {/* <Routes> 
+     <Route path='menu'  element={ <Index /> } /> 
     <Route path='login'  element={<Login />}/>
     <Route path='signup'  element={<SignUp />}/>
     <Route path='agreement'  element={<Agreement /> } />
     <Route path='home'  element={ <Auth><Home /></Auth> } />
-    </Routes>
+    </Routes> */}
 
     </>
   );

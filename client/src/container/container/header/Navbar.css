@@ -11,17 +11,15 @@ body {
 
 .container-fluid {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 2000px;
   padding: 0 15px;
+  background-color: #1890ff;
 }
 
-.ant-layout {
-  background: #fff !important;
-}
 
 .mainLayout .ant-layout-header {
-  background: #f8f8f8;
-  padding: 0;
+  background: #8d2c2c;
+  padding: 100;
   height: auto;
   line-height: 1.6;
 }

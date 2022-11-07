@@ -1,38 +1,90 @@
-import { useEffect } from 'react';
-import {Routes ,Route} from 'react-router-dom';
-import Agreement from './container/pages/agreement/Agreement'
-// import Index from './container/container/header/Index'
-// import AppHeader from './container/container/header/AppHeader'
-import Navbar from './container/container/header/Navbar'
-import Login from './container/pages/login/Login'
-import SignUp from './container/pages/signup/SignUp'
-import Auth from './container/auth/Auth'
-import Home from './home/Home'
-// import { login , user } from './container/rtk/actions'
+import {Routes,Route} from 'react-router-dom';
+import {useSelector ,useDispatch} from 'react-redux'
 
 function App() {
-
- useEffect(()=>{
-  // dispatch(login({apiCall:false}));
-  // dispatch(user({apiCall:false}));
-  },[])
  
+  const {login ,userType} = useSelector(({user:{login,userType}}) =>{login,userType});
 
+ if(!login){
+    return (<>
+  <Routes> 
+  <Route path='/'  element={<Login /> } /> 
+  <Route path='login'  element={<Login /> } /> 
+  <Route path='createAccount'  element={<CreateAccount /> } /> 
+  <Route path='contact'  element={<Contact /> } />
+  <Route path='agreement'  element={<Agreement /> } />
+  </Routes>  
+    </>)
+ }
+else {
 
- return (
-    <>
-    <Home />
-    {/* <Routes> 
-     <Route path='menu'  element={ <Index /> } /> 
-    <Route path='login'  element={<Login />}/>
-    <Route path='signup'  element={<SignUp />}/>
-    <Route path='agreement'  element={<Agreement /> } />
-    <Route path='home'  element={ <Auth><Home /></Auth> } />
-    </Routes> */}
+if(userType==='user'){
+  return (<>
+    <Routes>
+   <Route path='user' element={ <User /> } >
+      <Route index element={ <Home /> } />
+      <Route path='home' element={<Home /> } />
+      <Route path='address' element={<Address /> } />
+      <Route path='education' element={<Education /> } />
+      <Route path='docVerification' element={<DocVerification /> } />
+      <Route path='otherDetail' element={<OtherDetail /> } />
+      <Route path='setting' element={<Setting /> } >
+         <Route path='changePassword' element={<ChangePassword /> } />
+         <Route path='resetPassword' element={<ResetPassword /> } />
+         <Route path='deleteAccount' element={<DeleteAccount /> } />
+      </Route>
+    </Route> 
 
-    </>
-  );
+     <Route path='teacher'  element={<Teacher />}>
+       <Route index  element={<TeacherDetail />}  />
+   </Route>
+
+   <Route path='parent'  element={<Parent />}>
+      <Route index  element={<ParentDetail />}  />
+       <Route path='children'  element={<ChildrenDetail />}  />
+    </Route>
+   </Routes>
+  </>)
 }
 
+ if(userType==='admin'){
+ return (<>
+   <Routes>
+   <Route path='admin' element={<Admin /> } >
+   <Route index element={<User /> } />
+   <Route path='user' element={<User /> } />
+   <Route path='student' element={<Student /> } />
+   <Route path='teacher' element={<Teacher /> } />
+   <Route path='parent' element={<Parent /> } />
+   <Route path='team' element={<Team /> } />
+   </Route>
+   </Routes>
+ </>)
+ 
+}
+
+if(userType==='main'){
+
+return (<>
+  <Routes>
+  <Route path='main' element={<Main /> } >
+   <Route index element={<Team /> } />
+   <Route path='team' element={<Team /> } />
+   <Route path='user' element={<User /> } />
+   <Route path='student' element={<Student /> } />
+   <Route path='teacher' element={<Teacher /> } />
+   <Route path='parent' element={<Parent /> } />
+   </Route>
+  </Routes>
+
+</>)
+
+}
+
+}
+
+return <NoMatch />
+
+}
 
 export default App;

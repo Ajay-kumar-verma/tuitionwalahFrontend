@@ -1,0 +1,16 @@
+@import '~antd/dist/antd.css';
+
+.login-form {
+/* background-color: red; */
+width: 100vw;
+
+}
+.login-form-forgot {
+  float: right;
+}
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+.login-form-button {
+  width: 100%;
+}

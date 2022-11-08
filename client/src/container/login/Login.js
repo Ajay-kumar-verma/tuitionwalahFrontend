@@ -15,6 +15,8 @@ const Login = () => {
   const login = () =>{
     const login =true;
     const userType=inputEle.current.value; 
+    const token ="113uiewyisdkd";
+    localStorage.setItem('token',token); 
     navigate(`/${userType}`);
     dispatch(loginUsertype({login,userType}));
    

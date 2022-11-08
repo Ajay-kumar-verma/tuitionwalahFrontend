@@ -2,7 +2,10 @@ import React from 'react'
 
 const Agreement = () => {
   return (
-    <div>Agreement</div>
+    <>
+    OUR AGGREEMENT IS :
+    
+    </>
   )
 }
 

@@ -1,13 +1,18 @@
+import React from 'react';
 import { Divider } from 'antd'
 import { Routes, Route  } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import All from './container/all/All'
+import Auth from './container/auth/Auth';
 import Nav from './container/nav/Nav'
 
 import Login from './container/login/Login'
+import Logout from './container/logout/Logout'
+
 import CreateAccount from './container/createAccount/CreateAccount'
 import Contact from './container/contact/Contact'
-import Agreement from './container/agreement/index'
+import Agreement from './container/agreement/Agreement'
 
 import User from './container/user/User'
 import Home from './container/user/home/Home'
@@ -35,13 +40,11 @@ import Team from './container/admin/team/Team'
 import Main from './container/main/Main'
 
 import Payment from './container/payment/Payment'
-import Logout from './container/logout/Logout'
 
 import NoMatch from './container/noMatch/NoMatch'
 
 function App() {
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
-
 
   const { login, userType } = useSelector(({ user: { login, userType } }) => ({
     login,
@@ -50,18 +53,19 @@ function App() {
 
   console.log({ login, userType })
   if (!login) {
-   
     return (
       <>
         <Nav />
         <Divider>ALL</Divider>
         <Routes>
-          <Route  path="/" element={<Login />} />
+        <Route path="/" element={<All />} >  
+          <Route  index element={<Login />} />
           <Route  path="login" element={<Login />} />
           <Route  path="createAccount" element={<CreateAccount />} />
           <Route  path="contact" element={<Contact />} />
-          <Route  path="agreement" element={<Agreement />} />
+          <Route  path="agreement" element={<Auth><Agreement/></Auth>} />
           <Route  path="*" element={<NoMatch />} />
+        </Route>  
         </Routes>
       </>
     )

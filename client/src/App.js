@@ -43,6 +43,7 @@ import Main from './container/main/Main'
 import Payment from './container/payment/Payment'
 
 import NoMatch from './container/noMatch/NoMatch'
+
 function App() {
   const navigate = useNavigate();
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
@@ -55,18 +56,18 @@ console.log({ state });
 
 useEffect(()=>{
   if(!login && localStorage.getItem('token')!==null){
-    console.log("Login is called ")
+    // console.log("Login is called ")
     dispatch(action.user.login())
   }
   navigate(userType);
 },[dispatch,login,userType])
 
 
-if(!login) {
+if(userType==="/") {
   return (
     <>
         <Nav />
-        <Divider>ALL</Divider>
+         <Divider>ALL</Divider>
         <Routes>
         <Route path="/" element={<All />} >  
           <Route  index element={<Login />} />
@@ -75,13 +76,12 @@ if(!login) {
           <Route  path="contact" element={<Contact />} />
           <Route  path="agreement" element={<Auth><Agreement/></Auth>} />
           <Route  path="*" element={<NoMatch />} />
-         
         </Route>  
         </Routes>
       </>
     )
-  } else {
-    if (userType === 'user') {
+  } 
+if(userType === 'user') {
       return (
         <>
           <Divider>USER</Divider>
@@ -121,7 +121,7 @@ if(!login) {
       )
     }
 
-    if (userType === 'admin') {
+if (userType === 'admin') {
       return (
         <>
           <Divider>ADMIN</Divider>
@@ -142,7 +142,7 @@ if(!login) {
       )
     }
 
-    if (userType === 'main') {
+if (userType === 'main') {
       return (
         <>
           <Divider>MAIN</Divider>
@@ -163,9 +163,8 @@ if(!login) {
         </>
       )
     }
- }
+  }
+return <NoMatch />
 
-  return <NoMatch />
-}
 
 export default App

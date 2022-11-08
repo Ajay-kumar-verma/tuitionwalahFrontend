@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux'
 import action  from '../../rtk/actions/index'
 const {user:{loginUsertype}} =action;
 
-console.log("Login page ");
-console.log({loginUsertype});
+// console.log("Login page ");
+// console.log({loginUsertype});
 
 const Login = () => {
   const inputEle = useRef(null);

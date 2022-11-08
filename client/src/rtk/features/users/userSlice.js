@@ -1,6 +1,8 @@
 import api from '../../api/api'
+import { useNavigate } from 'react-router-dom';
 const {createAsyncThunk,createSlice} = require('@reduxjs/toolkit');
 
+// read only 
 const initialState = {
    login:false,
    userType:'user',
@@ -15,6 +17,21 @@ const initialState = {
    address:{},
    otherDetail:{}
   }
+  
+ 
+   
+    const login = createAsyncThunk(
+      'login',
+      async (obj) => {
+        try {
+      const {data} = await api.post(`/login`,obj);
+          return data;     
+      } catch (error) {
+           console.log("Error is : ",error);  
+        }
+     }
+    )
+
   
   // CREATE ACCOUNT
   const createAccount = createAsyncThunk(
@@ -31,24 +48,7 @@ const initialState = {
     }
     )
 
-   // LOGIN USER  
-  const login = createAsyncThunk(
-  'login',
-  async (obj) => {
-    console.log('login data is ',obj)
-    // initialState.sentData=obj;
-    const {Mobile ,Password} =obj;
-    try {
-     const data = await api.post(`/login`,{Mobile,Password})
-      console.log("Server data is  ",data.data);     
-     return data.data;
-     } catch (error) {
-      //  console.log("Error is : ",error);  
-    }
-    
-  }
-)
-
+ 
  // RESET PASSWORD  
    const reset = createAsyncThunk(
     'reset',
@@ -98,9 +98,6 @@ const initialState = {
       )
 
 
-
-
-
   // ADDRESS
     const address = createAsyncThunk(
       'address',
@@ -139,7 +136,6 @@ const initialState = {
 
 
 // REDUCER 
-
 const {reducer ,actions } = createSlice({
   name:"user",
   initialState,
@@ -148,6 +144,7 @@ const {reducer ,actions } = createSlice({
     state.sentData =action.payload;
     state.userType =action.payload.userType
   },
+
   loginUsertype :(state,{payload:{login,userType}}) => {
      if(login===true){
        state.login = true;
@@ -158,8 +155,6 @@ const {reducer ,actions } = createSlice({
       }
     
   },
- 
-
 },
 
   // login
@@ -171,25 +166,29 @@ const {reducer ,actions } = createSlice({
       state.login=false;
    },
    [login.fulfilled]: (state,{payload}) => {
-     state.all =payload;
+     state.all = payload;
      state.loading = false ;
-    if(payload?.login===true){
-      localStorage.setItem('token',payload?.token);
+     const navigate = useNavigate();
+     const {login,token,userType,message,error} =payload;
+    
+     if(token && login===true &&
+       (userType === 'user' || userType === 'admin' || userType==='main'))
+       {
+      localStorage.setItem('token',token);
       state.login=true;  
+      state.userType = userType; 
+      navigate(userType);
     }
-    console.log('Login state fullfil')
-    state.message=payload?.message;
-    state.error=payload?.error;
-    state.userType='user';
-   },
+     state.message=message;
+     state.error=error;
+  },
   [login.rejected]:(state,{payload}) => {
-    console.log('Login state Rejected')
     state.all =payload; 
     state.login = false;
     state.loading = false;
     state.error = payload?.error;
     state.message ="request rejected ! ";
-     },
+  },
     [createAccount.pending]: state => {
        state.loading = true;
        state.login=false;

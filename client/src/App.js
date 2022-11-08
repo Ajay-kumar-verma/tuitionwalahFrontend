@@ -1,7 +1,8 @@
 import React from 'react';
 import { Divider } from 'antd'
 import { Routes, Route  } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector ,useDispatch } from 'react-redux'
+import action  from './rtk/actions/index'
 
 import All from './container/all/All'
 import Auth from './container/auth/Auth';
@@ -42,19 +43,20 @@ import Main from './container/main/Main'
 import Payment from './container/payment/Payment'
 
 import NoMatch from './container/noMatch/NoMatch'
-
 function App() {
+  
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
+  const { login, userType } = useSelector(({ user:{ login, userType } }) =>
+  ({login,userType,}))
 
-  const { login, userType } = useSelector(({ user: { login, userType } }) => ({
-    login,
-    userType,
-  }))
+  const dispatch = useDispatch();
 
-  console.log({ login, userType })
+  console.log({ login, userType });
+  console.log({action});
   if (!login) {
     return (
       <>
+       {dispatch(action.user.login())}
         <Nav />
         <Divider>ALL</Divider>
         <Routes>
@@ -154,7 +156,7 @@ function App() {
         </>
       )
     }
-  }
+ }
 
   return <NoMatch />
 }

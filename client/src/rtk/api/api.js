@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const ENDPOINT = 'https://twserver.herokuapp.com';
-// const ENDPOINT = 'http://localhost:3001';
+// const ENDPOINT = 'https://twserver.herokuapp.com';
+const ENDPOINT = 'http://localhost:3001';
  
 const Token =localStorage.getItem('token');
 const token = `Bearer ${Token}`;

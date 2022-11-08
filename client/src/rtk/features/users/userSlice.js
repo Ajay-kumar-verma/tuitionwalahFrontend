@@ -1,11 +1,10 @@
 import api from '../../api/api'
-import { useNavigate } from 'react-router-dom';
 const {createAsyncThunk,createSlice} = require('@reduxjs/toolkit');
 
 // read only 
 const initialState = {
    login:false,
-   userType:'user',
+   userType:'',
    all:{},
    sentData:{}, 
    loading:false,
@@ -17,14 +16,14 @@ const initialState = {
    address:{},
    otherDetail:{}
   }
-  
- 
    
     const login = createAsyncThunk(
       'login',
       async (obj) => {
         try {
+          console.log("slice 25",{obj});
       const {data} = await api.post(`/login`,obj);
+      console.log({data})
           return data;     
       } catch (error) {
            console.log("Error is : ",error);  
@@ -168,7 +167,6 @@ const {reducer ,actions } = createSlice({
    [login.fulfilled]: (state,{payload}) => {
      state.all = payload;
      state.loading = false ;
-     const navigate = useNavigate();
      const {login,token,userType,message,error} =payload;
     
      if(token && login===true &&
@@ -177,7 +175,6 @@ const {reducer ,actions } = createSlice({
       localStorage.setItem('token',token);
       state.login=true;  
       state.userType = userType; 
-      navigate(userType);
     }
      state.message=message;
      state.error=error;

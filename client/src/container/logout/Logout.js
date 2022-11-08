@@ -1,10 +1,9 @@
 import React from 'react'
 
 const Logout = () => {
- 
-  localStorage.removeItem('token');
+   localStorage.removeItem('token');
+  //  console.log("LOGOUT COMPONENET ")
   window.location.href="/";
-  // console.log("")
   return (
     <>LOG OUT</>
   )

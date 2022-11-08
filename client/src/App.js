@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { Divider } from 'antd'
-import { Routes, Route  } from 'react-router-dom'
+import { Routes, Route ,useNavigate } from 'react-router-dom'
 import { useSelector ,useDispatch } from 'react-redux'
 import action  from './rtk/actions/index'
 
@@ -44,19 +44,27 @@ import Payment from './container/payment/Payment'
 
 import NoMatch from './container/noMatch/NoMatch'
 function App() {
-  
+  const navigate = useNavigate();
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
-  const { login, userType } = useSelector(({ user:{ login, userType } }) =>
-  ({login,userType,}))
+ const state =useSelector(state =>state);
+ const { user:{ login, userType } } =state;
 
-  const dispatch = useDispatch();
+ const dispatch = useDispatch();
 
-  console.log({ login, userType });
-  console.log({action});
-  if (!login) {
-    return (
-      <>
-       {dispatch(action.user.login())}
+console.log({ state });
+
+useEffect(()=>{
+  if(!login && localStorage.getItem('token')!==null){
+    console.log("Login is called ")
+    dispatch(action.user.login())
+  }
+  navigate(userType);
+},[dispatch,login,userType])
+
+
+if(!login) {
+  return (
+    <>
         <Nav />
         <Divider>ALL</Divider>
         <Routes>
@@ -67,6 +75,7 @@ function App() {
           <Route  path="contact" element={<Contact />} />
           <Route  path="agreement" element={<Auth><Agreement/></Auth>} />
           <Route  path="*" element={<NoMatch />} />
+         
         </Route>  
         </Routes>
       </>
@@ -103,8 +112,8 @@ function App() {
 
             <Route path="logout" element={<Logout />} />
             <Route path="payment" element={<Payment />} />
+            <Route  path="*" element={<NoMatch />} />
           </Route>
-          <Route  path="*" element={<NoMatch />} />
         
           </Routes>
       
@@ -124,12 +133,11 @@ function App() {
               <Route path="teacher" element={<Teacher />} />
               <Route path="parent" element={<Parent />} />
               <Route path="team" element={<Team />} />
-            </Route>
-            <Route path="logout" element={<Logout />} />
+             <Route path="logout" element={<Logout />} />
             <Route path="payment" element={<Payment />} />
             <Route  path="*" element={<NoMatch />} />
-        
-          </Routes>
+           </Route>
+         </Routes>
         </>
       )
     }
@@ -146,11 +154,10 @@ function App() {
               <Route path="student" element={<Student />} />
               <Route path="teacher" element={<Teacher />} />
               <Route path="parent" element={<Parent />} />
+              <Route path="logout" element={<Logout />} />
+              <Route path="payment" element={<Payment />} />
+              <Route  path="*" element={<NoMatch />} />
             </Route>
-
-            <Route path="logout" element={<Logout />} />
-            <Route path="payment" element={<Payment />} />
-            <Route  path="*" element={<NoMatch />} />
         
           </Routes>
         </>

@@ -1,8 +1,7 @@
 const {createSlice} = require('@reduxjs/toolkit');
 
 const initialState = {
-    login:false,
-    token:""
+   login:true
   }
 
 const {reducer ,actions} = createSlice({

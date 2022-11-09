@@ -48,17 +48,19 @@ function App() {
   const navigate = useNavigate();
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
  const state =useSelector(state =>state);
- const { user:{ login, userType } } =state;
-
+ console.log({ state },{action});
+ let {all:{login,userType}} =state;
  const dispatch = useDispatch();
+console.log({login,userType});
 
-console.log({ state });
+userType=userType[0];
 
 useEffect(()=>{
   if(!login && localStorage.getItem('token')!==null){
     // console.log("Login is called ")
-    dispatch(action.user.login())
+    dispatch(action.all.login())
   }
+//  userType  
   navigate(userType);
 },[dispatch,login,userType])
 
@@ -66,21 +68,22 @@ useEffect(()=>{
 if(userType==="/") {
   return (
     <>
-        <Nav />
-         <Divider>ALL</Divider>
+       <Divider>ALL</Divider>
         <Routes>
         <Route path="/" element={<All />} >  
           <Route  index element={<Login />} />
           <Route  path="login" element={<Login />} />
           <Route  path="createAccount" element={<CreateAccount />} />
           <Route  path="contact" element={<Contact />} />
-          <Route  path="agreement" element={<Auth><Agreement/></Auth>} />
+          <Route  path="agreement" element={<Agreement/>} />
           <Route  path="*" element={<NoMatch />} />
         </Route>  
         </Routes>
       </>
     )
   } 
+
+
 if(userType === 'user') {
       return (
         <>
@@ -110,8 +113,8 @@ if(userType === 'user') {
               <Route path="children" element={<ChildrenDetail />} />
             </Route>
 
-            <Route path="logout" element={<Logout />} />
             <Route path="payment" element={<Payment />} />
+            <Route path="logout" element={<Logout />} />
             <Route  path="*" element={<NoMatch />} />
           </Route>
         
@@ -164,7 +167,8 @@ if (userType === 'main') {
       )
     }
   }
-return <NoMatch />
+
+// return <NoMatch />
 
 
 export default App

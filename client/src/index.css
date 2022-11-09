@@ -1,0 +1,9 @@
+@import '~antd/dist/antd.css';
+
+.LoginPage ,.SignUpPage ,.ContactPage{
+    padding:5px;
+    max-width: 800px;
+    height:100vh;
+    margin:auto;
+    background-color:white;
+  }  

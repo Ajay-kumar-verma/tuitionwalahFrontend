@@ -4,6 +4,7 @@ import axios from 'axios';
 const ENDPOINT = 'http://localhost:3001';
  
 const Token =localStorage.getItem('token');
+
 const token = `Bearer ${Token}`;
 
 const  headers={

@@ -3,8 +3,6 @@ const {createAsyncThunk,createSlice} = require('@reduxjs/toolkit');
 
 // read only 
 const initialState = {
-   login:false,
-   userType:'/',
    all:{},
    sentData:{}, 
    loading:false,
@@ -12,8 +10,8 @@ const initialState = {
    message: '',
    error:'',
    apiCalled:false,
-   home:{},
-   address:{},
+   home:{apiCall:false, data:{}},
+   address:{apiCall:false, data:{}},
    otherDetail:{}
   }
   
@@ -21,7 +19,7 @@ const initialState = {
     'home',
     async ()=>{
      try {
-      const {data} = await api.get(`/user`)
+      const {data} = await api.get(`/user/home`)
        return data; 
     } catch (error) {
       return error;   
@@ -214,11 +212,13 @@ const {reducer ,actions } = createSlice({
       state.loading = true;
    },
    [home.fulfilled]:(state,{payload}) => {
-     state.home = payload;
+     state.all = payload;
      state.loading = false ;
      state.message=payload?.message;
      state.error=payload?.error;
-   },
+     state.home.data=payload;
+     state.home.apiCall=false;
+    },
    [home.rejected]:(state,{payload}) => {
      state.home =payload; 
      state.loading = false;
@@ -231,7 +231,8 @@ const {reducer ,actions } = createSlice({
   },
   [address.fulfilled]:(state,{payload}) => {
   state.all =payload;
-  state.address = payload.address;
+  state.address.data = payload;
+  state.address.apiCall = true;
   state.loading = false ;
   state.message=payload?.message;
   state.error=payload?.error; 

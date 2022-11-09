@@ -4,7 +4,7 @@ import React from 'react'
 const NoMatch = () => {
   return (
     <>
-    <h1>Inavalid url  </h1>
+    <h1>PLEASE  WAIT   </h1>
     <nav>
     <a href="/" >Home</a>
     <a href="/login" >Login</a>

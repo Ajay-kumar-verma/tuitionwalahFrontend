@@ -48,21 +48,22 @@ function App() {
   const navigate = useNavigate();
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
  const state =useSelector(state =>state);
- console.log({ state },{action});
+ //console.log({ state },{action});
  let {all:{login,userType}} =state;
  const dispatch = useDispatch();
-console.log({login,userType});
+//console.log({login,userType});
 
 userType=userType[0];
 
 useEffect(()=>{
   if(!login && localStorage.getItem('token')!==null){
-    // console.log("Login is called ")
+   //console.log("Login is called ")
     dispatch(action.all.login())
   }
 //  userType  
-  navigate(userType);
-},[dispatch,login,userType])
+const path = window.location.pathname; 
+  navigate(path);
+},[dispatch,login])
 
 
 if(userType==="/") {

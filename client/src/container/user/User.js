@@ -5,7 +5,7 @@ import React from 'react'
 const User = () => {
   return (
     <>
-    <h1>USER ACCOUNT </h1>
+  <h3 style={{color:"green"}} >USER ACCOUNT </h3>
   <nav>
 <NavLink to="home" >home </NavLink>
 <NavLink to="address" >address </NavLink>

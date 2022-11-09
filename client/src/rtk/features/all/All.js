@@ -21,7 +21,7 @@ const initialState = {
     const login = createAsyncThunk(
       'login',
       async (obj) => {
-        console.log("Login",{obj})
+        // console.log("Login",{obj})
         try {
         const {data} = await api.post(`/login`,obj);
       // console.log({data})

@@ -1,9 +1,18 @@
-import React from 'react'
+import { NavLink,Outlet } from 'react-router-dom'
 
-const Teacher = () => {
+const TeacherDetail = () => {
   return (
-    <div>Teacher</div>
-  )
+<>
+<nav>
+<NavLink to="education" >Education  </NavLink>
+<NavLink to="otherDetail" >Other details </NavLink>
+
+  </nav>
+<Outlet />
+
+  </>
+ 
+    )
 }
 
-export default Teacher
+export default TeacherDetail

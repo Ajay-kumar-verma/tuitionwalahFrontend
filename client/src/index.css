@@ -1,9 +1,13 @@
 @import '~antd/dist/antd.css';
 
-.LoginPage ,.SignUpPage ,.ContactPage{
+.form{
     padding:5px;
     max-width: 800px;
     height:100vh;
     margin:auto;
     background-color:white;
   }  
+
+  .active {
+    color:red;
+  }

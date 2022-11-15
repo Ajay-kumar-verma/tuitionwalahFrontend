@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import {message} from 'antd';
 import {useSelector ,useDispatch} from 'react-redux';
 import action  from '../../rtk/actions/index'
+import {MailOutlined , PhoneOutlined  }  from '@ant-design/icons'
 
 import {
     Button,
@@ -92,7 +93,7 @@ import {
           ]}
         >
           <Input
-            addonBefore="+91"  maxLength="10" showCount
+            addonBefore=<PhoneOutlined />  maxLength="10" showCount
             style={{
               width: '100%',
             }}
@@ -115,7 +116,7 @@ import {
           ]}
         >
           <Input
-            addonBefore="mail id "  maxLength="70" showCount
+            addonBefore=<MailOutlined />  maxLength="70" showCount
             style={{
               width: '100%',
             }}

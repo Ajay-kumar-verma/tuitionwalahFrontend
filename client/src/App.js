@@ -17,18 +17,21 @@ import Agreement from './container/agreement/Agreement'
 
 import User from './container/user/User'
 import Home from './container/user/home/Home'
+import UserContact from './container/user/contact/Contact'
 import Address from './container/user/address/Address'
-import Education from './container/user/education/Education'
 import Document from './container/user/document/Document'
-import OtherDetail from './container/user/otherDetail/OtherDetail'
+import AccountType from './container/user/accountType/AccountType'
+
+import Teacher from './container/teacher/Teacher'
+import Education from './container/teacher/education/Education'
+import OtherDetail from './container/teacher/otherDetail/OtherDetail'
+
 
 import Setting from './container/user/setting/Setting'
 import ChangePassword from './container/user/setting/changePassword/ChnagePassword'
 import ResetPassword from './container/user/setting/resetPassword/ResetPassword'
 import DeleteAccount from './container/user/setting/deleteAccount/DeleteAccount'
 
-import Teacher from './container/teacher/Teacher'
-import TeacherDetail from './container/teacher/teacherDetail/TeacherDetail'
 
 import Parent from './container/parent/Parent'
 import ParentDetail from './container/parent/parentDetail/ParentDetail'
@@ -48,7 +51,7 @@ function App() {
   const navigate = useNavigate();
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
  const state =useSelector(state =>state);
- //console.log({ state },{action});
+ console.log({ state },{action});
  let {all:{login,userType}} =state;
  const dispatch = useDispatch();
 //console.log({login,userType});
@@ -62,14 +65,26 @@ useEffect(()=>{
   }
 //  userType  
 const path = window.location.pathname; 
-  navigate(path);
+  //  navigate(userType);
+   navigate(path)
+
 },[dispatch,login])
 
 
 if(userType==="/") {
+  const list =[
+    {href:"home",title:"Home"},
+    {href:"signup",title:"Sign Up"},
+    {href:"login",title:"Login"},
+    {href:"faq",title:"FAQ"},
+    {href:"contact",title:"Contact"},
+  
+  ]
+  
   return (
     <>
-       <Divider>ALL</Divider>
+       <Nav menuList={list} />
+       <Divider />
         <Routes>
         <Route path="/" element={<All />} >  
           <Route  index element={<Login />} />
@@ -86,18 +101,26 @@ if(userType==="/") {
 
 
 if(userType === 'user') {
-      return (
+  
+  return (
         <>
           <Divider>USER</Divider>
           <Routes>
             <Route path="user" element={<User />}>
               <Route index element={<Home />} />
               <Route path="home" element={<Home />} />
+              <Route path="contact" element={<UserContact />} />
               <Route path="address" element={<Address />} />
               <Route path="education" element={<Education />} />
               <Route path="document" element={<Document />} />
-              <Route path="otherDetail" element={<OtherDetail />} />
              
+              <Route path="teacher" element={<Teacher />}>
+              <Route index element={<Education />} />
+              <Route path="education" element={<Education />} />
+              <Route path="otherDetail" element={<OtherDetail />} />
+              </Route>
+        
+
               <Route path="setting" element={<Setting />}>
                 <Route index element={<ChangePassword />} />
                 <Route path="changePassword" element={<ChangePassword />} />
@@ -105,15 +128,14 @@ if(userType === 'user') {
                 <Route path="deleteAccount" element={<DeleteAccount />} />
               </Route>
            
-            <Route path="teacher" element={<Teacher />}>
-              <Route index element={<TeacherDetail />} />
-            </Route>
-
             <Route path="parent" element={<Parent />}>
               <Route index element={<ParentDetail />} />
+              <Route path="parentInfo" element={<ParentDetail />} />
               <Route path="children" element={<ChildrenDetail />} />
             </Route>
 
+            <Route path="accountType" element={<AccountType />} />
+            
             <Route path="payment" element={<Payment />} />
             <Route path="logout" element={<Logout />} />
             <Route  path="*" element={<NoMatch />} />

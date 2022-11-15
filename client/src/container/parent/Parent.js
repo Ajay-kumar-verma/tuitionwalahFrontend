@@ -9,10 +9,9 @@ console.log("parent page ")
 <>
 <h1>Parent</h1>
     <nav>
-   <NavLink to="children">Children </NavLink> 
-   <NavLink to="/">home </NavLink> 
-   <NavLink to="deleteAccount">deleteAccount </NavLink> 
-   </nav>
+    <NavLink to="parentInfo">Parent info </NavLink> 
+    <NavLink to="children">Children </NavLink> 
+     </nav>
   <Outlet />
 
 </>

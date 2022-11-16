@@ -65,8 +65,8 @@ useEffect(()=>{
   }
 //  userType  
 const path = window.location.pathname; 
-  //  navigate(userType);
-   navigate(path)
+   navigate(userType);
+  //  navigate(path)
 
 },[dispatch,login])
 

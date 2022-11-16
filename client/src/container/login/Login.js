@@ -32,7 +32,7 @@ const Login = () => {
 
   <Form  form={form} 
    id="login"
-  className="LoginPage"
+  className="form"
       name="basic"
       labelCol={{
         span: 24,

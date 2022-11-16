@@ -1,6 +1,6 @@
 import React ,{useEffect} from 'react';
 import {useDispatch ,useSelector} from 'react-redux'
-
+import { Image } from 'antd';
 import action  from '../../../rtk/actions/index';
 
 
@@ -19,8 +19,21 @@ useEffect(()=>{
 
 },[dispatch,apiCall,home])
 
-  return (
+const maleImage = "https://img.icons8.com/color/96/null/person-male.png";
+const femaleImage ="https://img.icons8.com/color/96/null/person-female.png"; 
+
+return (
     <div>
+ <Image
+    width={100}
+    src={maleImage}
+  />
+ <Image
+    width={100}
+    src={femaleImage}
+  />
+
+
       This is home page 
      {JSON.stringify(data)}
 

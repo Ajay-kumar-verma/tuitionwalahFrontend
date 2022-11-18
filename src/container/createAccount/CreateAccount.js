@@ -36,8 +36,8 @@ import {
 
     return (
       <Form  
-        id="signup"
-        className="SignUpPage"
+       id="createAccount"
+       className="form"
         name="register"
         labelCol={{span: 24,}}
         wrapperCol={{span: 24,}}

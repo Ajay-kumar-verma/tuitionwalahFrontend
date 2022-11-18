@@ -24,7 +24,7 @@ function AppContact() {
   return (
         <Form  
         id="contact"
-        className="ContactPage"
+        className="form"
       onFinish={onFinish}
       labelCol={{span: 24,}}
       wrapperCol={{span: 24,}}

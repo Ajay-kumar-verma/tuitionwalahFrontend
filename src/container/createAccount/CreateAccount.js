@@ -28,9 +28,7 @@ import {
     // console.log('On submit values is :',values);
     dispatch(createAccount(values));
     };
-    
-
-   
+     
    
     const onFinishFailed = (values) =>{
     console.log('Received values of form: ', values);

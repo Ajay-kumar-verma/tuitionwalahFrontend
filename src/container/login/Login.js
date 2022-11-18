@@ -6,8 +6,6 @@ import {useSelector,useDispatch} from 'react-redux';
 import action  from '../../rtk/actions/index'
 
 
-import env from "react-dotenv";
-console.log({env},window.env)
 const Login = () => {
   // const navigate =useNavigate(); 
 

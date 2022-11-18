@@ -1,5 +1,8 @@
-import  config from  'dotenv-config';
- 
-console.log({config}); // localhost
- 
-export default config;
+const data  ={
+    ENDPOINT : 'https://twserver.herokuapp.com',
+    // ENDPOINT : 'localhost:4000'  
+    // ENDPOINT : 'https://twtest.herokuapp.com',
+
+
+}
+export default data;

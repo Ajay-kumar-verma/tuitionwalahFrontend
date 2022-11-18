@@ -1,6 +1,8 @@
-import {useEffect} from 'react';
-import {message} from 'antd';
-import {useSelector ,useDispatch} from 'react-redux';
+// import {useEffect} from 'react';
+// import {message} from 'antd';
+import {
+  // useSelector,
+  useDispatch} from 'react-redux';
 import action  from '../../rtk/actions/index'
 import {MailOutlined , PhoneOutlined  }  from '@ant-design/icons'
 
@@ -17,7 +19,7 @@ import {
   const { Option } = Select;
     
   const App = () => {
-    const state =useSelector(state =>state.user);
+    // const state =useSelector(state =>state.user);
     const dispatch =useDispatch();
   const {all:{createAccount}} = action;
       // console.log({createAccount})
@@ -26,9 +28,7 @@ import {
     // console.log('On submit values is :',values);
     dispatch(createAccount(values));
     };
-    
-
-   
+     
    
     const onFinishFailed = (values) =>{
     console.log('Received values of form: ', values);

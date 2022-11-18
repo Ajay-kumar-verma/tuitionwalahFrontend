@@ -1,11 +1,11 @@
 import axios from 'axios';
+import config from '../../config'
+const {ENDPOINT} =config ;
+console.log({ENDPOINT})
 
-// const ENDPOINT = 'https://twserver.herokuapp.com';
-const ENDPOINT = 'http://localhost:3001';
- 
 const Token =localStorage.getItem('token');
-
 const token = `Bearer ${Token}`;
+
 
 const  headers={
     token

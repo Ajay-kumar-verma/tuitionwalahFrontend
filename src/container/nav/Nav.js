@@ -28,7 +28,7 @@ function AppHeader({menuList}) {
       <div className="header">
         <div className="logo">
           <i className="fas fa-book-reader"></i>
-          <a href="#0">TUITION WALAH</a>
+          <a href="11" onClick={(e)=>{e.preventDefault()}} >TUITION WALAH</a>
         </div>
         <div className="mobileHidden">
            {list()}

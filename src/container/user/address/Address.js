@@ -1,7 +1,7 @@
 import React ,{useEffect} from 'react';
 import {useDispatch ,useSelector} from 'react-redux'
 import { Form, Input, Button,
-  Select  ,Divider,message} from 'antd';
+  Select  ,Divider} from 'antd';
 import action  from '../../../rtk/actions/index';
 
 const zipList = [
@@ -17,7 +17,7 @@ const App = () => {
   
   const {address} = action.user; 
     console.log({state})
-   const {apiCall,data} =state; 
+   const {apiCall} =state; 
    
 useEffect(()=>{
    if(!apiCall){

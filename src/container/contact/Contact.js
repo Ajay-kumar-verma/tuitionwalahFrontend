@@ -1,11 +1,13 @@
 import React from 'react';
-import {useSelector ,useDispatch} from 'react-redux';
+import {
+  // useSelector
+   useDispatch} from 'react-redux';
 import action  from '../../rtk/actions/index'
 import { Form, Input, Button, Checkbox, Divider } from 'antd';
 const { TextArea } = Input;
 
 function AppContact() {
-  const state =useSelector(state =>state.user);
+  // const state =useSelector(state =>state.user);
   const dispatch =useDispatch();
   const {all:{contact}} = action;
    

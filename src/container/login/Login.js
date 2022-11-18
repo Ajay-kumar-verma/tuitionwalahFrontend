@@ -1,11 +1,13 @@
-import {useNavigate} from 'react-router-dom';
-import { Button, Checkbox, Form, Input ,Tooltip ,Divider,message  } from 'antd';
+
+// import {useNavigate} from 'react-router-dom';
+import { Button, Checkbox, Form, Input ,Tooltip ,Divider } from 'antd';
 import React  from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import action  from '../../rtk/actions/index'
 
+
 const Login = () => {
-  const navigate =useNavigate(); 
+  // const navigate =useNavigate(); 
 
   const state =useSelector(state =>state);
   const dispatch =useDispatch();
@@ -24,11 +26,12 @@ const Login = () => {
     console.log('Failed:', errorInfo);
   };
   
-
+  const data =  process.env;
+  console.log({data})
 
   return (
     <>
-        
+   
 
   <Form  form={form} 
    id="login"

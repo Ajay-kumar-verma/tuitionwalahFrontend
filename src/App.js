@@ -27,7 +27,7 @@ import Education from './container/teacher/education/Education'
 import OtherDetail from './container/teacher/otherDetail/OtherDetail'
 
 
-import Setting from './container/user/setting/Setting'
+// import Setting from './container/user/setting/Setting'
 import ChangePassword from './container/user/setting/changePassword/ChnagePassword'
 import ResetPassword from './container/user/setting/resetPassword/ResetPassword'
 import DeleteAccount from './container/user/setting/deleteAccount/DeleteAccount'

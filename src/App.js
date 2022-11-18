@@ -5,7 +5,7 @@ import { useSelector ,useDispatch } from 'react-redux'
 import action  from './rtk/actions/index'
 
 import All from './container/all/All'
-import Auth from './container/auth/Auth';
+// import Auth from './container/auth/Auth';
 import Nav from './container/nav/Nav'
 
 import Login from './container/login/Login'
@@ -64,11 +64,11 @@ useEffect(()=>{
     dispatch(action.all.login())
   }
 //  userType  
-const path = window.location.pathname; 
+// const path = window.location.pathname; 
    navigate(userType);
   //  navigate(path)
 
-},[dispatch,login])
+},[dispatch,login,userType])
 
 
 if(userType==="/") {
@@ -78,7 +78,6 @@ if(userType==="/") {
     {href:"login",title:"Login"},
     {href:"faq",title:"FAQ"},
     {href:"contact",title:"Contact"},
-  
   ]
   
   return (
@@ -92,6 +91,10 @@ if(userType==="/") {
           <Route  path="createAccount" element={<CreateAccount />} />
           <Route  path="contact" element={<Contact />} />
           <Route  path="agreement" element={<Agreement/>} />
+          <Route path="changePassword" element={<ChangePassword />} />
+          <Route path="resetPassword" element={<ResetPassword />} />
+          <Route path="deleteAccount" element={<DeleteAccount />} />
+          <Route path="logout" element={<Logout />} />
           <Route  path="*" element={<NoMatch />} />
         </Route>  
         </Routes>
@@ -101,7 +104,6 @@ if(userType==="/") {
 
 
 if(userType === 'user') {
-  
   return (
         <>
           <Divider>USER</Divider>
@@ -113,31 +115,22 @@ if(userType === 'user') {
               <Route path="address" element={<Address />} />
               <Route path="education" element={<Education />} />
               <Route path="document" element={<Document />} />
-             
-              <Route path="teacher" element={<Teacher />}>
-              <Route index element={<Education />} />
-              <Route path="education" element={<Education />} />
-              <Route path="otherDetail" element={<OtherDetail />} />
-              </Route>
-        
-
-              <Route path="setting" element={<Setting />}>
-                <Route index element={<ChangePassword />} />
-                <Route path="changePassword" element={<ChangePassword />} />
-                <Route path="resetPassword" element={<ResetPassword />} />
-                <Route path="deleteAccount" element={<DeleteAccount />} />
-              </Route>
-           
+            
             <Route path="parent" element={<Parent />}>
               <Route index element={<ParentDetail />} />
               <Route path="parentInfo" element={<ParentDetail />} />
               <Route path="children" element={<ChildrenDetail />} />
             </Route>
 
+            <Route path="teacher" element={<Teacher />}>
+              <Route index element={<Education />} />
+              <Route path="education" element={<Education />} />
+              <Route path="otherDetail" element={<OtherDetail />} />
+            </Route>
+       
             <Route path="accountType" element={<AccountType />} />
             
             <Route path="payment" element={<Payment />} />
-            <Route path="logout" element={<Logout />} />
             <Route  path="*" element={<NoMatch />} />
           </Route>
         
@@ -159,8 +152,6 @@ if (userType === 'admin') {
               <Route path="teacher" element={<Teacher />} />
               <Route path="parent" element={<Parent />} />
               <Route path="team" element={<Team />} />
-             <Route path="logout" element={<Logout />} />
-            <Route path="payment" element={<Payment />} />
             <Route  path="*" element={<NoMatch />} />
            </Route>
          </Routes>
@@ -180,8 +171,6 @@ if (userType === 'main') {
               <Route path="student" element={<Student />} />
               <Route path="teacher" element={<Teacher />} />
               <Route path="parent" element={<Parent />} />
-              <Route path="logout" element={<Logout />} />
-              <Route path="payment" element={<Payment />} />
               <Route  path="*" element={<NoMatch />} />
             </Route>
         

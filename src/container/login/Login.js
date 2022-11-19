@@ -30,11 +30,8 @@ const Login = () => {
   console.log({data})
 
   return (
-    <>
-   
-
   <Form  form={form} 
-   id="login"
+ 
   className="form"
       name="basic"
       labelCol={{
@@ -113,9 +110,6 @@ const Login = () => {
       <p style={{float:"right"}} > Not having account ?<a href="#signup">Create account</a></p>
    
      </Form>
-
-
-</>
   );
 };
 export default Login;

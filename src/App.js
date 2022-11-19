@@ -7,7 +7,7 @@ import action  from './rtk/actions/index'
 
 import All from './container/all/All'
 // import Auth from './container/auth/Auth';
-import Nav from './container/nav/Nav'
+// import Nav from './container/nav/Nav'
 
 import Login from './container/login/Login'
 import Logout from './container/logout/Logout'
@@ -73,38 +73,23 @@ useEffect(()=>{
 
 
 if(userType==="/") {
-  const list =[
-    {href:"home",title:"Home"},
-    {href:"signup",title:"Sign Up"},
-    {href:"login",title:"Login"},
-    {href:"faq",title:"FAQ"},
-    {href:"contact",title:"Contact"},
-  ]
+
   
   
   return (
-    <>
-       <Nav menuList={list} />
-       <Divider />
-        <Routes>
+       <Routes>
         <Route path="/" element={<All />} >  
-          <Route  index element={<Login />} />
-          <Route  path="login" element={<Login />} />
+          {/* <Route  index element={<Login />} /> */}
+          {/* <Route  path="login" element={<Login />} /> */}
           <Route  path="createAccount" element={<CreateAccount />} />
           <Route  path="contact" element={<Contact />} />
           <Route  path="agreement" element={<Agreement/>} />
-          <Route path="changePassword" element={<ChangePassword />} />
-          <Route path="resetPassword" element={<ResetPassword />} />
-          <Route path="deleteAccount" element={<DeleteAccount />} />
           <Route path="logout" element={<Logout />} />
           <Route  path="*" element={<NoMatch />} />
         </Route>  
-        </Routes>
-      </>
+       </Routes>
     )
   } 
-
-
 if(userType === 'user') {
   return (
         <>
@@ -117,7 +102,9 @@ if(userType === 'user') {
               <Route path="address" element={<Address />} />
               <Route path="education" element={<Education />} />
               <Route path="document" element={<Document />} />
-            
+              <Route path="changePassword" element={<ChangePassword />} />
+              <Route path="resetPassword" element={<ResetPassword />} />
+              <Route path="deleteAccount" element={<DeleteAccount />} />
             <Route path="parent" element={<Parent />}>
               <Route index element={<ParentDetail />} />
               <Route path="parentInfo" element={<ParentDetail />} />

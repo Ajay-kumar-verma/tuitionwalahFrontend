@@ -131,7 +131,7 @@ function AppContact() {
           <Form.Item>
             <Button
              style={{width:"100%"}}
-            type="primary" htmlType="submit" className="btn">
+            type="primary" htmlType="submit" >
               Submit
             </Button>
           </Form.Item>

@@ -35,8 +35,10 @@ import {
     } 
 
     return (
+     <>
+      
       <Form  
-       id="createAccount"
+      
        className="form"
         name="register"
         labelCol={{span: 24,}}
@@ -174,13 +176,14 @@ import {
 
 
         <Form.Item >
-          <Button type="primary" style={{width:"100%"}} htmlType="submit"className="btn" >
+          <Button type="primary" style={{width:"100%"}} htmlType="submit"  >
            createAccount
            </Button>
         </Form.Item>
         <p style={{float:"right"}} > Having Account ?<a href="#login">Login</a>
        </p>
    </Form>
+   </>
     );
   };
   export default App;

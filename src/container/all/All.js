@@ -1,5 +1,4 @@
 import React from 'react'
-import {Divider} from 'antd'
 import Nav from '../nav/all/Navbar';
 import {Outlet} from 'react-router-dom';
 import Login from '../login/Login'

@@ -84,7 +84,7 @@ function AppContact() {
         
           <Form.Item
             name="Subject"
-            label="Enter subject you wat to talk about " 
+            label="Enter subject you want to talk about " 
             rules={[
              
               {

@@ -30,15 +30,12 @@ return (<>
   </Button>   
 }     
 
-<Drawer title="TUITION WALAH" placement="right" onClose={onClose} open={open}>
+<Drawer title="TUITION WALAH" width='60%' placement="right" onClose={onClose} open={open}>
 {data.map((e,i)=>{
-    if(i===0){
-        return null;
-    }  
+    if(i===0) return null;
     return<div>{e}</div>;
     })}
    </Drawer>
-
 
 </>)
 

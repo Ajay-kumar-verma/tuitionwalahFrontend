@@ -13,13 +13,41 @@ import {
     Input,
     Select,
     Divider,
-    DatePicker
+    DatePicker,
+   message,
+   Space,
   } from 'antd';
   
   const { Option } = Select;
     
   const App = () => {
-    // const state =useSelector(state =>state.user);
+    const [messageApi, contextHolder] = message.useMessage()
+ 
+
+    const success = () => {
+      messageApi.open({
+        type: 'success',
+        content: 'This is a success message From CreateAccount',
+      });
+    };
+    const error = () => {
+      messageApi.open({
+        type: 'error',
+        content: 'This is an error message From CreateAccount',
+      });
+    };
+    const warning = () => {
+      messageApi.open({
+        type: 'warning',
+        content: 'This is a warning message From CreateAccount',
+      });
+    };
+  
+  
+  
+
+
+
     const dispatch =useDispatch();
   const {all:{createAccount}} = action;
       // console.log({createAccount})
@@ -36,7 +64,7 @@ import {
 
     return (
      <>
-      
+   
       <Form  
       
        className="form"
@@ -51,7 +79,12 @@ import {
         scrollToFirstError
       >
        <Divider>Create Account </Divider>
-
+       {contextHolder}
+       <Space>
+        <Button onClick={success}>Success</Button>
+        <Button onClick={error}>Error</Button>
+        <Button onClick={warning}>Warning</Button>
+      </Space>
         <Form.Item
           name="FirstName"
           label="FirstName"

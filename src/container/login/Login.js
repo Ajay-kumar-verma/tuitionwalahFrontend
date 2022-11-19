@@ -1,13 +1,12 @@
-
-// import {useNavigate} from 'react-router-dom';
 import { Button, Checkbox, Form, Input ,Tooltip ,Divider } from 'antd';
 import React  from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import action  from '../../rtk/actions/index'
+import { message, Space } from 'antd';
 
 
 const Login = () => {
-  // const navigate =useNavigate(); 
+  const [messageApi, contextHolder] = message.useMessage()
 
   const state =useSelector(state =>state);
   const dispatch =useDispatch();
@@ -29,28 +28,57 @@ const Login = () => {
   const data =  process.env;
   console.log({data})
 
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'This is a success message From Login',
+    });
+  };
+  const error = () => {
+    messageApi.open({
+      type: 'error',
+      content: 'This is an error message From Login',
+    });
+  };
+  const warning = () => {
+    messageApi.open({
+      type: 'warning',
+      content: 'This is a warning message From Login',
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
   <Form  form={form} 
  
   className="form"
       name="basic"
-      labelCol={{
-        span: 24,
-      }}
-      wrapperCol={{
-        span: 24,
-      }}
-      initialValues={{
-        remember: true,
-        Mobile:"",
-        Password:""
-      }}
+      labelCol={{span: 24,}}
+      wrapperCol={{span: 24,}}
+      initialValues={{remember: true,Mobile:"",Password:""}}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Divider>Login form </Divider>
-    
+      {contextHolder}
+      <Space>
+        <Button onClick={success}>Success</Button>
+        <Button onClick={error}>Error</Button>
+        <Button onClick={warning}>Warning</Button>
+      </Space>
       <Form.Item
         label="Mobile or Email "
         name="username"

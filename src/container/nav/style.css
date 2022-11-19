@@ -1,0 +1,54 @@
+
+.desktop {
+background-color: #1890ff;
+height:7%;
+width:100%;
+display:flex;
+justify-content: space-around;
+align-items: center;
+padding:0 5%;   
+position:fixed;
+z-index: 99;
+}
+
+ 
+
+
+
+.btn{
+ display: none; 
+ position:fixed;
+ right:0;
+ top:0; 
+ font-size: 30px;
+ z-index: 12300;
+}
+
+
+
+.anchor{
+color:white;
+font-size:25px;
+transition:all .3s ;
+}
+
+.anchor:hover {
+  color:rgb(45, 14, 181);
+  font-variant: small-caps; 
+}
+
+
+.active{
+  color:rgb(45, 14, 181) !important;
+
+  font-variant: small-caps;
+  font-stretch: expanded;
+}
+
+
+@media only screen and (max-width: 1250px) {
+  .mobile{display:block}
+  .btn{display: block;}
+  .desktop{display:none;}
+  
+}

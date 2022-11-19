@@ -3,11 +3,32 @@ import {
   // useSelector
    useDispatch} from 'react-redux';
 import action  from '../../rtk/actions/index'
-import { Form, Input, Button, Checkbox, Divider } from 'antd';
+import { Form, Input, Button, Checkbox, Divider,message,Space } from 'antd';
 const { TextArea } = Input;
 
 function AppContact() {
-  // const state =useSelector(state =>state.user);
+  
+  const [messageApi, contextHolder] = message.useMessage()
+ 
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'This is a success message From Contact',
+    });
+  };
+  const error = () => {
+    messageApi.open({
+      type: 'error',
+      content: 'This is an error message From Contact',
+    });
+  };
+  const warning = () => {
+    messageApi.open({
+      type: 'warning',
+      content: 'This is a warning message From Contact',
+    });
+  };
   const dispatch =useDispatch();
   const {all:{contact}} = action;
    
@@ -37,7 +58,12 @@ function AppContact() {
       >
      
        <Divider>We will contact you soon ! </Divider>
-          <Form.Item
+       {contextHolder}
+       <Space>
+        <Button onClick={success}>Success</Button>
+        <Button onClick={error}>Error</Button>
+        <Button onClick={warning}>Warning</Button>
+      </Space>  <Form.Item
             name="FullName" 
             label="Enter full Name "
             rules={[

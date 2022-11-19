@@ -1,6 +1,5 @@
 
 import React,{useEffect} from 'react';
-import { Divider } from 'antd'
 import { Routes, Route ,useNavigate } from 'react-router-dom'
 import { useSelector ,useDispatch } from 'react-redux'
 import action  from './rtk/actions/index'
@@ -9,11 +8,9 @@ import All from './container/all/All'
 // import Auth from './container/auth/Auth';
 // import Nav from './container/nav/Nav'
 
-import Login from './container/login/Login'
+
 import Logout from './container/logout/Logout'
 
-import CreateAccount from './container/createAccount/CreateAccount'
-import Contact from './container/contact/Contact'
 import Agreement from './container/agreement/Agreement'
 
 import User from './container/user/User'
@@ -53,45 +50,41 @@ function App() {
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
  const state =useSelector(state =>state);
  console.log({ state },{action});
- let {all:{login,userType}} =state;
+ const {all:{login,currentUser}} =state;
  const dispatch = useDispatch();
 //console.log({login,userType});
 
-userType=userType[0];
+const userType =currentUser;
 
 useEffect(()=>{
   if(!login && localStorage.getItem('token')!==null){
    //console.log("Login is called ")
     dispatch(action.all.login())
   }
-//  userType  
-// const path = window.location.pathname; 
-  //  navigate(userType);
+  //  userType  
+  // const path = window.location.pathname; 
+   navigate(userType);
   //  navigate(path)
-
+  dispatch(action.all.changeUser('user'))
+  
 },[dispatch,login,userType])
 
 
-if(userType==="/") {
-
-  
- 
+if(userType==='/') 
   return (
-   <Routes>
-       <Route  path="/" element={<All />}  / >  
+      <Routes>
+        <Route  path="/" element={<All />}  / >  
         <Route  path="agreement" element={<Agreement/>} />
         <Route  path="logout" element={<Logout />} />
         <Route  path="*" element={<NoMatch />} />
    </Routes>
 
     )
-  } 
-if(userType === 'user') {
+ 
+if(userType === 'user') 
   return (
-        <>
-          <Divider>USER</Divider>
-          <Routes>
-            <Route path="user" element={<User />}>
+            <Routes>
+              <Route path="user" element={<User />} >
               <Route index element={<Home />} />
               <Route path="home" element={<Home />} />
               <Route path="contact" element={<UserContact />} />
@@ -101,7 +94,8 @@ if(userType === 'user') {
               <Route path="changePassword" element={<ChangePassword />} />
               <Route path="resetPassword" element={<ResetPassword />} />
               <Route path="deleteAccount" element={<DeleteAccount />} />
-            <Route path="parent" element={<Parent />}>
+            
+             <Route path="parent" element={<Parent />}>
               <Route index element={<ParentDetail />} />
               <Route path="parentInfo" element={<ParentDetail />} />
               <Route path="children" element={<ChildrenDetail />} />
@@ -118,18 +112,15 @@ if(userType === 'user') {
             <Route path="payment" element={<Payment />} />
             <Route  path="*" element={<NoMatch />} />
           </Route>
-        
+          <Route  path="logout" element={<Logout />} />
           </Routes>
       
-        </>
       )
-    }
 
-if (userType === 'admin') {
+
+if (userType === 'admin') 
       return (
-        <>
-          <Divider>ADMIN</Divider>
-          <Routes>
+         <Routes>
             <Route path="admin" element={<Admin />}>
               <Route index element={<User />} />
               <Route path="user" element={<User />} />
@@ -140,14 +131,12 @@ if (userType === 'admin') {
             <Route  path="*" element={<NoMatch />} />
            </Route>
          </Routes>
-        </>
+       
       )
-    }
+  
 
-if (userType === 'main') {
+if (userType === 'main') 
       return (
-        <>
-          <Divider>MAIN</Divider>
           <Routes>
             <Route path="main" element={<Main />}>
               <Route index element={<Team />} />
@@ -160,12 +149,11 @@ if (userType === 'main') {
             </Route>
         
           </Routes>
-        </>
-      )
-    }
+        )
+ 
   }
 
-// return <NoMatch />
+
 
 
 export default App

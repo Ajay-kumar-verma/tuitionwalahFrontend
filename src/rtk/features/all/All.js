@@ -4,14 +4,15 @@ const {createAsyncThunk,createSlice} = require('@reduxjs/toolkit');
 // read only 
 const initialState = {
    login:false,
-   userType:["/"],   
    loading:false,
+   apiCalled:false,
+   currentUser:"/",
+   userType:["/"],   
    all:{},
    sentData:{}, 
    userData:{},
    message: '',
    error:'',
-   apiCalled:false,
    loginData :{},
    contactData:{},
    createAccountData:{} 
@@ -50,7 +51,7 @@ const initialState = {
       return data.data;
     }
   )
-  
+ 
   const contact = createAsyncThunk(
     'contact',
     async (obj) => {
@@ -64,16 +65,22 @@ const initialState = {
 }
     }
   )
-  
-   
-const {reducer} = createSlice({
+     
+const {reducer, actions} = createSlice({
   name:"all",
   initialState,
-   extraReducers:{
+  reducers:{
+    changeUser:(state,{payload})=>{
+      if(state.userType.includes(payload))
+         state.currentUser=payload
+      // else window.location.href="logout";
+        }
+  }
+  ,   extraReducers:{
    [login.pending]:(state)=> {
       state.loading = true;
       state.login=false;
-   },
+   } ,
    [login.fulfilled]: (state,{payload}) => {
      state.all = payload;
      state.loading = false ;
@@ -82,8 +89,9 @@ const {reducer} = createSlice({
        {
       localStorage.setItem('token',token);
       state.login=true;  
-      state.userType = userType.reverse(); 
-       }else{
+      state.userType = userType.reverse();
+      state.currentUser=userType[0];
+    }else{
         localStorage.removeItem('token');
        }
      state.message=message;
@@ -138,8 +146,9 @@ const {reducer} = createSlice({
 
 })
 
-
+const {changeUser} =actions;
 export const allReducer =  reducer ;
 export const allAction = {
    login , createAccount , reset , contact
-};
+   , changeUser  
+  };

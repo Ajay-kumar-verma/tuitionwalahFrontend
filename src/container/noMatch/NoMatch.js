@@ -1,21 +1,11 @@
-import {NavLink} from 'react-router-dom'
-import React from 'react'
-
-const NoMatch = () => {
-  return (
-    <>
-    <h1>PLEASE  WAIT   </h1>
-    <nav>
-    <a href="/" >Home</a>
-    <a href="/login" >Login</a>
-    <a href="/craetAccounte" >CreateAccount</a>
-    <NavLink to="/">home page </NavLink> 
-    <NavLink to="/login">Login </NavLink> 
-    <NavLink to="/createAccount">CreateAccount </NavLink> 
-    </nav>
- 
- </>
-    )
-}
-
-export default NoMatch
+import React from 'react';
+import { Button, Result } from 'antd';
+const App = () => (
+  <Result
+    status="404"
+    title="404"
+    subTitle="PAGE NOT FOUND !"
+    extra={<Button onClick={()=>{window.location.href="/"}} type="primary">Back Home</Button>}
+  />
+);
+export default App;

@@ -1,6 +1,5 @@
 import React from 'react'
 import Nav from '../nav/all/Navbar';
-import {Outlet} from 'react-router-dom';
 import Login from '../login/Login'
 import CreateAccount from '../createAccount/CreateAccount'
 import Contact from '../contact/Contact'
@@ -21,7 +20,7 @@ const All = () => {
   return (
     <>
     <Nav  data={list} />  
-    <Outlet />
+    {/* <Outlet /> */}
  
     <div   id="login" style={{height:'50px'}} ></div>
      <Login /> 

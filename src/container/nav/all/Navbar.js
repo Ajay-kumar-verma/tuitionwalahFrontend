@@ -1,49 +1,43 @@
-
-import React,{useRef,useState} from 'react'
-
-
-import {Divider ,Button} from 'antd';
-import {CloseOutlined } from '@ant-design/icons';
+import React,{useState} from 'react'
+import {Button,Drawer  } from 'antd';
+import {CloseCircleOutlined } from '@ant-design/icons';
 
 import './style.css'
 
 const App = ({data}) => {
-    const [b,setB] =useState(true); 
-    const ref= useRef(null);
-    const close = ()=>{
-      ref.current.style.display='none';
-      setB(true);
-    }
-  const open = ()=>{
-    ref.current.style.display='block';
-    setB(false);
-  }
-   
+  const [open, setOpen] = useState(false);
+    // const ref= useRef(null);
+    const showDrawer = () => {
+      setOpen(true);
+    };
+    const onClose = () => {
+      setOpen(false);
+    };
 return (<>
  <div className="desktop" >
      {data}  
       </div>
+ 
 
- {b?
-  <Button type="primary" className="btn" onClick={()=>{open()}}><i  className="fas fa-bars"></i>
+ {!open?
+  <Button type="primary" className="btn" 
+  onClick={showDrawer}><i  className="fas fa-bars"></i>
   </Button>
   :
-  <Button type="primary"  className="btn" style={{backgroundColor:"blue",color:"red"}}  onClick={()=>{close()}} 
-  ><CloseOutlined />
+  <Button type="primary"  className="btn"  
+  onClick={onClose} 
+  ><CloseCircleOutlined />
   </Button>   
 }     
-<div className="mobile" ref={ref} >
-  <div className="sidebar" >
-    {data.map((e,i)=>{
+
+<Drawer title="TUITION WALAH" placement="right" onClose={onClose} open={open}>
+{data.map((e,i)=>{
     if(i===0){
-        return <div style={{marginTop:'10px'}} >{e}<Divider /> </div>
+        return null;
     }  
     return<div>{e}</div>;
-
     })}
-    </div>
-    </div>
-
+   </Drawer>
 
 
 </>)

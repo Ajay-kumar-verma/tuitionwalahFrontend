@@ -66,7 +66,7 @@ useEffect(()=>{
   }
 //  userType  
 // const path = window.location.pathname; 
-   navigate(userType);
+  //  navigate(userType);
   //  navigate(path)
 
 },[dispatch,login,userType])
@@ -75,19 +75,15 @@ useEffect(()=>{
 if(userType==="/") {
 
   
-  
+ 
   return (
-       <Routes>
-        <Route path="/" element={<All />} >  
-          {/* <Route  index element={<Login />} /> */}
-          {/* <Route  path="login" element={<Login />} /> */}
-          <Route  path="createAccount" element={<CreateAccount />} />
-          <Route  path="contact" element={<Contact />} />
-          <Route  path="agreement" element={<Agreement/>} />
-          <Route path="logout" element={<Logout />} />
-          <Route  path="*" element={<NoMatch />} />
-        </Route>  
-       </Routes>
+   <Routes>
+       <Route  path="/" element={<All />}  / >  
+        <Route  path="agreement" element={<Agreement/>} />
+        <Route  path="logout" element={<Logout />} />
+        <Route  path="*" element={<NoMatch />} />
+   </Routes>
+
     )
   } 
 if(userType === 'user') {

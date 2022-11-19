@@ -27,26 +27,7 @@
    }
     
 
-   .mobile{
-    background-color: rgba(24, 144, 255,.7);
-    height:100%;
-    width:100%;
-    position:fixed;
-    top: 0;
-    right: 0;
-    padding:0 5%;
-    z-index: 2;
-    display: none;
-    transition:all 3s;
-}
 
-  .sidebar a{
-    text-decoration: none;
-    color:white;
-    letter-spacing: 1px;
-    font-size: 24px;
-    transition:all 3s ;
-}
  
   .btn{
    display: none; 

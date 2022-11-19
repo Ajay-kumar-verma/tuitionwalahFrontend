@@ -6,6 +6,7 @@ import Login from '../login/Login'
 import CreateAccount from '../createAccount/CreateAccount'
 import Contact from '../contact/Contact'
 import Faq from '../faq/Faq'
+import Footer from '../footer/Footer'
 
 const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
   <a href='#login'>Login</a>,
@@ -29,8 +30,10 @@ const All = () => {
     <CreateAccount />
     <div     id="contact" style={{height:"30px"}} ></div>
     <Contact />
-    <div     id="faq" style={{height:"120px"}} ></div>
+    <div     id="faq" style={{height:"300px"}} ></div>
     <Faq />
+    <div     style={{height:"20px"}} ></div>
+    <Footer />
     </>
   )
 }

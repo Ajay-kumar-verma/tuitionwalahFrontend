@@ -1,6 +1,6 @@
 import {NavLink,useNavigate} from 'react-router-dom';
 import React,{useState} from 'react'
-import {Button,Drawer  } from 'antd';
+import {Button,Drawer,Divider  } from 'antd';
 
 
 import './style.css'
@@ -32,21 +32,30 @@ const Navbar = ({data}) => {
     setChildrenDrawer2(false);
   };
 
+ const menu= data.filter((e,i)=>{
+    const {props:{options}} =e;
+    if(options || i<2)
+     return null;
+    return e;
+  
+  })
+  
 
-  const [op1,op2]= data.filter(e=>{
+const [op1,op2]= data.filter(e=>{
   const {props:{options}} =e;
-   if(options)
+  if(options)
    return options
- 
+  return null;
+
 })
-const nav=(e)=>{
+
+ const nav=(e)=>{
   e.preventDefault();
   const {target:{innerHTML}}= e;
 console.log({innerHTML})
-if(innerHTML==='admin' || innerHTML==='main') 
+if(innerHTML==='admin' || innerHTML==='main' || innerHTML==='agent') 
    navigate(`/${innerHTML}`);
 else navigate(innerHTML)
-
 }
 
 const userType=op1.props.options.map(({value})=><NavLink onClick={nav} to={`/${value}`} >{value}</NavLink>  );
@@ -64,30 +73,20 @@ const setting=op2.props.options.map(({value})=><NavLink onClick={nav} to={`/${va
   </Button>
   :null
 }     
- 
 <Drawer title="TUITION WALAH"  width={220}
  placement="right" onClose={onClose} open={open}>
- 
-
-
-{data.map((e,i)=>{
-  const {props:{children,options}} =e;
-    if(children && children[1]!=="")
-     {if(i===0)return <span style={{marginRight:"140px"}} >{e}</span>;
-      else return <>{e}<br /></>; 
-     }
-     if(options){
-       return <>{e}<br/></>;
-      }
-      return null;
-    })}
+  {menu.map((e,i)=>i<3 ||i>=menu.length-2 ?null:<Divider>{e}</Divider>)}
+    
+ <Divider>  
     <Button type="primary" onClick={showChildrenDrawer1}>
          UserType
         </Button>
-
-   <Button type="primary" onClick={showChildrenDrawer2}>
+ </Divider>
+ <Divider>
+ <Button type="primary" onClick={showChildrenDrawer2}>
    Setting
    </Button>
+ </Divider>
    
     <Drawer title="Usetype" width={220} onClose={onChildrenDrawerClose1} 
     open={childrenDrawer1}

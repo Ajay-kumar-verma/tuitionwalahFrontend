@@ -20,14 +20,14 @@ z-index: 99;
  position:fixed;
  right:0;
  top:0; 
- font-size: 30px;
- z-index: 12300;
+ font-size: 23px;
+ z-index: 120;
 }
 
 
 
 .anchor{
-color:white;
+color:blue;
 font-size:25px;
 transition:all .3s ;
 }

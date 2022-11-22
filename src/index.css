@@ -19,9 +19,6 @@ border-radius: 10px;
 }
 
 
-
-
-
 @import '~antd/dist/antd.css';
 
 .form{
@@ -32,4 +29,9 @@ border-radius: 10px;
     background-color:white;
   }  
 
- 
+ .ImageBox{
+  border:1px solid red;
+  width:fit-content;
+  text-align: center;
+ }
+

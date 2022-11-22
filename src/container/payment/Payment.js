@@ -12,17 +12,14 @@ import React from 'react'
 
 const Payment = () => {
   return (
-    <>
+    <div className="form">
    This section is for payment 
    you must have to make payment for further process
    This is registration fee . One time <hr/>
    <i>Note : </i> After 45 days we will refund if we are not able to provide to hom tuition in your area    
      {AddLibrary(`https://checkout.razorpay.com/v1/payment-button.js`)}
-       
   <a href="https://rzp.io/l/twrmf" >Pay now</a> 
-
-
-    </>
+    </div>
   )
 }
 

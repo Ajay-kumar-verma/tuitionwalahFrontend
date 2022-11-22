@@ -1,15 +1,16 @@
-import { Upload } from 'antd';
+import { Upload ,Divider } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import React, { useState } from 'react';
 const App = () => {
-  const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-  ]);
+  const [fileList, setFileList] = useState([]);
+  
+  // {
+  //   uid: '-1',
+  //   name: 'image.png',
+  //   status: 'done',
+  //   url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  // },
+
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
@@ -28,7 +29,9 @@ const App = () => {
     imgWindow?.document.write(image.outerHTML);
   };
   return (
-    <ImgCrop rotate>
+    <div className="form">
+      <Divider>Upload your Adhaar card</Divider>
+     <ImgCrop rotate>
       <Upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
@@ -36,9 +39,10 @@ const App = () => {
         onChange={onChange}
         onPreview={onPreview}
       >
-        {fileList.length < 2 && '+ Upload'}
+      {fileList.length===0?'Front Side ':fileList.length===1?"Back Side ":null}
       </Upload>
     </ImgCrop>
-  );
+    </div>
+    );
 };
 export default App;

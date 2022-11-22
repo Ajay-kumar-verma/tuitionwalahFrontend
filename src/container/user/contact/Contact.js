@@ -28,7 +28,7 @@ import { Form, Input, Button,
 
 
   const formData =[]; 
-    const fullName = dataInput("Enter full name as per Adhar card ","fullName",{maxLength:30})
+    const fullName = dataInput("Enter full name ","fullName",{maxLength:30})
           formData.push(fullName)
 
    const numberOption = selectInput("Enter numbers we can contact with ","mobiles",[])

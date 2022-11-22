@@ -18,6 +18,8 @@ import Home from './container/user/home/Home'
 import UserContact from './container/user/contact/Contact'
 import Address from './container/user/address/Address'
 import Document from './container/user/document/Document'
+import Payment from './container/payment/Payment'
+
 import AccountType from './container/user/accountType/AccountType'
 
 import Teacher from './container/teacher/Teacher'
@@ -41,7 +43,6 @@ import Team from './container/admin/team/Team'
 
 import Main from './container/main/Main'
 
-import Payment from './container/payment/Payment'
 
 import NoMatch from './container/noMatch/NoMatch'
 

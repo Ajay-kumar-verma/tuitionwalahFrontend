@@ -100,7 +100,7 @@ console.log({info})
       renderItem={(item) =>
      <Row justify="space-between">
         <Col span={20}><List.Item>{`${Object.keys(item)[0]} : ${Object.values(item)[0]}`}</List.Item></Col>
-        <Col span={4}><a href="#">edit</a></Col>
+        <Col span={4}><a href="22" onClick={(e)=>e.preventDefault()} >edit</a></Col>
     </Row>        
       }   
    

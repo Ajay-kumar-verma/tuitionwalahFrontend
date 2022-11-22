@@ -15,12 +15,14 @@ const Payment = () => {
 
 useEffect(()=>{
   AddLibrary(`https://checkout.razorpay.com/v1/payment-button.js`)
-  
+ setTimeout(() => {
+  document.getElementsByClassName("PaymentButton")[0].click();
+ },10); 
+ 
+ 
 },[])
 
-setTimeout(() => {
-  document.getElementsByClassName("PaymentButton")[0].click();
-},1);
+
 
   return (
     <div className="form" ref={ref} > 

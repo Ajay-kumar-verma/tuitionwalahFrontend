@@ -63,9 +63,9 @@ useEffect(()=>{
     dispatch(action.all.login())
   }
   //  userType  
-  // const path = window.location.pathname; 
-   navigate(userType);
-  //  navigate(path)
+  const path = window.location.pathname; 
+  //  navigate(userType);
+   navigate(path)
   dispatch(action.all.changeUser('user'))
   
 },[dispatch,login,userType])

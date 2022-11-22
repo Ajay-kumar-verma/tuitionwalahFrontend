@@ -1,5 +1,8 @@
-import React from 'react'
-
+import React,{useRef,useEffect} from 'react'
+import {Divider ,Button} from 'antd'
+const Payment = () => {
+  const ref=useRef(null);
+  
  function AddLibrary(urlOfTheLibrary) {
   const script = document.createElement('script');
   const form = document.createElement('form');
@@ -7,18 +10,23 @@ import React from 'react'
   script.async = true;
   script.setAttribute("data-payment_button_id","pl_KgfaBhwlhz9h1i");
   form.appendChild(script);
-  document.body.appendChild(form);
+  ref.current.appendChild(form);
 }
 
-const Payment = () => {
+useEffect(()=>{
+  AddLibrary(`https://checkout.razorpay.com/v1/payment-button.js`)
+  
+},[])
+
+setTimeout(() => {
+  document.getElementsByClassName("PaymentButton")[0].click();
+},1);
+
   return (
-    <div className="form">
-   This section is for payment 
-   you must have to make payment for further process
-   This is registration fee . One time <hr/>
+    <div className="form" ref={ref} > 
+     <Divider />
    <i>Note : </i> After 45 days we will refund if we are not able to provide to hom tuition in your area    
-     {AddLibrary(`https://checkout.razorpay.com/v1/payment-button.js`)}
-  <a href="https://rzp.io/l/twrmf" >Pay now</a> 
+   <Button type="primary" onClick={()=>{window.open(`https://rzp.io/l/twrmf`)}} >PAY NOW</Button>
     </div>
   )
 }

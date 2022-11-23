@@ -71,7 +71,8 @@ useEffect(()=>{
   else  
    navigate(path)
   
-   dispatch(action.all.changeUser('user'))
+   console.log({path},{userType})
+  //  dispatch(action.all.changeUser('user'))
   
 },[dispatch,login,userType])
 

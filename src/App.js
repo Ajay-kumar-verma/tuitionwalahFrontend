@@ -64,9 +64,14 @@ useEffect(()=>{
   }
   //  userType  
   const path = window.location.pathname; 
-  //  navigate(userType);
+  // const pathAr = path.split("/");
+ 
+  if(path==="/")
+   navigate(userType);
+  else  
    navigate(path)
-  dispatch(action.all.changeUser('user'))
+  
+   dispatch(action.all.changeUser('user'))
   
 },[dispatch,login,userType])
 

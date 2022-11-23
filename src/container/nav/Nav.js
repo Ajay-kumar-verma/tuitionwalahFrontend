@@ -53,7 +53,7 @@ const [op1,op2]= data.filter(e=>{
   e.preventDefault();
   const {target:{innerHTML}}= e;
 console.log({innerHTML})
-if(innerHTML==='admin' || innerHTML==='main' || innerHTML==='agent') 
+if(innerHTML==='admin' || innerHTML==='main' || innerHTML==='agent' || innerHTML==='logout') 
    navigate(`/${innerHTML}`);
 else navigate(innerHTML)
 }

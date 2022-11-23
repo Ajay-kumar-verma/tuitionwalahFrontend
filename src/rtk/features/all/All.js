@@ -37,7 +37,7 @@ const initialState = {
     'createAccount',
     async (obj) => {
       console.log({obj})
-      const {data} = await api.post(`/user`,obj);
+      const {data} = await api.post(`/createAccount`,obj);
       console.log("create account data is :",{data});
        return data;
     }
@@ -57,7 +57,7 @@ const initialState = {
     async (obj) => {
   console.log("contact ",{obj});
       try { 
-  const {data} = await   api.put(`/user/contact`,obj)
+  const {data} = await api.post(`/contact`,obj)
   return data;
 
 } catch (error) {
@@ -83,6 +83,7 @@ const {reducer, actions} = createSlice({
    } ,
    [login.fulfilled]: (state,{payload}) => {
      state.all = payload;
+     state.loginData=payload;
      state.loading = false ;
      const {login,token,userType,message,error} =payload;
      if((token && login===true) && Array.isArray(userType))
@@ -99,6 +100,7 @@ const {reducer, actions} = createSlice({
       },
     [login.rejected]:(state,{payload}) => {
     state.all =payload; 
+    state.loginData=payload;
     state.login = false;
     state.loading = false;
     state.error = payload?.error;
@@ -110,14 +112,16 @@ const {reducer, actions} = createSlice({
     },
     [createAccount.fulfilled]: (state,{payload}) => {
       state.all =payload;
+      state.createAccountData=payload;
       state.loading = false ;
       state.message=payload.message;
       state.error=payload.error;
     },
     [createAccount.rejected]:(state,{payload}) => {
         state.all =payload;
+        state.createAccountData=payload;
         state.loading = false;
-        state.error = payload.error;
+        state.error = payload?.error;
         state.message ="request rejected ! ";
    },  
     [reset.pending]:state => {
@@ -138,12 +142,8 @@ const {reducer, actions} = createSlice({
      state.message ="request rejected ! ";
     },  
     
-  
-
   } ,  
-   
   
-
 })
 
 const {changeUser} =actions;

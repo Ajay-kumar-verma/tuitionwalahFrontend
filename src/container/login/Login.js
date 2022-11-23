@@ -1,84 +1,58 @@
-import { Button, Checkbox, Form, Input ,Tooltip ,Divider } from 'antd';
-import React  from 'react';
-import {useSelector,useDispatch} from 'react-redux';
-import action  from '../../rtk/actions/index'
-import { message, Space } from 'antd';
-
+import React, { useEffect } from 'react'
+import { Button, Checkbox, Form, Input, Tooltip, Divider } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import action from '../../rtk/actions/index'
+import { message } from 'antd'
 
 const Login = () => {
   const [messageApi, contextHolder] = message.useMessage()
+  const Notification = ({ type, content }) => messageApi.open({ type, content })
 
-  const state =useSelector(state =>state);
-  const dispatch =useDispatch();
-  
-  const [form] = Form.useForm();
+  const dispatch = useDispatch()
+
+  const [form] = Form.useForm()
   const username = Form.useWatch('username', form)
-  
 
+  const reset = (obj) => dispatch()
+  const {
+    all: { login },
+  } = action
 
- const reset = (obj)=>dispatch();
- const {all:{login}} = action;
-
-  const onFinish = (values) =>dispatch(login(values));
- 
+  const onFinish = (values) => dispatch(login(values))
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-  
-  const data =  process.env;
-  console.log({data})
-
-
-  const success = () => {
-    messageApi.open({
-      type: 'success',
-      content: 'This is a success message From Login',
-    });
-  };
-  const error = () => {
-    messageApi.open({
+    console.log('Failed:', errorInfo)
+    Notification({
       type: 'error',
-      content: 'This is an error message From Login',
-    });
-  };
-  const warning = () => {
-    messageApi.open({
-      type: 'warning',
-      content: 'This is a warning message From Login',
-    });
-  };
+      content: 'Some field are missing ,Please fill ',
+    })
+  }
 
+  const state = useSelector(({ all: { loginData } }) => loginData)
 
-
-
-
-
-
-
-
-
-
-
+  useEffect(() => {
+    if(state=== undefined) return;
+    const { login, message } = state
+    const content = message
+    if (login === undefined) return
+    if (login) Notification({ type: 'success', content })
+    if (!login) Notification({ type: 'warning', content })
+  }, [state])
 
   return (
-  <Form  form={form} 
- 
-  className="form"
+    <Form
+      form={form}
+      className="form"
       name="basic"
-      labelCol={{span: 24,}}
-      wrapperCol={{span: 24,}}
-      initialValues={{remember: true,Mobile:"",Password:""}}
+      labelCol={{ span: 24 }}
+      wrapperCol={{ span: 24 }}
+      initialValues={{ remember: true, Mobile: '', Password: '' }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Divider>Login form </Divider>
       {contextHolder}
-      <Space>
-        <Button onClick={success}>Success</Button>
-        <Button onClick={error}>Error</Button>
-        <Button onClick={warning}>Warning</Button>
-      </Space>
+
       <Form.Item
         label="Mobile or Email "
         name="username"
@@ -104,40 +78,51 @@ const Login = () => {
         <Input.Password />
       </Form.Item>
 
-       <Form.Item
-          name="remember"
-          valuePropName="checked"
-          noStyle
-        
-         >
+      <Form.Item name="remember" valuePropName="checked" noStyle>
         <Checkbox>Remember me</Checkbox>
-    <Tooltip title={(""+username).length >=9?null:"Enter mobile number or email"} color={"#108ee9"}  >
-    <a href="#0" onClick={()=>{reset({username})}} style={{float:"right"}} 
-        disabled={(""+username).length<=9 || state.loading}
-       > Get new Password  </a>
-     
-    </Tooltip>
-    
-    </Form.Item> 
-     <p></p>
-    
-    <Tooltip
-     title={(""+username).length>=9?null:
-    "Enter  mobile number or email"} color={"#108ee9"}  >
-     
-     <Form.Item>
-        <Button  
-          style={{width:"100%"}}
-          disabled={(""+username).length<=9 || state.loading}
-         type="primary" htmlType="submit">
-         {state.loading?"Please wait ":"Login"}
-
-        </Button>
+        <Tooltip
+          title={
+            ('' + username).length >= 9 ? null : 'Enter mobile number or email'
+          }
+          color={'#108ee9'}
+        >
+          <a
+            href="#0"
+            onClick={() => {
+              reset({ username })
+            }}
+            style={{ float: 'right' }}
+            disabled={('' + username).length <= 9 || state.loading}
+          >
+            {' '}
+            Get new Password{' '}
+          </a>
+        </Tooltip>
       </Form.Item>
+      <p></p>
+
+      <Tooltip
+        title={
+          ('' + username).length >= 9 ? null : 'Enter  mobile number or email'
+        }
+        color={'#108ee9'}
+      >
+        <Form.Item>
+          <Button
+            style={{ width: '100%' }}
+            disabled={('' + username).length <= 9 || state.loading}
+            type="primary"
+            htmlType="submit"
+          >
+            {state.loading ? 'Please wait ' : 'Login'}
+          </Button>
+        </Form.Item>
       </Tooltip>
-      <p style={{float:"right"}} > Not having account ?<a href="#signup">Create account</a></p>
-   
-     </Form>
-  );
-};
-export default Login;
+      <p style={{ float: 'right' }}>
+        {' '}
+        Not having account ?<a href="#createAccount">Create account</a>
+      </p>
+    </Form>
+  )
+}
+export default Login

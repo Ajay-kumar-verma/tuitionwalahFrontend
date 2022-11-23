@@ -11,8 +11,11 @@ const initialState = {
    error:'',
    apiCalled:false,
    home:{apiCall:false, data:{}},
+   home:{apiCall:false, data:{}},
+   contact:{apiCall:false, data:{}},
    address:{apiCall:false, data:{}},
-   otherDetail:{}
+   otherDetail:{apiCall:false, data:{}},
+   payment:{apiCall:false, data:{}},
   }
   
   const home = createAsyncThunk(
@@ -222,7 +225,8 @@ const {reducer ,actions } = createSlice({
    [home.rejected]:(state,{payload}) => {
      state.home =payload; 
      state.loading = false;
-     state.error = payload.error;
+     state.home.data=payload;
+     state.error = payload?.error;
      state.message ="request rejected ! ";
     },  
      

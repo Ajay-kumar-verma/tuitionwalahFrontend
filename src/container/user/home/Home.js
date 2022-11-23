@@ -96,7 +96,7 @@ console.log({info})
       size="small"
       header={<div>YOUR INFO</div>}
       bordered
-      dataSource={info}
+      dataSource={info.length===1?[]:info}
       renderItem={(item) =>
      <Row justify="space-between">
         <Col span={20}><List.Item>{`${Object.keys(item)[0]} : ${Object.values(item)[0]}`}</List.Item></Col>

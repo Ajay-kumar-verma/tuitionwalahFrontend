@@ -1,49 +1,40 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
-  // useSelector
+  useSelector,
    useDispatch} from 'react-redux';
 import action  from '../../rtk/actions/index'
 import { Form, Input, Button, Checkbox, Divider,message,Space } from 'antd';
 const { TextArea } = Input;
 
 function AppContact() {
-  
   const [messageApi, contextHolder] = message.useMessage()
- 
+  const Notification = ({ type, content }) => messageApi.open({ type, content })
 
-  const success = () => {
-    messageApi.open({
-      type: 'success',
-      content: 'This is a success message From Contact',
-    });
-  };
-  const error = () => {
-    messageApi.open({
-      type: 'error',
-      content: 'This is an error message From Contact',
-    });
-  };
-  const warning = () => {
-    messageApi.open({
-      type: 'warning',
-      content: 'This is a warning message From Contact',
-    });
-  };
   const dispatch =useDispatch();
   const {all:{contact}} = action;
-   
-
-
-       const onFinish = (values) => {
-    // console.log('Received values of form: ', values);
-    dispatch(contact(values));
-
-  };  
+  const onFinish = (values) =>dispatch(contact(values))
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
+    Notification({
+      type: 'error',
+      content: 'Some field are missing ,Please fill ',
+    })
   };
   
+  const state = useSelector(({ all: { contactData } }) => contactData)
+
+  useEffect(() => {
+    if(state=== undefined) return;
+    const { login, message } = state;
+    const content = message
+    if (login === undefined) return
+    if (login) Notification({ type: 'success', content })
+    if (!login) Notification({ type: 'warning', content })
+  }, [state])
+
+
+
   return (
         <Form  
         id="contact"
@@ -59,11 +50,7 @@ function AppContact() {
      
        <Divider>We will contact you soon ! </Divider>
        {contextHolder}
-       <Space>
-        <Button onClick={success}>Success</Button>
-        <Button onClick={error}>Error</Button>
-        <Button onClick={warning}>Warning</Button>
-      </Space>  <Form.Item
+       <Form.Item
             name="FullName" 
             label="Enter full Name "
             rules={[

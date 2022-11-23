@@ -1,95 +1,71 @@
-// import {useEffect} from 'react';
-// import {message} from 'antd';
-import {
-  // useSelector,
-  useDispatch} from 'react-redux';
-import action  from '../../rtk/actions/index'
-import {MailOutlined , PhoneOutlined  }  from '@ant-design/icons'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import action from '../../rtk/actions/index'
+import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 
 import {
-    Button,
-    Checkbox,
-    Form,
-    Input,
-    Select,
-    Divider,
-    DatePicker,
-   message,
-   Space,
-  } from 'antd';
-  
-  const { Option } = Select;
-    
-  const App = () => {
-    const [messageApi, contextHolder] = message.useMessage()
- 
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Select,
+  Divider,
+  DatePicker,
+  message,
+  Space,
+} from 'antd'
+const { Option } = Select
 
-    const success = () => {
-      messageApi.open({
-        type: 'success',
-        content: 'This is a success message From CreateAccount',
-      });
-    };
-    const error = () => {
-      messageApi.open({
-        type: 'error',
-        content: 'This is an error message From CreateAccount',
-      });
-    };
-    const warning = () => {
-      messageApi.open({
-        type: 'warning',
-        content: 'This is a warning message From CreateAccount',
-      });
-    };
-  
-  
-  
+const App = () => {
+  const [messageApi, contextHolder] = message.useMessage()
+  const Notification = ({ type, content }) => messageApi.open({ type, content })
 
+  const {
+    all: { createAccount },
+  } = action
+  const dispatch = useDispatch()
+  const onFinish = (values) => dispatch(createAccount(values))
 
+  const onFinishFailed = (values) => {
+    console.log('Received values of form: ', values)
+    Notification({
+      type: 'error',
+      content: 'Some field are missing ,Please fill ',
+    })
+  }
 
-    const dispatch =useDispatch();
-  const {all:{createAccount}} = action;
-      // console.log({createAccount})
+  const state = useSelector(
+    ({ all: { createAccountData } }) => createAccountData,
+  )
+  useEffect(() => {
+    if(state=== undefined) return;
+    const { AccountCreated, message } = state
+    const content = message
+    if (AccountCreated === undefined) return
+    if (AccountCreated) Notification({ type: 'success', content })
+    if (!AccountCreated) Notification({ type: 'warning', content })
+  }, [state])
 
-    const onFinish = (values) => {
-    // console.log('On submit values is :',values);
-    dispatch(createAccount(values));
-    };
-     
-   
-    const onFinishFailed = (values) =>{
-    console.log('Received values of form: ', values);
-    } 
-
-    return (
-     <>
-   
-      <Form  
-      
-       className="form"
+  return (
+    <>
+      <Form
+        className="form"
         name="register"
-        labelCol={{span: 24,}}
-        wrapperCol={{span: 24,}}
-       
+        labelCol={{ span: 24 }}
+        wrapperCol={{ span: 24 }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        initialValues={{
-        }}
+        initialValues={{}}
         scrollToFirstError
       >
-       <Divider>Create Account </Divider>
-       {contextHolder}
-       <Space>
-        <Button onClick={success}>Success</Button>
-        <Button onClick={error}>Error</Button>
-        <Button onClick={warning}>Warning</Button>
-      </Space>
+        <Divider>Create Account </Divider>
+        {contextHolder}
+        <Space></Space>
         <Form.Item
           name="FirstName"
           label="FirstName"
-           rules={[
-             {
+          rules={[
+            {
               required: true,
               message: 'Please input your first Name!',
             },
@@ -115,11 +91,9 @@ import {
           <Input maxLength={50} showCount placeholder="Enter last Name" />
         </Form.Item>
 
-
-
         <Form.Item
           name="Mobile"
-          label="Mobile" 
+          label="Mobile"
           rules={[
             {
               required: true,
@@ -128,17 +102,18 @@ import {
           ]}
         >
           <Input
-            addonBefore=<PhoneOutlined />  maxLength="10" showCount
+            addonBefore=<PhoneOutlined />
+            maxLength="10"
+            showCount
             style={{
               width: '100%',
             }}
           />
         </Form.Item>
- 
 
         <Form.Item
           name="Email"
-          label="Email" 
+          label="Email"
           rules={[
             {
               type: 'email',
@@ -151,14 +126,14 @@ import {
           ]}
         >
           <Input
-            addonBefore=<MailOutlined />  maxLength="70" showCount
+            addonBefore=<MailOutlined />
+            maxLength="70"
+            showCount
             style={{
               width: '100%',
             }}
           />
         </Form.Item>
-
-
 
         <Form.Item
           name="Gender"
@@ -176,29 +151,29 @@ import {
             <Option value="other">Other</Option>
           </Select>
         </Form.Item>
-      
-      
-          
-                  <Form.Item
-                    name="DateOfBirth"
-                    label="DateOfBirth"
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Please choose your date of birth !',
-                      },
-                    ]}
-                  >
-                  <DatePicker  style={{width:"100%"}}   />
-                  </Form.Item>
-                
+
+        <Form.Item
+          name="DateOfBirth"
+          label="DateOfBirth"
+          rules={[
+            {
+              required: true,
+              message: 'Please choose your date of birth !',
+            },
+          ]}
+        >
+          <DatePicker style={{ width: '100%' }} />
+        </Form.Item>
+
         <Form.Item
           name="agreement"
           valuePropName="checked"
           rules={[
             {
               validator: (_, value) =>
-                value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+                value
+                  ? Promise.resolve()
+                  : Promise.reject(new Error('Should accept agreement')),
             },
           ]}
         >
@@ -207,16 +182,17 @@ import {
           </Checkbox>
         </Form.Item>
 
-
-        <Form.Item >
-          <Button type="primary" style={{width:"100%"}} htmlType="submit"  >
-           createAccount
-           </Button>
+        <Form.Item>
+          <Button type="primary" style={{ width: '100%' }} htmlType="submit">
+            createAccount
+          </Button>
         </Form.Item>
-        <p style={{float:"right"}} > Having Account ?<a href="#login">Login</a>
-       </p>
-   </Form>
-   </>
-    );
-  };
-  export default App;
+        <p style={{ float: 'right' }}>
+          {' '}
+          Having Account ?<a href="#login">Login</a>
+        </p>
+      </Form>
+    </>
+  )
+}
+export default App

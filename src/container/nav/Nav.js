@@ -52,8 +52,9 @@ const [op1,op2]= data.filter(e=>{
  const nav=(e)=>{
   e.preventDefault();
   const {target:{innerHTML}}= e;
-console.log({innerHTML})
-if(innerHTML==='admin' || innerHTML==='main' || innerHTML==='agent' || innerHTML==='logout') 
+// console.log({innerHTML})
+if(innerHTML==='admin' || innerHTML==='main' ||
+ innerHTML==='agent' || innerHTML==='logout') 
    navigate(`/${innerHTML}`);
 else navigate(innerHTML)
 }
@@ -87,9 +88,8 @@ const setting=op2.props.options.map(({value})=><NavLink onClick={nav} to={`/${va
    Setting
    </Button>
  </Divider>
-   
-    <Drawer title="Usetype" width={220} onClose={onChildrenDrawerClose1} 
-    open={childrenDrawer1}
+   <Drawer title="Usetype" width={220} onClose={onChildrenDrawerClose1} 
+     open={childrenDrawer1}
        >
          {userType.map(e=><div>{e}</div>)}
          </Drawer>
@@ -101,9 +101,7 @@ const setting=op2.props.options.map(({value})=><NavLink onClick={nav} to={`/${va
          </Drawer>
    
    </Drawer>
-
  </>
-
 )
 }
 

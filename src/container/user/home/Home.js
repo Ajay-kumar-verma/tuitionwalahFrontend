@@ -4,7 +4,7 @@ import ImgCrop from 'antd-img-crop';
 
 import { useDispatch, useSelector } from 'react-redux'
 import action from '../../../rtk/actions/index'
-
+import ImageUpload from './Fileupload';
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
   const [{info,Gender},setInfo]=useState({info:[{}],Gender:'male'});
@@ -63,18 +63,9 @@ const  UploadImage =()=>(
    onOk={()=>{setUploadImage(true)}}
    onCancel={()=>{setUploadImage(false)}}
    >
- <ImgCrop rotate>
-<Upload
-  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-  listType="picture-card"
-  // fileList={fileList}
-  onChange={onChange}
-  onPreview={onPreview}
->
-  {fileList.length ===0 && '+ Upload'}
-</Upload>
-</ImgCrop>
-</Modal>
+<ImageUpload />
+
+ </Modal>
 ) 
 
 

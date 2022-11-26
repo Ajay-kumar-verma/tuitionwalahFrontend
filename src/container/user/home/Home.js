@@ -7,7 +7,7 @@ import action from '../../../rtk/actions/index'
 import ImageUpload from './Fileupload';
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
-  const [{info,Gender},setInfo]=useState({info:[{}],Gender:'male'});
+  const [{info,Gender,ImageLink},setInfo]=useState({info:[{}],ImageLink:null,Gender:'male'});
   const [fileList, setFileList] = useState([
      ]);
   const onChange = ({ fileList: newFileList }) => {
@@ -37,12 +37,12 @@ const Home = () => {
    
    if(data?.user!==undefined)
    { setInfo(_=>{
-      let {FirstName ,LastName ,Gender ,Email,Mobile,userType,Active} =data?.user;
+      let {FirstName ,LastName ,Gender ,Email,Mobile,userType,Active,Imgae} =data?.user;
      return {
       info:[
         {FirstName} ,{LastName },{Gender} ,{Email},
-        {Mobile},{userType},{Active}
-      ],Gender
+        {Mobile},{userType},{Active},
+      ],Gender,ImageLink:Imgae
      }
    })}
 
@@ -77,7 +77,7 @@ console.log({info})
     <div className="form">
       <Divider />
      {(<div className="ImageBox">
-     <Image width={100} src={data?.Image?null:Gender==='male'?maleImage:femaleImage} /><br/>
+      <Image width={100} src={ImageLink!==null?ImageLink:Gender==='male'?maleImage:femaleImage} /><br/>
      <Button type="text" onClick={()=>{setUploadImage(true)}}>Change Image</Button></div>)} 
     {uploadImage?<UploadImage/>:null}
       {/* {JSON.stringify(data.user)} */}

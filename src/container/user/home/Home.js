@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import ImageUpload from './Fileupload';
 import { RWebShare } from "react-web-share";
-
+import { QRCode } from 'react-qrcode-logo';
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
   const [{info,Gender,ImageLink},setInfo]=useState({info:[{}],ImageLink:null,Gender:'male'});
@@ -110,6 +110,21 @@ console.log({info})
         <button>Share on Web</button>
       </RWebShare>
       <a href="whatsapp://send?text= Please Visit http://ad-test.easygov.co.in/PanAdvertisement"  rel="nofollow noopener" target="_blank" className="share-icon"><img alt="imag" style={{height:'36px'}}/>Share via Whatsapp</a>
+      <QRCode 
+      // logoImage={ImageLink}
+      size={300}
+      logoWidth={100}
+      logoHeight={100}
+      // logoOpacity={1}
+      removeQrCodeBehindLogo={true}
+      bgColor="#04327d"
+      fgColor="white"
+      // value="https://github.com/gcoro/react-qrcode-logo"
+      // value="https://tuitionwalah.com/"
+    value={JSON.stringify(info)}
+      qrStyle='dots'
+     />,
+   
     </div>
   )
 }

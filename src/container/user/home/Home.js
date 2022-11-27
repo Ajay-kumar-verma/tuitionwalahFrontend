@@ -5,6 +5,8 @@ import ImgCrop from 'antd-img-crop';
 import { useDispatch, useSelector } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import ImageUpload from './Fileupload';
+import { RWebShare } from "react-web-share";
+
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
   const [{info,Gender,ImageLink},setInfo]=useState({info:[{}],ImageLink:null,Gender:'male'});
@@ -77,7 +79,7 @@ console.log({info})
     <div className="form">
       <Divider />
      {(<div className="ImageBox">
-      <Image width={100} src={ImageLink!==null?ImageLink:Gender==='male'?maleImage:femaleImage} /><br/>
+      <Image width={100} height={100} src={ImageLink!==null?ImageLink:Gender==='male'?maleImage:femaleImage}  /><br/>
      <Button type="text" onClick={()=>{setUploadImage(true)}}>Change Image</Button></div>)} 
     {uploadImage?<UploadImage/>:null}
       {/* {JSON.stringify(data.user)} */}
@@ -97,7 +99,17 @@ console.log({info})
    
    />    
 
-
+<RWebShare
+        data={{
+          text: "Web Share - GfG",
+          url: "http://localhost:3000",
+          title: "GfG",
+        }}
+        onClick={() => console.log("shared successfully!")}
+      >
+        <button>Share on Web</button>
+      </RWebShare>
+      <a href="whatsapp://send?text= Please Visit http://ad-test.easygov.co.in/PanAdvertisement"  rel="nofollow noopener" target="_blank" className="share-icon"><img alt="imag" style={{height:'36px'}}/>Share via Whatsapp</a>
     </div>
   )
 }

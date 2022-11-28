@@ -1,10 +1,26 @@
 import React, { useEffect } from 'react'
+import { GoogleLogin ,GoogleLogout} from 'react-google-login'; 
+import { gapi } from 'gapi-script';
+import { useGoogleOneTapLogin } from 'react-google-one-tap-login';
 import { Button, Checkbox, Form, Input, Tooltip, Divider } from 'antd'
+
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import { message } from 'antd'
 
+const  clientId="614668011518-d4g0cr825vs5ugm0iqgo5ieovqhgiisr.apps.googleusercontent.com";
+
+
 const Login = () => {
+  useEffect(()=>{
+    gapi.load('client:auth2',()=>{
+      gapi.auth2.init({clientId})
+    })
+  
+  },[])
+
+   // This code is onetap login 
+  
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
@@ -19,6 +35,11 @@ const Login = () => {
   } = action
 
   const onFinish = (values) => dispatch(login(values))
+  const responseGoogle = (response) => {
+    const {email,familyName,givenName,imageUrl}= response?.profileObj;
+    dispatch(login({username:email,googleLogin:true}))
+     }
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
     Notification({
@@ -37,6 +58,16 @@ const Login = () => {
     if (login) Notification({ type: 'success', content })
     if (!login) Notification({ type: 'warning', content })
   }, [state])
+
+  const OneTapLogin =_=> useGoogleOneTapLogin({
+    onError: responseGoogle,
+    onSuccess: responseGoogle,
+    googleAccountConfigs: {
+      client_id:clientId 
+    }
+  })  
+  
+  OneTapLogin();
 
   return (
     <Form
@@ -122,6 +153,15 @@ const Login = () => {
         {' '}
         Not having account ?<a href="#createAccount">Create account</a>
       </p>
+      <GoogleLogin
+    clientId={clientId}
+    buttonText="Login with google"
+    onSuccess={responseGoogle}
+    onFailure={responseGoogle}
+    cookiePolicy={'single_host_origin'}
+  />
+  
+ 
     </Form>
   )
 }

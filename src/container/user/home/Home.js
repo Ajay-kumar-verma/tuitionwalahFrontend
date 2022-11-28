@@ -1,36 +1,15 @@
 import React, { useEffect , useState } from 'react'
-import { Button, Modal,Divider,Upload,Image ,List, Row,Col  } from 'antd';
-import ImgCrop from 'antd-img-crop';
+import { Button, Modal,Divider,Image ,List, Row,Col  } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import ImageUpload from './Fileupload';
 import { RWebShare } from "react-web-share";
-import { QRCode } from 'react-qrcode-logo';
+// import { QRCode } from 'react-qrcode-logo';
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
   const [{info,Gender,ImageLink},setInfo]=useState({info:[{}],ImageLink:null,Gender:'male'});
-  const [fileList, setFileList] = useState([
-     ]);
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-  };
-  const onPreview = async (file) => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
-  };
-
-
+ 
   const dispatch = useDispatch()
   const { apiCall,data} = useSelector(({ user: { home } }) => home)
   const { home } = action.user
@@ -66,14 +45,9 @@ const  UploadImage =()=>(
    onCancel={()=>{setUploadImage(false)}}
    >
 <ImageUpload />
-
  </Modal>
 ) 
-
-
-
 console.log({info})
-
 
   return (
     <div className="form">
@@ -103,14 +77,15 @@ console.log({info})
         data={{
           text: "Web Share - GfG",
           url: "http://localhost:3000",
-          title: "GfG",
+          title: "GET HOME TUTOR",
         }}
         onClick={() => console.log("shared successfully!")}
       >
-        <button>Share on Web</button>
+        <button>Share in web</button>
       </RWebShare>
-      <a href="whatsapp://send?text= Please Visit http://ad-test.easygov.co.in/PanAdvertisement"  rel="nofollow noopener" target="_blank" className="share-icon"><img alt="imag" style={{height:'36px'}}/>Share via Whatsapp</a>
-      <QRCode 
+      {/* <a href="whatsapp://send?text= Please Visit http://ad-test.easygov.co.in/PanAdvertisement"  rel="nofollow noopener" target="_blank" className="share-icon"><img alt="imag" style={{height:'36px'}}/>Share via Whatsapp</a> */}
+      
+      {/* <QRCode 
       // logoImage={ImageLink}
       size={300}
       logoWidth={100}
@@ -123,7 +98,7 @@ console.log({info})
       // value="https://tuitionwalah.com/"
     value={JSON.stringify(info)}
       qrStyle='dots'
-     />,
+     />, */}
    
     </div>
   )

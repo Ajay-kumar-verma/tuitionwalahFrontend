@@ -11,7 +11,6 @@ const initialState = {
    error:'',
    apiCalled:false,
    home:{apiCall:false, data:{}},
-   home:{apiCall:false, data:{}},
    contact:{apiCall:false, data:{}},
    address:{apiCall:false, data:{}},
    otherDetail:{apiCall:false, data:{}},
@@ -29,7 +28,19 @@ const initialState = {
     }
         }
     )
-   
+  
+    const contact = createAsyncThunk(
+      'contact',
+      async (obj)=>{
+       try {
+        const {data} = await api.post(`/user/contact`,obj)
+         return data; 
+      } catch (error) {
+        return error;   
+      }
+          }
+      )
+     
     
     const address = createAsyncThunk(
       'address',
@@ -230,6 +241,25 @@ const {reducer ,actions } = createSlice({
      state.message ="request rejected ! ";
     },  
      
+    [contact.pending]: state => {
+      state.loading = true;
+   },
+   [contact.fulfilled]:(state,{payload}) => {
+     state.all = payload;
+     state.loading = false ;
+     state.message=payload?.message;
+     state.error=payload?.error;
+     state.contact.data=payload;
+     state.contact.apiCall=false;
+    },
+   [contact.rejected]:(state,{payload}) => {
+     state.all =payload; 
+     state.loading = false;
+     state.contact.data=payload;
+     state.error = payload?.error;
+     state.message ="request rejected ! ";
+    },  
+    
  [address.pending]: state => {
   state.loading = true; 
   },
@@ -294,7 +324,7 @@ const {userType,logout} =actions;
 
 export const userReducer =  reducer ;
 export const userActions = { userType,logout ,
-home ,address,education ,document,otherDetail,
+home,contact,address,education ,document,otherDetail,
 settingChangePassword ,settingResetPassword ,settingDeleteAccount,
 teacherTeacherDetail ,reset,
 parentParentDetail ,parentChildrenDetail,deleteUser

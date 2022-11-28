@@ -1,5 +1,7 @@
 import React from 'react'
-import { Form, Input, Button,
+import { useDispatch, useSelector } from 'react-redux'
+import action from '../../../rtk/actions/index'
+import { Form,  Button,
   notification  ,Select ,Divider } from 'antd';
 
   const option = (list)=>list.map((name)=>(<Select.Option allowClear key={name}>{name}</Select.Option>));
@@ -15,35 +17,20 @@ import { Form, Input, Button,
     )
  }
  
- const dataInput =(...data)=>{
-  const {maxLength} = data[2]; 
-    return (<>
-   
-      <Form.Item label={data[0]} name={data[1]} rules={[{required: true,message: 'required !'}]} >
-      {maxLength?<Input allowClear placeholder={data[0]} showCount maxLength={maxLength}  />:<Input placeholder={data[0]} />} 
-       </Form.Item>
-</>
-  )
-}
-
-
   const formData =[]; 
-    const fullName = dataInput("Enter full name ","fullName",{maxLength:30})
-          formData.push(fullName)
-
-   const numberOption = selectInput("Enter numbers we can contact with ","mobiles",[])
+    const numberOption = selectInput("Enter numbers we can contact with ","mobiles",[])
      formData.push(numberOption)
 
    const emailsOption = selectInput("Enter Emails we can contact with ","emails",[])
        formData.push(emailsOption)
 
-  
 const Contact = () => {
-
-
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };  
+  const { apiCall,data} = useSelector(({ user: { contact } }) => contact)
+  
+  
+  const { contact } = action.user
+  const dispatch = useDispatch();
+  const onFinish = (values) => dispatch(contact(values)) 
 
   const onFinishFailed = (errorInfo) => { 
     notification['error']({
@@ -57,6 +44,8 @@ const Contact = () => {
   };
   
   return (
+<>
+
 
     <Form   className="form"
     onFinish={onFinish}
@@ -69,7 +58,8 @@ const Contact = () => {
          scrollToFirstError
          
        >
-  <Divider>Personal details</Divider>   
+  <Divider>Contact number</Divider>   
+  {JSON.stringify(data)}
    {formData.map(e=>e)}
          <Form.Item>
            <Button 
@@ -79,8 +69,10 @@ const Contact = () => {
              Submit Contact
            </Button>
          </Form.Item>
+       
        </Form>
-    )
+</>
+)
 }
 
 export default Contact

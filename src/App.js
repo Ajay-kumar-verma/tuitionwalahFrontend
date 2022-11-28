@@ -1,6 +1,7 @@
 
 import React,{useEffect} from 'react';
 import { Routes, Route ,useNavigate } from 'react-router-dom'
+
 import { useSelector ,useDispatch } from 'react-redux'
 import action  from './rtk/actions/index'
 
@@ -47,6 +48,9 @@ import Main from './container/main/Main'
 import NoMatch from './container/noMatch/NoMatch'
 
 function App() {
+
+
+
   const navigate = useNavigate();
  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
  const state =useSelector(state =>state);
@@ -83,7 +87,7 @@ if(userType==='/')
         <Route  path="/" element={<All />}  / >  
         <Route  path="agreement" element={<Agreement/>} />
         <Route  path="logout" element={<Logout />} />
-        <Route  path="*" element={<NoMatch />} />
+        <Route  path=":id" element={<NoMatch />} />
    </Routes>
 
     )
@@ -114,14 +118,13 @@ if(userType === 'user')
               <Route path="otherDetail" element={<OtherDetail />} />
             </Route>
        
-            <Route path="accountType" element={<AccountType />} />
-            
+         <Route path="accountType" element={<AccountType />} />
             <Route path="payment" element={<Payment />} />
-            <Route  path="*" element={<NoMatch />} />
           </Route>
+       
           <Route  path="logout" element={<Logout />} />
+         <Route  path=":id" element={<NoMatch />} />
           </Routes>
-      
       )
 
 

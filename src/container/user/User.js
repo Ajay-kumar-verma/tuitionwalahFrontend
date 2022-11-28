@@ -1,5 +1,5 @@
 import {NavLink ,useNavigate } from 'react-router-dom'
-import {ArrowLeftOutlined ,ArrowRightOutlined } from '@ant-design/icons';
+import {Tooltip } from 'antd'; 
 import {Select} from 'antd';
 import { Outlet } from 'react-router-dom'
 import React from 'react'
@@ -22,13 +22,17 @@ const User = () => {
    
   const handleChange = (e)=>{
      navigate(`/${e}`);
-     
-     }
+   }
      const data = [
-      <a href="ww"   className="anchor" onClick={(e)=>{e.preventDefault();window.history.back()}} ><ArrowLeftOutlined /> </a>,
-      <a  href="ww4" className="anchor"  onClick={(e)=>{e.preventDefault();window.history.forward()}} ><ArrowRightOutlined /> </a>,
+      <a href="id"    className="anchor" onClick={(e)=>{e.preventDefault();navigate('/TWU0000001')}} >
+        <Tooltip title="SHARE YOUR PROFILE IN WEB " color='#108ee9'  >
+        {String('TWU0000001')}
+        </Tooltip>
+        
+        </a>,
+      <a  href="ww4" className="anchor"  onClick={(e)=>{e.preventDefault()}} > </a>,
       <p  className="anchor" to={``} > </p>, 
-     ...list(["","","home","contact","address","document","payment","","",]),
+     ...list(["","","home","contact","address","document","","",]),
    <Select size={"large"} defaultValue="user" onChange={handleChange} style={{width: 110,}}options={options2}/>,
    <Select size={"large"} defaultValue="setting" onChange={handleChange} style={{width: 160, }} options={options1} /> 
      ]

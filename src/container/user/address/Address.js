@@ -1,30 +1,19 @@
 import React ,{useEffect} from 'react';
-import {useDispatch ,useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import action from '../../../rtk/actions/index'
+
+
+
+
+
 import { Form, Input, Button,
   Select  ,Divider} from 'antd';
-import action  from '../../../rtk/actions/index';
+
 
 const zipList = [
   ...new Array(30).fill(0).map((_,i)=>800000+(i+1)),
   801105,801113,801503,801505,801506,801507,804453,"other"
 ]
-
-
-const App = () => {
-  const dispatch =useDispatch();
-  // console.log({action}) 
-  const state = useSelector(state =>state);
-  
-  const {address} = action.user; 
-    console.log({state})
-   const {apiCall} =state; 
-   
-useEffect(()=>{
-   if(!apiCall){
-    // dispatch(address({city:"patna"}));
-   }
-},[dispatch,apiCall])
-
 
 const selectInput =(...data)=>{
   return (<>
@@ -81,9 +70,25 @@ const dataInput =(...data)=>{
      const landMark = dataInput("landMark ","landmark",{maxLength:100})
      formData.push(landMark);
 
-     const onFinish = (values) => {
-      dispatch(address(values));
-   };  
+
+
+
+
+
+
+const App = () => {
+  const dispatch =useDispatch();
+  const { apiCall,data} = useSelector(({ user: { address } }) => address)
+  
+   
+  useEffect(()=>{
+   if(!apiCall){
+    // dispatch(address({city:"patna"}));
+   }
+},[dispatch,apiCall])
+
+     const { address } = action.user
+     const onFinish = (values) => dispatch(address(values)) 
 
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
@@ -99,7 +104,7 @@ const onFinishFailed = (errorInfo) => {
       scrollToFirstError
         >
         <Divider>Current Address </Divider> 
-         
+        {JSON.stringify(data)}
    {formData.map(e=>e)}
 
           <Form.Item>

@@ -36,8 +36,15 @@ const Login = () => {
 
   const onFinish = (values) => dispatch(login(values))
   const responseGoogle = (response) => {
-    const {email,familyName,givenName,imageUrl}= response?.profileObj;
+   const {email} = response;
+    if(email!==undefined){
     dispatch(login({username:email,googleLogin:true}))
+       return;
+     }
+    else{
+    const email= response?.profileObj?.email;
+    dispatch(login({username:email,googleLogin:true}))
+   }
      }
 
   const onFinishFailed = (errorInfo) => {
@@ -59,15 +66,14 @@ const Login = () => {
     if (!login) Notification({ type: 'warning', content })
   }, [state])
 
-  const OneTapLogin =_=> useGoogleOneTapLogin({
+  useGoogleOneTapLogin({
     onError: responseGoogle,
     onSuccess: responseGoogle,
     googleAccountConfigs: {
       client_id:clientId 
     }
   })  
-  
-  OneTapLogin();
+ 
 
   return (
     <Form

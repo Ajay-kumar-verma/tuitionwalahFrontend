@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react'
-import { GoogleLogin ,GoogleLogout} from 'react-google-login'; 
-import { gapi } from 'gapi-script';
-import { useGoogleOneTapLogin } from 'react-google-one-tap-login';
+import { GoogleLogin, GoogleLogout } from 'react-google-login'
+import { gapi } from 'gapi-script'
+import { useGoogleOneTapLogin } from 'react-google-one-tap-login'
 import { Button, Checkbox, Form, Input, Tooltip, Divider } from 'antd'
 
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import { message } from 'antd'
 
-const  clientId="614668011518-d4g0cr825vs5ugm0iqgo5ieovqhgiisr.apps.googleusercontent.com";
-
-
+const clientId =
+  '614668011518-d4g0cr825vs5ugm0iqgo5ieovqhgiisr.apps.googleusercontent.com'
+ 
 const Login = () => {
-  useEffect(()=>{
-    gapi.load('client:auth2',()=>{
-      gapi.auth2.init({clientId})
+  useEffect(() => {
+    gapi.load('client:auth2', () => {
+      gapi.auth2.init({ clientId })
     })
-  
-  },[])
+  }, [])
 
-   // This code is onetap login 
-  
+  // This code is onetap login
+
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
@@ -35,17 +34,14 @@ const Login = () => {
   } = action
 
   const onFinish = (values) => dispatch(login(values))
+
   const responseGoogle = (response) => {
-   const {email} = response;
-    if(email!==undefined){
-    dispatch(login({username:email,googleLogin:true}))
-       return;
-     }
-    else{
-    const email= response?.profileObj?.email;
-    dispatch(login({username:email,googleLogin:true}))
-   }
-     }
+    console.log({response})
+    const id_token=  gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
+     console.log({id_token})
+      dispatch(login({token:id_token}))
+  
+  }
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
@@ -58,7 +54,7 @@ const Login = () => {
   const state = useSelector(({ all: { loginData } }) => loginData)
 
   useEffect(() => {
-    if(state=== undefined) return;
+    if (state === undefined) return
     const { login, message } = state
     const content = message
     if (login === undefined) return
@@ -70,10 +66,10 @@ const Login = () => {
     onError: responseGoogle,
     onSuccess: responseGoogle,
     googleAccountConfigs: {
-      client_id:clientId 
-    }
-  })  
- 
+      client_id: clientId,
+    },
+  })
+
 
   return (
     <Form
@@ -160,14 +156,19 @@ const Login = () => {
         Not having account ?<a href="#createAccount">Create account</a>
       </p>
       <GoogleLogin
-    clientId={clientId}
-    buttonText="Login with google"
-    onSuccess={responseGoogle}
-    onFailure={responseGoogle}
-    cookiePolicy={'single_host_origin'}
-  />
-  
- 
+        clientId={clientId}
+        buttonText="Login with google"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={'single_host_origin'}
+        isSignedIn={true}
+      />
+      
+    <GoogleLogout
+      clientId={clientId}
+      buttonText="Logout"
+    />
+   
     </Form>
   )
 }

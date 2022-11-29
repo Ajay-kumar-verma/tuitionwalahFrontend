@@ -82,19 +82,16 @@ useEffect(()=>{
 
 
 if(userType==='/') 
-  return (
-      <Routes>
+  return <Routes>
         <Route  path="/" element={<All />}  / >  
         <Route  path="agreement" element={<Agreement/>} />
         <Route  path="logout" element={<Logout />} />
         <Route  path=":id" element={<NoMatch />} />
-   </Routes>
+        </Routes>
 
-    )
  
 if(userType === 'user') 
-  return (
-            <Routes>
+  return    <Routes>
               <Route path="user" element={<User />} >
               <Route index element={<Home />} />
               <Route path="home" element={<Home />} />
@@ -125,11 +122,11 @@ if(userType === 'user')
           <Route  path="logout" element={<Logout />} />
          <Route  path=":id" element={<NoMatch />} />
           </Routes>
-      )
+    
 
 
 if (userType === 'admin') 
-      return (
+      return 
          <Routes>
             <Route path="admin" element={<Admin />}>
               <Route index element={<User />} />
@@ -142,11 +139,8 @@ if (userType === 'admin')
            </Route>
          </Routes>
        
-      )
-  
-
 if (userType === 'main') 
-      return (
+      return 
           <Routes>
             <Route path="main" element={<Main />}>
               <Route index element={<Team />} />
@@ -159,8 +153,7 @@ if (userType === 'main')
             </Route>
         
           </Routes>
-        )
- 
+    
   }
 
 

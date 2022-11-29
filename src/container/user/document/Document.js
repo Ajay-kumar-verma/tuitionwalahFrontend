@@ -1,47 +1,34 @@
-import { Upload ,Divider } from 'antd';
-import ImgCrop from 'antd-img-crop';
-import React, { useState } from 'react';
-const App = () => {
-  const [fileList, setFileList] = useState([]);
-  
-  // {
-  //   uid: '-1',
-  //   name: 'image.png',
-  //   status: 'done',
-  //   url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-  // },
+import { Divider,Row,Col,Image } from 'antd';
+import React,{useState}  from 'react';
+import ImageUpload from './Fileupload';
 
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-  };
-  const onPreview = async (file) => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
-  };
+const App = () => {
+
   return (
     <div className="form">
-      <Divider>Upload your Adhaar card</Divider>
-     <ImgCrop rotate>
-      <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
-        // fileList={fileList}
-        onChange={onChange}
-        onPreview={onPreview}
-      >
-      {fileList.length===0?'Front Side ':fileList.length===1?"Back Side ":null}
-      </Upload>
-    </ImgCrop>
+       <Divider />
+      
+       <Row justify="space-between">
+    <Col>
+       <Image width={100} height={100} src={'https://drive.google.com/uc?export=view&id=1u8zGiSS-pBxNETcXywnz-F-ngd3MOeEz'} />
+    </Col>
+    <Col>
+       <Image width={100} height={100} src={'https://drive.google.com/uc?export=view&id=1wYZ-EhUEFOpRaR1Q_tbD91lD5YW6xunp'}/>
+
+    </Col>
+    
+    </Row>
+
+     <Divider />
+    <Row justify="space-between">
+    <Col>
+     <ImageUpload name="front" />
+    </Col>
+    <Col>
+     <ImageUpload name="back" />
+    </Col>
+    
+    </Row>
     </div>
     );
 };

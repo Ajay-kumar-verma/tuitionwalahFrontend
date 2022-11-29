@@ -25,7 +25,7 @@ const initialState = {
         // console.log("Login",{obj})
         try {
         const {data} = await api.post(`/login`,obj);
-      // console.log({data})
+      console.log({data})
           return data;     
       } catch (error) {
            console.log("Error is : ",error);  
@@ -86,6 +86,7 @@ const {reducer, actions} = createSlice({
      state.loginData=payload;
      state.loading = false ;
      const {login,token,userType,message,error} =payload;
+     console.log({payload})
      if((token && login===true) && Array.isArray(userType))
        {
       localStorage.setItem('token',token);

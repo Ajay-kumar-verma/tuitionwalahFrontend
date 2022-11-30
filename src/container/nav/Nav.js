@@ -11,9 +11,8 @@ const Navbar = ({data}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch() 
-  const state = useSelector(({all})=>all?.userType);
-  // console.log({state})
-  // const state=['user','agent']
+  const {userType,currentUser} = useSelector(({all})=>all);
+  
   const showDrawer = () => {
     setOpen(true);
   };
@@ -21,41 +20,37 @@ const Navbar = ({data}) => {
     setOpen(false);
   };
   
-  data.unshift(
-  <a href="id"    className="anchor" onClick={(e)=>{e.preventDefault();navigate('/TWU0000001')}} >
-  <Tooltip title="SHARE YOUR PROFILE IN WEB " color='#108ee9'  >
-  {String('TWU0000001')}
-  </Tooltip>
-  </a>)
+  // data.unshift(
+  // <a href="id"    className="anchor" onClick={(e)=>{e.preventDefault();navigate('/TWU0000001')}} >
+  // <Tooltip title="SHARE YOUR PROFILE IN WEB " color='#108ee9'  >
+  // {String('TWU0000001')}
+  // </Tooltip>
+  // </a>)
 
   const obj=(e)=> <Option value={e} >{e}</Option>
   const settings =<Select size={"large"} defaultValue="setting"
   onChange={(value)=>{navigate(`/${value}`)}} style={{width: 150,}}>
   {['changePassword','changePassword','resetPassword','deleteAccount','logout'].map(e=>obj(e))}
  </Select>
-  const usertypes =<Select size={"large"} defaultValue="user"
+  const usertypes =<Select size={"large"} defaultValue={currentUser}
   onChange={(value)=>{
     dispatch(action.all.changeUser(value));
      navigate(`/${value}`)
      }}
    style={{width: 150}}>
-  {state.map(e=>obj(e))}</Select>
-  data.push(usertypes);
-  data.push(settings);
+  {userType.map(e=>obj(e))}</Select>
 
- const menu= data.filter((e,i)=>{
-    const {props:{options}} =e;
-    if(options || i<2)
-     return null;
-    return e;
-  
-  })
-  
+  // data.push(usertypes);
+  // data.push(settings);
 
 
   return (
  <>
- <div className="desktop" >{data}</div>
+ <div className="desktop" >
+  {data}
+ {usertypes}
+ {settings}
+ </div>
        
  {!open?<Button type="primary" className="btn" 
   onClick={showDrawer}><i  className="fas fa-bars"></i>
@@ -65,7 +60,7 @@ const Navbar = ({data}) => {
 
 <Drawer title="TUITION WALAH"  width={220}
  placement="right" onClose={onClose} open={open}>
-  {menu.map((e,i)=><Divider>{e}</Divider>)}
+  {data.map((e)=><Divider>{e}</Divider>)}
  <Divider>{usertypes} </Divider>
   <Divider> {settings} </Divider>
    </Drawer>

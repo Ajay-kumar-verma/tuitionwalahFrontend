@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useMemo} from 'react'
 import {NavLink ,Outlet} from 'react-router-dom'
 import NavBar from '../nav/Nav'
 
@@ -11,12 +11,15 @@ const User = () => {
      ...list(["","home","contact","address","document",]),
    ]
 
-
+   const navLists= useMemo(()=>{
+    return <NavBar data={data} />
+  },[])
+  
 
   return (
     <>
    <nav>
-  <NavBar data={data} />
+   {navLists}
   </nav>
 <Outlet />
     </>

@@ -1,11 +1,11 @@
-import React,{useState ,useEffect} from 'react'
+import React,{useState ,useEffect } from 'react'
 import {NavLink ,Outlet} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import {NumericInput} from './NumberInput'
 import NavBar from '../nav/Nav'
 
-import { Button , Form, Input,Table , message } from 'antd'
+import { Button , Form, Input,Table , message ,Divider} from 'antd'
 import {  PhoneOutlined } from '@ant-design/icons'
 import { Collapse,Select } from 'antd';
 const { Panel } = Collapse;
@@ -14,7 +14,7 @@ const {Option} = Select;
 
 const list = (data)=>data.map(e=><NavLink  className="anchor" to={`${e}`} > {e} </NavLink>) 
 
-const lists =  list(["","home","contact","address","document"])
+const lists =  list(["home","contact"])
 
 
 const columns = [
@@ -99,15 +99,17 @@ useEffect(() => {
    )
 
 },[clients])
+
 const obj=(e)=> <Option value={e} >{e}</Option>
 return (
  <>
- <nav>
+<nav>
   <NavBar data={lists} />
-  </nav>
+  </nav> 
 <Outlet />
-<div className="form">
- 
+
+ <div className="form">
+ <Divider />
 <Collapse accordion>
     <Panel header="Add student , teacher and parent  " extra="शिक्षक माता-पिता तथा छात्र को जोड़" key="1">
     <Form

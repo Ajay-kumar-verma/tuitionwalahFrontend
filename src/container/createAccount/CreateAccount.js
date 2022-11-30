@@ -69,6 +69,10 @@ const App = () => {
               required: true,
               message: 'Please input your first Name!',
             },
+            {
+              pattern: new RegExp(/^[a-zA-Z]*$/),
+              message:"Only Aplhabet is allowed"
+            }
           ]}
         >
           <Input maxLength={50} showCount placeholder="Enter first Name" />
@@ -86,6 +90,10 @@ const App = () => {
               required: true,
               message: 'Please input your last Name!',
             },
+            {
+              pattern: new RegExp(/^[a-zA-Z]*$/),
+              message:"Only Aplhabet is allowed"
+            }
           ]}
         >
           <Input maxLength={50} showCount placeholder="Enter last Name" />
@@ -99,6 +107,10 @@ const App = () => {
               required: true,
               message: 'Please input your phone number!',
             },
+            {
+              pattern: new RegExp(/^[0-9]*$/),
+              message:"Invalid number"
+            }
           ]}
         >
           <Input

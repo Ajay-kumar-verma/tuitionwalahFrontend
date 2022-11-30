@@ -137,7 +137,7 @@ function App() {
    return (
     <Routes>
     <Route path="admin" element={<Admin />}>
-      <Route index element={<User />} />
+      <Route index element={<Admin />} />
       <Route path="user" element={<User />} />
       <Route path="student" element={<Student />} />
       <Route path="teacher" element={<Teacher />} />

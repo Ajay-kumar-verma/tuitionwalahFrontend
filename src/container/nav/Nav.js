@@ -1,36 +1,47 @@
 import {NavLink,useNavigate} from 'react-router-dom';
 import React,{useState} from 'react'
-import {Button,Drawer,Divider  } from 'antd';
-
-
+import {Button,Drawer,Divider ,Select , Tooltip} from 'antd';
+import { useSelector, useDispatch } from 'react-redux'
+import action from '../../rtk/actions/index'
 import './style.css'
+const {Option} = Select; 
+
+
 const Navbar = ({data}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [childrenDrawer1, setChildrenDrawer1] = useState(false);
-  const [childrenDrawer2, setChildrenDrawer2] = useState(false);
-  
+  const dispatch = useDispatch() 
+  const state = useSelector(({all})=>all?.userType);
+  // console.log({state})
+  // const state=['user','agent']
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
+  
+  data.unshift(
+  <a href="id"    className="anchor" onClick={(e)=>{e.preventDefault();navigate('/TWU0000001')}} >
+  <Tooltip title="SHARE YOUR PROFILE IN WEB " color='#108ee9'  >
+  {String('TWU0000001')}
+  </Tooltip>
+  </a>)
 
-  const showChildrenDrawer1 = () => {
-    setChildrenDrawer1(true);
-  };
-  const onChildrenDrawerClose1 = () => {
-    setChildrenDrawer1(false);
-  };
-
-
-  const showChildrenDrawer2 = () => {
-    setChildrenDrawer2(true);
-  };
-  const onChildrenDrawerClose2 = () => {
-    setChildrenDrawer2(false);
-  };
+  const obj=(e)=> <Option value={e} >{e}</Option>
+  const settings =<Select size={"large"} defaultValue="setting"
+  onChange={(value)=>{navigate(`/${value}`)}} style={{width: 150,}}>
+  {['changePassword','changePassword','resetPassword','deleteAccount','logout'].map(e=>obj(e))}
+ </Select>
+  const usertypes =<Select size={"large"} defaultValue="user"
+  onChange={(value)=>{
+    dispatch(action.all.changeUser(value));
+     navigate(`/${value}`)
+     }}
+   style={{width: 150}}>
+  {state.map(e=>obj(e))}</Select>
+  data.push(usertypes);
+  data.push(settings);
 
  const menu= data.filter((e,i)=>{
     const {props:{options}} =e;
@@ -41,65 +52,22 @@ const Navbar = ({data}) => {
   })
   
 
-const [op1,op2]= data.filter(e=>{
-  const {props:{options}} =e;
-  if(options)
-   return options
-  return null;
-
-})
-
- const nav=(e)=>{
-  e.preventDefault();
-  const {target:{innerHTML}}= e;
-// console.log({innerHTML})
-if(innerHTML==='admin' || innerHTML==='main' ||
- innerHTML==='agent' || innerHTML==='logout') 
-   navigate(`/${innerHTML}`);
-else navigate(innerHTML)
-}
-
-const userType=op1.props.options.map(({value})=><NavLink onClick={nav} to={`/${value}`} >{value}</NavLink>  );
-const setting=op2.props.options.map(({value})=><NavLink onClick={nav} to={`/${value}`} >{value}</NavLink>  );
 
   return (
  <>
- <div className="desktop" >
-     {data}  
-      </div>
-      
- 
+ <div className="desktop" >{data}</div>
+       
  {!open?<Button type="primary" className="btn" 
   onClick={showDrawer}><i  className="fas fa-bars"></i>
   </Button>
   :null
-}     
+}
+
 <Drawer title="TUITION WALAH"  width={220}
  placement="right" onClose={onClose} open={open}>
-  {menu.map((e,i)=>i<3 ||i>=menu.length-2 ?null:<Divider>{e}</Divider>)}
-    
- <Divider>  
-    <Button type="primary" onClick={showChildrenDrawer1}>
-         UserType
-        </Button>
- </Divider>
- <Divider>
- <Button type="primary" onClick={showChildrenDrawer2}>
-   Setting
-   </Button>
- </Divider>
-   <Drawer title="Usetype" width={220} onClose={onChildrenDrawerClose1} 
-     open={childrenDrawer1}
-       >
-         {userType.map(e=><div>{e}</div>)}
-         </Drawer>
-   
-   <Drawer title="Setting" width={220} onClose={onChildrenDrawerClose2} 
-    open={childrenDrawer2}
-       >
-         {setting.map(e=><div>{e}</div>)}
-         </Drawer>
-   
+  {menu.map((e,i)=><Divider>{e}</Divider>)}
+ <Divider>{usertypes} </Divider>
+  <Divider> {settings} </Divider>
    </Drawer>
  </>
 )

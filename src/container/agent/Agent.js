@@ -1,8 +1,9 @@
 import React,{useState ,useEffect} from 'react'
-
+import {NavLink ,Outlet} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import {NumericInput} from './NumberInput'
+import NavBar from '../nav/Nav'
 
 import { Button , Form, Input,Table , message } from 'antd'
 import {  PhoneOutlined } from '@ant-design/icons'
@@ -10,6 +11,11 @@ import { Collapse,Select } from 'antd';
 const { Panel } = Collapse;
 
 const {Option} = Select;
+
+const list = (data)=>data.map(e=><NavLink  className="anchor" to={`${e}`} > {e} </NavLink>) 
+
+const lists =  list(["","home","contact","address","document"])
+
 
 const columns = [
   {
@@ -54,24 +60,12 @@ const columns = [
   
 ];
 
-
 const Agent = ()=>{
   const [value, setValue] = useState('');
   const [data,setDate] =useState([]); 
   const dispatch = useDispatch() 
   const state = useSelector(state=>state)
  
-  const obj=(e)=> <Option value={e.split(" ")[0]} >{e}</Option>
-  const options =state.all.userType.map(e=>obj(e))
-  
-  options.reverse()
-  console.log({options})
-  
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-    dispatch(action.all.changeUser(value))
-  };
-
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
@@ -87,7 +81,7 @@ const Agent = ()=>{
 
   
 useEffect(() => {
-  dispatch(action.user.agent())
+  dispatch(action.user.agent({x:'no-data'}))
 },[])
 
 const clients = state?.user?.agent?.data?.myClinets;
@@ -105,18 +99,15 @@ useEffect(() => {
    )
 
 },[clients])
-  
+const obj=(e)=> <Option value={e} >{e}</Option>
 return (
+ <>
+ <nav>
+  <NavBar data={lists} />
+  </nav>
+<Outlet />
 <div className="form">
-  <Select
-    defaultValue="agent"
-    style={{width: '100%',}}
-    onChange={handleChange}
-  >
-      {options}
-  </Select>
-
-
+ 
 <Collapse accordion>
     <Panel header="Add student , teacher and parent  " extra="शिक्षक माता-पिता तथा छात्र को जोड़" key="1">
     <Form
@@ -183,7 +174,6 @@ return (
 <Select
     defaultValue="teacher  शिक्षक"
     style={{width: '100%',}}
-    onChange={handleChange}
   >
    {['student छात्र',`teacher  शिक्षक`,'parent माता-पिता ',`other`].map(e=>obj(e))}
   </Select>
@@ -210,8 +200,8 @@ return (
   
   </Collapse>
 
-
 </div>
+    </> 
 )
 
 }

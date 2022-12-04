@@ -46,46 +46,48 @@ import NoMatch from './container/noMatch/NoMatch'
 
 function App() {
   const navigate = useNavigate()
-  //  const data = useSelector(({user}) =>({login:user.login,userType:user.userType}))
+  //  const data = useSelector(({user}) =>({login:user.login,currentUser:user.currentUser}))
   const state = useSelector((state) => state)
   console.log({ state }, { action })
+  
   const {
     all: { login, currentUser },
   } = state
+  
   const dispatch = useDispatch()
-  //console.log({login,userType});
-
-  const userType = currentUser
-
+  
   useEffect(() => {
-    if (!login && localStorage.getItem('token') !== null) {
-      //console.log("Login is called ")
+    console.log("Current usertype is changed ",currentUser)
+
+    const token = localStorage.getItem('token');
+    if (!login && token !== null) {
       dispatch(action.all.login())
     }
-    //  userType
+  
     const path = window.location.pathname
-    // const pathAr = path.split("/");
+    if (path === '/') navigate(currentUser)
+    else navigate(currentUser)
 
-    if (path === '/') navigate(userType)
-    else navigate(userType)
+  }, [dispatch, login, currentUser])
 
-    //  console.log({path},{userType})
-    //  dispatch(action.all.changeUser('user'))
-  }, [dispatch, login, userType])
+  
 
-  if (userType === '/')
-    return (
+  if (currentUser === '/')
+    // return <Lo />
+  return (
+        
       <Routes>
+        <Route path="logout" element={<Logout />} />
         <Route path="/" element={<All />} />
         <Route path="agreement" element={<Agreement />} />
-        <Route path="logout" element={<Logout />} />
         <Route path=":id" element={<NoMatch />} />
       </Routes>
     )
 
-  if (userType === 'user')
+  if (currentUser === 'user')
     return (
       <Routes>
+          <Route path="logout" element={<Logout />} />
         <Route path="user" element={<User />}>
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
@@ -118,10 +120,11 @@ function App() {
       </Routes>
     )
 
-  if (userType === 'agent'){
-    console.log({userType})
+  if (currentUser === 'agent'){
+    console.log({currentUser})
     return (
       <Routes>
+          <Route path="logout" element={<Logout />} />
          <Route path="agent"  element={<Agent />} >
           <Route index element={<Agent />} />
           <Route path="student" element={<Student />} />
@@ -133,9 +136,10 @@ function App() {
       </Routes>
     )}
 
-  if (userType === 'admin')
+  if (currentUser === 'admin')
    return (
     <Routes>
+        <Route path="logout" element={<Logout />} />
     <Route path="admin" element={<Admin />}>
       <Route index element={<Admin />} />
       <Route path="user" element={<User />} />
@@ -148,9 +152,10 @@ function App() {
   </Routes>
    )
  
-   if (userType === 'main')
+   if (currentUser === 'main')
    return (
    <Routes>
+      <Route path="logout" element={<Logout />} />
     <Route path="main" element={<Main />}>
       <Route index element={<Team />} />
       <Route path="team" element={<Team />} />

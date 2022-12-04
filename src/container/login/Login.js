@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
-import { GoogleLogin, GoogleLogout } from 'react-google-login'
+import { GoogleLogin, } from 'react-google-login'
 import { gapi } from 'gapi-script'
-import { useGoogleOneTapLogin } from 'react-google-one-tap-login'
+// import { useGoogleOneTapLogin } from 'react-google-one-tap-login'
+
 import { Button, Checkbox, Form, Input, Tooltip, Divider } from 'antd'
 
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import { message } from 'antd'
+import obj from '../../config' 
 
-const clientId =
-  '614668011518-d4g0cr825vs5ugm0iqgo5ieovqhgiisr.apps.googleusercontent.com'
- 
+const {clientId} = obj;
+
 const Login = () => {
   useEffect(() => {
     gapi.load('client:auth2', () => {
@@ -33,17 +34,7 @@ const Login = () => {
     all: { login },
   } = action
 
-  const onFinish = (values) => dispatch(login(values))
-
-  const responseGoogle = (response) => {
-    console.log({response})
-    const id_token=  gapi?.auth2?.getAuthInstance()?.
-    currentUser?.get()?.getAuthResponse()?.id_token;
-    //  console.log({id_token})
-      dispatch(login({token:id_token}))
-  
-  }
-
+  const onFinish = (values) =>dispatch(login(values))
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
     Notification({
@@ -63,13 +54,22 @@ const Login = () => {
     if (!login) Notification({ type: 'warning', content })
   }, [state])
 
-  useGoogleOneTapLogin({
-    onError: responseGoogle,
-    onSuccess: responseGoogle,
-    googleAccountConfigs: {
-      client_id: clientId,
-    },
-  })
+  const responseGoogle = () => {
+    const token=  gapi?.auth2?.getAuthInstance()?.
+     currentUser?.get()?.getAuthResponse()?.id_token;
+     console.log({token});
+     localStorage.setItem('token',token);
+     dispatch(login({token}))
+  }
+ 
+
+  // useGoogleOneTapLogin({
+  //   onError: console.log,
+  //   onSuccess: console.log,
+  //   googleAccountConfigs: {
+  //     client_id: clientId,
+  //   },
+  // })
 
 
   return (
@@ -116,7 +116,7 @@ const Login = () => {
         <Checkbox>Remember me</Checkbox>
         <Tooltip
           title={
-            ('' + username).length >= 9 ? null : 'Enter mobile number or email'
+            ('' + username)?.length >= 9 ? null : 'Enter mobile number or email'
           }
           color={'#108ee9'}
         >
@@ -126,7 +126,7 @@ const Login = () => {
               reset({ username })
             }}
             style={{ float: 'right' }}
-            disabled={('' + username).length <= 9 || state.loading}
+            disabled={('' + username)?.length <= 9 || state?.loading}
           >
             {' '}
             Get new Password{' '}
@@ -137,18 +137,18 @@ const Login = () => {
 
       <Tooltip
         title={
-          ('' + username).length >= 9 ? null : 'Enter  mobile number or email'
+          ('' + username)?.length >= 9 ? null : 'Enter  mobile number or email'
         }
         color={'#108ee9'}
       >
         <Form.Item>
           <Button
             style={{ width: '100%' }}
-            disabled={('' + username).length <= 9 || state.loading}
+            disabled={('' + username)?.length <= 9 || state?.loading}
             type="primary"
             htmlType="submit"
           >
-            {state.loading ? 'Please wait ' : 'Login'}
+            {state?.loading ? 'Please wait ' : 'Login'}
           </Button>
         </Form.Item>
       </Tooltip>
@@ -165,10 +165,6 @@ const Login = () => {
         isSignedIn={true}
       />
       
-    <GoogleLogout
-      clientId={clientId}
-      buttonText="Logout"
-    />
    
     </Form>
   )

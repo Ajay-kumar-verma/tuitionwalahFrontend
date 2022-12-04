@@ -1,7 +1,8 @@
-import {NavLink,useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import React,{useState} from 'react'
-import {Button,Drawer,Divider ,Select , Tooltip} from 'antd';
+import {Button,Drawer,Divider ,Select  } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
+import Logout from '../logout/Logout'
 import action from '../../rtk/actions/index'
 import './style.css'
 const {Option} = Select; 
@@ -25,7 +26,7 @@ const Navbar = ({data}) => {
 
   const settings =<Select size={"large"} defaultValue="setting"
   onChange={(value)=>{navigate(`/${value}`)}} style={{width: 150,}}>
-  {['changePassword','changePassword','resetPassword','deleteAccount','logout'].map((e,i)=>obj(e,i))}
+  {['changePassword','changePassword','resetPassword','deleteAccount'].map((e,i)=>obj(e,i))}
  </Select>
 
   const usertypes =<Select size={"large"} defaultValue={currentUser}
@@ -37,9 +38,6 @@ const Navbar = ({data}) => {
   {userType.map((e,i)=>obj(e,i))}
   </Select>
 
-  // data.push(usertypes);
-  // data.push(settings);
-
 
   return (
  <>
@@ -48,7 +46,8 @@ const Navbar = ({data}) => {
   {data}
  {usertypes}
  {settings}
- </div>
+ <Logout /> 
+  </div>
        
  {!open?<Button type="primary" className="btn" 
   onClick={showDrawer}><i  className="fas fa-bars"></i>
@@ -62,6 +61,9 @@ const Navbar = ({data}) => {
   {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
   <Divider>{usertypes} </Divider>
   <Divider> {settings} </Divider>
+  <Divider> <Logout /> </Divider>
+    
+ 
    </Drawer>
  </>
 )

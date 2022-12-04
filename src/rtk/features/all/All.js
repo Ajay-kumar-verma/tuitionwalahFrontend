@@ -22,10 +22,9 @@ const initialState = {
     const login = createAsyncThunk(
       'login',
       async (obj) => {
-        // console.log("Login",{obj})
         try {
         const {data} = await api.post(`/login`,obj);
-      console.log({data})
+      // console.log({data})
           return data;     
       } catch (error) {
            console.log("Error is : ",error);  
@@ -39,7 +38,7 @@ const initialState = {
       console.log({obj})
       const {data} = await api.post(`/createAccount`,obj);
       console.log("create account data is :",{data});
-       return data;
+       return data;   
     }
    )
 
@@ -83,21 +82,22 @@ const {reducer, actions} = createSlice({
    } ,
    [login.fulfilled]: (state,{payload}) => {
      state.all = payload;
-     state.loginData=payload;
      state.loading = false ;
-     const {login,token,userType,message,error} =payload;
+     const {login,token,message,user,error} =payload;
      console.log({payload})
-     if((token && login===true) && Array.isArray(userType))
+     const {userType} = user;
+     if((login===true) && Array.isArray(userType))
        {
-      localStorage.setItem('token',token);
+        if(!!token) localStorage.setItem('token',token);
       state.login=true;  
       state.userType = userType.reverse();
       state.currentUser=userType[0];
-    }else{
-        localStorage.removeItem('token');
-       }
-     state.message=message;
-     state.error=error;
+    } else{
+      localStorage.removeItem('token')
+    }
+    
+    state.message=message;
+    state.error=error;
       },
     [login.rejected]:(state,{payload}) => {
     state.all =payload; 

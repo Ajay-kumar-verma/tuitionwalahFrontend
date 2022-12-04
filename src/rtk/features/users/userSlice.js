@@ -16,7 +16,6 @@ const initialState = {
    otherDetail:{apiCall:false, data:{}},
    payment:{apiCall:false, data:{}},
    agent:{apiCall:false, data:{}},
-
   }
   
   const home = createAsyncThunk(

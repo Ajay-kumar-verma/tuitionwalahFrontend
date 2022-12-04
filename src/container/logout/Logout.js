@@ -3,18 +3,18 @@ import {GoogleLogout } from 'react-google-login'
 import obj from '../../config' 
 
 const Logout = () => {
-  console.log("Logout butddton ")
- const ref = useRef(null);
+
   const {clientId} = obj;
   
   const lgot= ()=>{
 localStorage.removeItem('token');
+localStorage.removeItem('currentUser');
   window.location.href="/"
 }
 
 
 
-  return <GoogleLogout  ref={ref}
+  return <GoogleLogout 
     clientId={clientId}
     buttonText=" Logout "
     onLogoutSuccess={lgot}

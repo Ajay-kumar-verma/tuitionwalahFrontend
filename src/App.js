@@ -48,7 +48,7 @@ function App() {
   const navigate = useNavigate()
   //  const data = useSelector(({user}) =>({login:user.login,currentUser:user.currentUser}))
   const state = useSelector((state) => state)
-  console.log({ state }, { action })
+  // console.log({ state }, { action })
   
   const {
     all: { login, currentUser },
@@ -56,22 +56,22 @@ function App() {
   
   const dispatch = useDispatch()
   
-  useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser');
-    if(currentUser!==null)
-    dispatch(action.all.changeUser(currentUser));
+useEffect(() => {
+  const path = window.location.pathname
+  if(path.split("/")[1]===currentUser)
+    navigate(path);
+  else if(path==="/")
+    navigate(currentUser); 
+  setTimeout(()=>dispatch(action.all.changeUser(path.split("/")[1])),0)
+
     
+},[currentUser])
+
+  useEffect(() => {
     const token = localStorage.getItem('token');
     if (!login && token !== null)
-      dispatch(action.all.login());
-  
-    const path = window.location.pathname
-    if(path.split("/")[0]===currentUser)
-      navigate(path);
-     else navigate(currentUser); 
-
-
-  }, [dispatch, login, currentUser])
+      dispatch(action.all.login({token}));
+  }, [dispatch, login ])
 
  
   if (currentUser === '/')

@@ -70,9 +70,11 @@ const {reducer, actions} = createSlice({
   initialState,
   reducers:{
     changeUser:(state,{payload})=>{
-      if(state.userType.includes(payload))
+
+      if(state.userType.includes(payload)){
+        // console.log("chnage use is called ",payload)
          state.currentUser=payload
-      // else window.location.href="logout";
+      }
         }
   }
   ,   extraReducers:{

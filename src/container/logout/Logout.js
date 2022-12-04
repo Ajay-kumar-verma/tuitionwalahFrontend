@@ -1,4 +1,4 @@
-import React,{useRef} from 'react'
+import React from 'react'
 import {GoogleLogout } from 'react-google-login'
 import obj from '../../config' 
 
@@ -8,7 +8,6 @@ const Logout = () => {
   
   const lgot= ()=>{
 localStorage.removeItem('token');
-localStorage.removeItem('currentUser');
   window.location.href="/"
 }
 

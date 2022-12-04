@@ -57,7 +57,7 @@ const Login = () => {
   const responseGoogle = () => {
     const token=  gapi?.auth2?.getAuthInstance()?.
      currentUser?.get()?.getAuthResponse()?.id_token;
-     console.log({token});
+    //  console.log({token});
      localStorage.setItem('token',token);
      localStorage.setItem("currentUser","user");
      

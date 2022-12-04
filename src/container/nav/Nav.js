@@ -20,25 +20,22 @@ const Navbar = ({data}) => {
     setOpen(false);
   };
   
-  // data.unshift(
-  // <a href="id"    className="anchor" onClick={(e)=>{e.preventDefault();navigate('/TWU0000001')}} >
-  // <Tooltip title="SHARE YOUR PROFILE IN WEB " color='#108ee9'  >
-  // {String('TWU0000001')}
-  // </Tooltip>
-  // </a>)
 
-  const obj=(e)=> <Option value={e} >{e}</Option>
+  const obj=(e,i)=> <Option value={e} key={i} >{e}</Option>
+
   const settings =<Select size={"large"} defaultValue="setting"
   onChange={(value)=>{navigate(`/${value}`)}} style={{width: 150,}}>
-  {['changePassword','changePassword','resetPassword','deleteAccount','logout'].map(e=>obj(e))}
+  {['changePassword','changePassword','resetPassword','deleteAccount','logout'].map((e,i)=>obj(e,i))}
  </Select>
+
   const usertypes =<Select size={"large"} defaultValue={currentUser}
   onChange={(value)=>{
     dispatch(action.all.changeUser(value));
      navigate(`/${value}`)
      }}
    style={{width: 150}}>
-  {userType.map(e=>obj(e))}</Select>
+  {userType.map((e,i)=>obj(e,i))}
+  </Select>
 
   // data.push(usertypes);
   // data.push(settings);
@@ -47,6 +44,7 @@ const Navbar = ({data}) => {
   return (
  <>
  <div className="desktop" >
+  {"TWU0000001"}
   {data}
  {usertypes}
  {settings}
@@ -60,8 +58,9 @@ const Navbar = ({data}) => {
 
 <Drawer title="TUITION WALAH"  width={220}
  placement="right" onClose={onClose} open={open}>
-  {data.map((e)=><Divider>{e}</Divider>)}
- <Divider>{usertypes} </Divider>
+ {"TWU0000001"}
+  {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
+  <Divider>{usertypes} </Divider>
   <Divider> {settings} </Divider>
    </Drawer>
  </>

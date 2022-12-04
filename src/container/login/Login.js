@@ -37,8 +37,9 @@ const Login = () => {
 
   const responseGoogle = (response) => {
     console.log({response})
-    const id_token=  gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
-     console.log({id_token})
+    const id_token=  gapi?.auth2?.getAuthInstance()?.
+    currentUser?.get()?.getAuthResponse()?.id_token;
+    //  console.log({id_token})
       dispatch(login({token:id_token}))
   
   }

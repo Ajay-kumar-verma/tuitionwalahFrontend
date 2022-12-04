@@ -59,6 +59,8 @@ const Login = () => {
      currentUser?.get()?.getAuthResponse()?.id_token;
      console.log({token});
      localStorage.setItem('token',token);
+     localStorage.setItem("currentUser","user");
+     
      dispatch(login({token}))
   }
  

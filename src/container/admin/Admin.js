@@ -16,6 +16,9 @@ const Admin = () => {
    <NavBar data={data} />
   </nav>
     <Outlet />
+   THISIS A ADMIN PAGE 
+
+
     </>
     )
 }

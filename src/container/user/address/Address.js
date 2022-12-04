@@ -52,9 +52,6 @@ const dataInput =(...data)=>{
     const zipCode = selectInput("Enter Zip code of your area ","zipCode",zipList)
         formData.push(zipCode)
 
-    const address1 = dataInput("Address 1 ","address 1",{maxLength:100})
-     formData.push(address1);
-
      const address2 = dataInput("Address 2 ","address 2",{maxLength:100})
      formData.push(address2);
 

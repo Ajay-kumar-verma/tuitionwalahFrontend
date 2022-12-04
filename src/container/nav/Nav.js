@@ -31,6 +31,7 @@ const Navbar = ({data}) => {
 
   const usertypes =<Select size={"large"} defaultValue={currentUser}
   onChange={(value)=>{
+    localStorage.setItem('currentUser',value)
     dispatch(action.all.changeUser(value));
      navigate(`/${value}`)
      }}

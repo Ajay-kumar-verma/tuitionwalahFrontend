@@ -57,21 +57,23 @@ function App() {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    console.log("Current usertype is changed ",currentUser)
-
+    const currentUser = localStorage.getItem('currentUser');
+    if(currentUser!==null)
+    dispatch(action.all.changeUser(currentUser));
+    
     const token = localStorage.getItem('token');
-    if (!login && token !== null) {
-      dispatch(action.all.login())
-    }
+    if (!login && token !== null)
+      dispatch(action.all.login());
   
     const path = window.location.pathname
-    if (path === '/') navigate(currentUser)
-    else navigate(currentUser)
+    if(path.split("/")[0]===currentUser)
+      navigate(path);
+     else navigate(currentUser); 
+
 
   }, [dispatch, login, currentUser])
 
-  
-
+ 
   if (currentUser === '/')
     // return <Lo />
   return (

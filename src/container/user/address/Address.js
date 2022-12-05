@@ -57,9 +57,14 @@ const dataInput =(...data)=>{
     const zipCode = selectInput("Zip code ","zipCode",zipList)
         formData.push(zipCode)
 
+<<<<<<< HEAD
     const address1 = dataInput("Address ","address ",{maxLength:100})
      formData.push(address1);
 
+=======
+     const address2 = dataInput("Address 2 ","address 2",{maxLength:100})
+     formData.push(address2);
+>>>>>>> test
 
      const street = dataInput("Street  ","street",{maxLength:100})
      formData.push(street);

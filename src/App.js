@@ -9,7 +9,6 @@ import All from './container/all/All'
 // import Nav from './container/nav/Nav'
 
 import Logout from './container/logout/Logout'
-
 import Agreement from './container/agreement/Agreement'
 
 import User from './container/user/User'
@@ -37,6 +36,13 @@ import ChildrenDetail from './container/parent/childDetail/ChildDetail'
 import Agent from './container/agent/Agent'
 
 import Admin from './container/admin/Admin'
+import Auser from './container/admin/user/User';
+import Astudent from './container/admin/student/Student';
+import Ateacher from './container/admin/teacher/Teacher';
+import Aparent from './container/admin/parent/Parent';
+import Aagent from './container/admin/agent/Agent';
+import Ateam from './container/admin/user/User';
+
 import Student from './container/admin/student/Student'
 import Team from './container/admin/team/Team'
 
@@ -143,12 +149,13 @@ useEffect(() => {
     <Routes>
         <Route path="logout" element={<Logout />} />
     <Route path="admin" element={<Admin />}>
-      <Route index element={<Admin />} />
-      <Route path="user" element={<User />} />
-      <Route path="student" element={<Student />} />
-      <Route path="teacher" element={<Teacher />} />
-      <Route path="parent" element={<Parent />} />
-      <Route path="team" element={<Team />} />
+      <Route index element={<Auser />} />
+      <Route path="user" element={<Auser />} />
+      <Route path="student" element={<Astudent />} />
+      <Route path="teacher" element={<Ateacher />} />
+      <Route path="parent" element={<Aparent />} />
+      <Route path="agent" element={<Aagent />} />
+      <Route path="team" element={<Ateam />} />
       <Route path="*" element={<NoMatch />} />
     </Route>
   </Routes>

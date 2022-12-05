@@ -8,9 +8,6 @@ const data = [
 ]
    
 const User = () => {
-   
-
-   
     
 
   return (

@@ -1,9 +1,12 @@
 import React from 'react'
 
-const Parent = () => {
+const App = () => {
   return (
-    <div>Parent</div>
+    <div className="form" >
+  Here will be all parent 
+
+    </div>
   )
 }
 
-export default Parent
+export default App

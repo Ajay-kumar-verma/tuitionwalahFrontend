@@ -1,9 +1,12 @@
 import React from 'react'
 
-const User = () => {
+const App = () => {
   return (
-    <div>User</div>
+    <div className="form" >
+  Here will be all teams
+
+    </div>
   )
 }
 
-export default User
+export default App

@@ -13,6 +13,7 @@ const initialState = {
    home:{apiCall:false, data:{}},
    contact:{apiCall:false, data:{}},
    address:{apiCall:false, data:{}},
+   document:{apiCall:false, data:{}},
    otherDetail:{apiCall:false, data:{}},
    payment:{apiCall:false, data:{}},
    agent:{apiCall:false, data:{}},
@@ -70,18 +71,7 @@ const initialState = {
 )
 
 
-const  document = createAsyncThunk(
-  'document',
-  async (obj)=>{
-  try {
-   const {data} = await  api.post(`/user/document`,obj)
-     return data; 
-  } catch (error) {
-    console.log("error",error);
-    return error;   
-  }
-      }
-)
+
 
 const agent = createAsyncThunk(
   'agent',
@@ -231,7 +221,15 @@ const {reducer ,actions } = createSlice({
      localStorage.removeItem('token');
      window.location.href="/"
   } , 
- 
+  document:(state,{payload}) => {
+    state.all = payload;
+    state.loading = false ;
+    state.message=payload?.message;
+    state.error=payload?.error;
+    state.document.data=payload;
+    state.document.apiCall=false;
+   },
+
 },
 
   extraReducers:{
@@ -290,8 +288,7 @@ const {reducer ,actions } = createSlice({
   state.error = payload.error;
   state.message ="request rejected ! ";
  }, 
-  
-    
+   
  [agent.pending]: state => {
   state.loading = true; 
   },
@@ -351,7 +348,7 @@ const {reducer ,actions } = createSlice({
 
 })
 
-const {userType,logout} =actions;
+const {userType,logout,document} =actions;
 
 export const userReducer =  reducer ;
 

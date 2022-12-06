@@ -41,7 +41,7 @@ import Astudent from './container/admin/student/Student';
 import Ateacher from './container/admin/teacher/Teacher';
 import Aparent from './container/admin/parent/Parent';
 import Aagent from './container/admin/agent/Agent';
-import Ateam from './container/admin/user/User';
+import Ateam from './container/admin/team/Team';
 import Aadmin from './container/admin/admin/Admin';
 
 import Student from './container/admin/student/Student'
@@ -55,7 +55,7 @@ function App() {
   const navigate = useNavigate()
   //  const data = useSelector(({user}) =>({login:user.login,currentUser:user.currentUser}))
   const state = useSelector((state) => state)
-  console.log({ state }, { action })
+  // console.log({ state }, { action })
   
   const {
     all: { login, currentUser },

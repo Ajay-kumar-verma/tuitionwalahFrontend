@@ -1,10 +1,20 @@
 import React from 'react'
+import {useSelector, useDispatch} from 'react-redux';
+import action from '../../../rtk/actions';
 
 const App = () => {
+const dispatch = useDispatch();
+const state = useSelector(({admin:{teacher}}) => teacher)
+const {admin:{teacher}}  = action;
+
+console.log({ state }, { teacher })
+  
+
   return (
     <div className="form" >
-  Here will be all Teacher
-
+     {JSON.stringify(state)}
+     {/* {JSON.stringify(user)} */}
+      This is teacher 
     </div>
   )
 }

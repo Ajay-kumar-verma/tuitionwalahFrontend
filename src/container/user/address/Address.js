@@ -57,23 +57,8 @@ const dataInput =(...data)=>{
     const zipCode = selectInput("Zip code ","zipCode",zipList)
         formData.push(zipCode)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    const address1 = dataInput("Address ","address ",{maxLength:100})
-     formData.push(address1);
-
-=======
->>>>>>> main
-     const address2 = dataInput("Address 2 ","address 2",{maxLength:100})
-     formData.push(address2);
->>>>>>> test
-=======
-    const address = dataInput("Address ","address ",{maxLength:100})
+     const address = dataInput("Address ","address ",{maxLength:100})
      formData.push(address);
-
->>>>>>> main
 
      const street = dataInput("Street  ","street",{maxLength:100})
      formData.push(street);

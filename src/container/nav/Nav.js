@@ -29,7 +29,9 @@ const Navbar = ({data}) => {
   {['changePassword','changePassword','resetPassword','deleteAccount'].map((e,i)=>obj(e,i))}
  </Select>
 
-  const usertypes =<Select size={"large"} defaultValue={currentUser}
+  const usertypes =<Select size={"large"}
+  
+  defaultValue={currentUser}
   onChange={(value)=>{
     localStorage.setItem('currentUser',value)
     dispatch(action.all.changeUser(value));
@@ -46,7 +48,7 @@ const Navbar = ({data}) => {
   {"TWU0000001"}
   {data}
  {usertypes}
- {settings}
+ {currentUser==='admin'?null:settings}
  <Logout /> 
   </div>
        
@@ -61,7 +63,7 @@ const Navbar = ({data}) => {
  {"TWU0000001"}
   {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
   <Divider>{usertypes} </Divider>
-  <Divider> {settings} </Divider>
+  <Divider>  {currentUser==='admin'?null:settings}</Divider>
   <Divider> <Logout /> </Divider>
     
  

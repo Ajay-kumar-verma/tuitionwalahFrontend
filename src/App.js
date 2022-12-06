@@ -42,6 +42,7 @@ import Ateacher from './container/admin/teacher/Teacher';
 import Aparent from './container/admin/parent/Parent';
 import Aagent from './container/admin/agent/Agent';
 import Ateam from './container/admin/user/User';
+import Aadmin from './container/admin/admin/Admin';
 
 import Student from './container/admin/student/Student'
 import Team from './container/admin/team/Team'
@@ -54,7 +55,7 @@ function App() {
   const navigate = useNavigate()
   //  const data = useSelector(({user}) =>({login:user.login,currentUser:user.currentUser}))
   const state = useSelector((state) => state)
-  // console.log({ state }, { action })
+  console.log({ state }, { action })
   
   const {
     all: { login, currentUser },
@@ -156,6 +157,7 @@ useEffect(() => {
       <Route path="parent" element={<Aparent />} />
       <Route path="agent" element={<Aagent />} />
       <Route path="team" element={<Ateam />} />
+      <Route path="admin" element={<Aadmin />} />
       <Route path="*" element={<NoMatch />} />
     </Route>
   </Routes>

@@ -1,7 +1,7 @@
 import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
-import { Button,message,Collapse,List,Row,Col,Tag ,Badge  } from 'antd';
+import { Button,message,Collapse,List,Row,Col,Tag ,Badge  ,Modal } from 'antd';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 
 // import Menu from './Menu';
@@ -9,12 +9,13 @@ import moment from 'moment';
 const { Panel } = Collapse;
 
 const App = () => {
-  const [messageApi, contextHolder] = message.useMessage()
-const dispatch = useDispatch();
-const state = useSelector(({admin:{user}}) => user)
-const {admin:{user}}  = action;
+ const [open, setOpen] = useState(false);
+ const [data ,setData] = useState([]);
+ const [messageApi, contextHolder] = message.useMessage()
+ const dispatch = useDispatch();
+ const state = useSelector(({admin:{user}}) => user)
+ const {admin:{user}}  = action;
 
-const [data ,setData] = useState([]);
 
 // console.log({ data })
 
@@ -55,6 +56,7 @@ const data1 = data.slice(0,len/2);
 const data2 = data.slice(len/2);
 
 const Lists = (data)=>{
+
  return  <Collapse accordion>
    {data.map((e,i)=>{
     const {FirstName,LastName,Mobile} = e; 
@@ -98,12 +100,15 @@ const Lists = (data)=>{
      
         if(key==='Email')
           value = <a href={`mailto:${value}`}><MailOutlined /> {value}</a>
+        
+        if(key==='FirstName')
+          value = <>{value} <Button onClick={() => setOpen(true)}>Add</Button></>
           
            return <Row justify="space-between">
         <Col span={8}><List.Item>{key}</List.Item></Col>
         <Col span={0.2}></Col>
         <Col span={12}><List.Item>{value}</List.Item></Col>
-    </Row>        }
+            </Row>        }
       }   
    />    
      </Badge.Ribbon>
@@ -121,6 +126,19 @@ const Lists = (data)=>{
   >
     {contextHolder}
    
+  <Modal
+  title="Add"
+  centered
+  open={open}
+  onOk={() => setOpen(false)}
+  onCancel={() => setOpen(false)}
+  maxWidth={1000}
+  >
+  <p>some contents...</p>
+  <p>some contents...</p>
+  <p>some contents...</p>
+</Modal>
+
     <Button 
      onClick={()=>{sort({type:'reverse'})}}>
      reverse

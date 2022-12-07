@@ -60,9 +60,12 @@ const Lists = (data)=>{
       const indx = keys.indexOf('TimeAtCreated');
         keys.splice(indx,1);
         keys.unshift('TimeAtCreated'); 
-   return <Panel header={
+   return <Panel showArrow={false} header={
      (<Row>
-        <Col>{(i+1 )} </Col> 
+         <Col span='1'></Col>
+          <Col><Badge.Ribbon key={i}   text={(i+1)}
+        color={`#${Math.floor(100000 + Math.random() * 900000)}`} 
+        ></Badge.Ribbon></Col> 
         <Col span='1'></Col>
         <Col>{<Tag color="success">{FirstName} {LastName} </Tag>}</Col>
      </Row>)
@@ -70,6 +73,10 @@ const Lists = (data)=>{
 
      extra={<Tag color="geekblue"> {Mobile} </Tag>} 
       key={i}>
+      <Badge.Ribbon key={i}   text={<a href="1" style={{color:`white`}}
+       onClick={(e)=>e.preventDefault()}>click me </a>}
+        color={`#${Math.floor(100000 + Math.random() * 900000)}`} 
+        >
      <List 
       size="small"
       bordered
@@ -84,18 +91,14 @@ const Lists = (data)=>{
         if(key==="userType" || key==="Active" || key==="Block")
             value=String(value);
             
-            // let maxVal = 0xFFFFFF; // 16777215
-            // let randomNumber = Math.random() * maxVal; 
-            // randomNumber = Math.floor(randomNumber);
-            // let randColor = randomNumber.toString(16);
-                i++;
-       return <Row justify="space-between">
-        <Col span={8}><List.Item> <Badge key={i} color={`#${Math.floor(100000 + Math.random() * 900000)}`} text={i} /> {key}</List.Item></Col>
-        <Col span={1}></Col>
+           return <Row justify="space-between">
+        <Col span={8}><List.Item>{key}</List.Item></Col>
+        <Col span={0.2}></Col>
         <Col span={12}><List.Item>{value}</List.Item></Col>
     </Row>        }
       }   
    />    
+     </Badge.Ribbon>
     </Panel>        
 }
  )}

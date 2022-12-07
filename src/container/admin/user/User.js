@@ -2,6 +2,8 @@ import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
 import { Button,message,Collapse,List,Row,Col,Tag ,Badge  } from 'antd';
+import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
+
 // import Menu from './Menu';
 import moment from 'moment';
 const { Panel } = Collapse;
@@ -74,7 +76,7 @@ const Lists = (data)=>{
      extra={<Tag color="geekblue"> {Mobile} </Tag>} 
       key={i}>
       <Badge.Ribbon key={i}   text={<a href="1" style={{color:`white`}}
-       onClick={(e)=>e.preventDefault()}>click me </a>}
+       onClick={(e)=>e.preventDefault()}>Notes</a>}
         color={`#${Math.floor(100000 + Math.random() * 900000)}`} 
         >
      <List 
@@ -90,7 +92,13 @@ const Lists = (data)=>{
         
         if(key==="userType" || key==="Active" || key==="Block")
             value=String(value);
-            
+         
+        if(key==='Mobile')
+          value =<a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
+     
+        if(key==='Email')
+          value = <a href={`mailto:${value}`}><MailOutlined /> {value}</a>
+          
            return <Row justify="space-between">
         <Col span={8}><List.Item>{key}</List.Item></Col>
         <Col span={0.2}></Col>

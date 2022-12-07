@@ -24,7 +24,12 @@ const App = () => {
     all: { createAccount },
   } = action
   const dispatch = useDispatch()
-  const onFinish = (values) => dispatch(createAccount(values))
+  const onFinish = (values) =>{
+  const data = {...values,Email:(""+values?.Email)?.toLowerCase()}  
+  dispatch(createAccount(data))
+
+  
+}
 
   const onFinishFailed = (values) => {
     console.log('Received values of form: ', values)

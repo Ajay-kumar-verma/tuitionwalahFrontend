@@ -34,8 +34,12 @@ const Login = () => {
     all: { login },
   } = action
 
-  const onFinish = (values) =>dispatch(login(values))
-  const onFinishFailed = (errorInfo) => {
+  const onFinish = (values) =>{
+     const data = {...values,username:(""+values?.username)?.toLowerCase()}    
+    dispatch(login(data))
+
+}  
+const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
     Notification({
       type: 'error',

@@ -1,9 +1,48 @@
 import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
-import { Button,message,Collapse,List,Row,Col,Tag } from 'antd';
+import { Button,message,Collapse,List,Row,Col,Tag ,Menu  } from 'antd';
+// import Menu from './Menu';
 import moment from 'moment';
 const { Panel } = Collapse;
+
+const items = [
+  {
+    label: '',
+    key: 'SubMenu',
+    children: [
+      {
+        type: 'group',
+        label: 'Item 1',
+        children: [
+          {
+            label: 'Option 1',
+            key: 'setting:1',
+          },
+          {
+            label: 'Option 2',
+            key: 'setting:2',
+          },
+        ],
+      },
+      {
+        type: 'group',
+        label: 'Item 2',
+        children: [
+          {
+            label: 'Option 3',
+            key: 'setting:3',
+          },
+          {
+            label: 'Option 4',
+            key: 'setting:4',
+          },
+        ],
+      },
+    ],
+  },
+];
+
 const App = () => {
   const [messageApi, contextHolder] = message.useMessage()
 const dispatch = useDispatch();
@@ -23,12 +62,15 @@ useEffect(() => {
   return ;
   }
  
+
   const type ='success';
     messageApi.open({type,content:data.data})
     setData(users)
 
 },[state])
  
+
+  
 const sort =({type}) =>{
   const newData = [...data];
   if(type==='reverse'){
@@ -47,16 +89,26 @@ const len = data.length;
 const data1 = data.slice(0,len/2);
 const data2 = data.slice(len/2);
 
-
 const Lists = (data)=>{
  return  <Collapse accordion>
    {data.map((e,i)=>{
     const {FirstName,LastName,Mobile} = e;  
      const keys =Object.keys(e);
-   return <Panel header={<>{(i+1 )} <Tag color="geekblue">{FirstName} {LastName} </Tag> 
-      <Tag color="success">Verified </Tag>
-      </> } 
-     extra={<Tag color="geekblue">{Mobile}</Tag>}
+   return <Panel header={
+     (<Row>
+      <Col>{(i+1 )} </Col> 
+      <Col>{<Tag color="success">{FirstName} {LastName} </Tag>}</Col>
+      <Col>{<Tag color="geekblue"> {Mobile} </Tag>}</Col>
+           </Row>) } 
+
+     extra={
+      <Menu 
+      // onClick={onClick}
+        items={items} />
+     
+      // <Tag color="">{Mobile}</Tag>
+    
+    }
        key={i}>
      <List 
       size="small"
@@ -85,6 +137,7 @@ const Lists = (data)=>{
    style={{margin:"0 20px 0 20px"}} 
   >
     {contextHolder}
+   
     <Button 
      onClick={()=>{sort({type:'reverse'})}}>
      reverse
@@ -98,6 +151,7 @@ const Lists = (data)=>{
    >
          call api    
    </Button>
+  
 
   <Row  gutter={{
         xs: 8,

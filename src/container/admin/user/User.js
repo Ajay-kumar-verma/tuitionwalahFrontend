@@ -1,7 +1,7 @@
 import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
-import { Button,message,Collapse,List,Row,Col,Divider} from 'antd';
+import { Button,message,Collapse,List,Row,Col,Tag } from 'antd';
 import moment from 'moment';
 const { Panel } = Collapse;
 const App = () => {
@@ -53,8 +53,10 @@ const Lists = (data)=>{
    {data.map((e,i)=>{
     const {FirstName,LastName,Mobile} = e;  
      const keys =Object.keys(e);
-   return <Panel header={`${(i+1)} ${FirstName} ${LastName}`} 
-     extra={Mobile}
+   return <Panel header={<>{(i+1 )} <Tag color="geekblue">{FirstName} {LastName} </Tag> 
+      <Tag color="success">Verified </Tag>
+      </> } 
+     extra={<Tag color="geekblue">{Mobile}</Tag>}
        key={i}>
      <List 
       size="small"
@@ -108,7 +110,7 @@ const Lists = (data)=>{
      md={{span:24}}
      lg={{span:12}}
    >{Lists(data1)}</Col>
-   <Col
+     <Col
      xs={{span:24}}
      md={{span:24}}
      lg={{span:12}}

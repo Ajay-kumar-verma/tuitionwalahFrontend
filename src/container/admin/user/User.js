@@ -1,47 +1,10 @@
 import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
-import { Button,message,Collapse,List,Row,Col,Tag ,Menu  } from 'antd';
+import { Button,message,Collapse,List,Row,Col,Tag ,Badge  } from 'antd';
 // import Menu from './Menu';
 import moment from 'moment';
 const { Panel } = Collapse;
-
-const items = [
-  {
-    label: '',
-    key: 'SubMenu',
-    children: [
-      {
-        type: 'group',
-        label: 'Item 1',
-        children: [
-          {
-            label: 'Option 1',
-            key: 'setting:1',
-          },
-          {
-            label: 'Option 2',
-            key: 'setting:2',
-          },
-        ],
-      },
-      {
-        type: 'group',
-        label: 'Item 2',
-        children: [
-          {
-            label: 'Option 3',
-            key: 'setting:3',
-          },
-          {
-            label: 'Option 4',
-            key: 'setting:4',
-          },
-        ],
-      },
-    ],
-  },
-];
 
 const App = () => {
   const [messageApi, contextHolder] = message.useMessage()
@@ -92,35 +55,44 @@ const data2 = data.slice(len/2);
 const Lists = (data)=>{
  return  <Collapse accordion>
    {data.map((e,i)=>{
-    const {FirstName,LastName,Mobile} = e;  
+    const {FirstName,LastName,Mobile} = e; 
      const keys =Object.keys(e);
+      const indx = keys.indexOf('TimeAtCreated');
+        keys.splice(indx,1);
+        keys.unshift('TimeAtCreated'); 
    return <Panel header={
      (<Row>
-      <Col>{(i+1 )} </Col> 
-      <Col>{<Tag color="success">{FirstName} {LastName} </Tag>}</Col>
-      <Col>{<Tag color="geekblue"> {Mobile} </Tag>}</Col>
-           </Row>) } 
+        <Col>{(i+1 )} </Col> 
+        <Col span='1'></Col>
+        <Col>{<Tag color="success">{FirstName} {LastName} </Tag>}</Col>
+     </Row>)
+     } 
 
-     extra={
-      <Menu 
-      // onClick={onClick}
-        items={items} />
-     
-      // <Tag color="">{Mobile}</Tag>
-    
-    }
-       key={i}>
+     extra={<Tag color="geekblue"> {Mobile} </Tag>} 
+      key={i}>
      <List 
       size="small"
       bordered
       dataSource={keys}
-      renderItem={(key) =>{
+      renderItem={(key,i) =>{
+        if(key==="_id" || key==="__v") return null;
+        
         let value =e[key] 
-         if('TimeAtCreated'===key || 'DateOfBirth'===key)
-            value = moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a")
-        return <Row justify="space-between">
-        <Col span={8}><List.Item>{key}</List.Item></Col>
-        <Col span={16}><List.Item>{value}</List.Item></Col>
+        if('TimeAtCreated'===key || 'DateOfBirth'===key)
+        value = moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a")
+        
+        if(key==="userType" || key==="Active" || key==="Block")
+            value=String(value);
+            
+            // let maxVal = 0xFFFFFF; // 16777215
+            // let randomNumber = Math.random() * maxVal; 
+            // randomNumber = Math.floor(randomNumber);
+            // let randColor = randomNumber.toString(16);
+                i++;
+       return <Row justify="space-between">
+        <Col span={8}><List.Item> <Badge key={i} color={`#${Math.floor(100000 + Math.random() * 900000)}`} text={i} /> {key}</List.Item></Col>
+        <Col span={1}></Col>
+        <Col span={12}><List.Item>{value}</List.Item></Col>
     </Row>        }
       }   
    />    

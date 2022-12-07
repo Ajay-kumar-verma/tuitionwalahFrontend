@@ -1,7 +1,7 @@
 import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
-import { Button,message,Collapse,List,Row,Col} from 'antd';
+import { Button,message,Collapse,List,Row,Col,Divider} from 'antd';
 import moment from 'moment';
 const { Panel } = Collapse;
 const App = () => {
@@ -40,33 +40,20 @@ const sort =({type}) =>{
     return a.FirstName.localeCompare(b.FirstName)
   })
   setData(newData); 
-}
+ }
 }  
 
+const len = data.length;
+const data1 = data.slice(0,len/2);
+const data2 = data.slice(len/2);
 
 
-  return (
-   <div className="form">
-    {contextHolder}
-    <Button 
-     onClick={()=>{sort({type:'reverse'})}}>
-     reverse
-   </Button>
-
-   <Button 
-     onClick={()=>{sort({type:'name'})}}>
-  Name
-   </Button>
-
-
-  <Collapse accordion>
-    {data.map((e,i)=>{
+const Lists = (data)=>{
+ return  <Collapse accordion>
+   {data.map((e,i)=>{
     const {FirstName,LastName,Mobile} = e;  
-   
      const keys =Object.keys(e);
-    //  const values =Object.values(e);
-     
-   return <Panel header={`${FirstName} ${LastName}`} 
+   return <Panel header={`${(i+1)} ${FirstName} ${LastName}`} 
      extra={Mobile}
        key={i}>
      <List 
@@ -86,14 +73,49 @@ const sort =({type}) =>{
     </Panel>        
 }
  )}
-  
   </Collapse>
-   <Button
+} 
+
+
+
+  return (
+   <div 
+   style={{margin:"0 20px 0 20px"}} 
+  >
+    {contextHolder}
+    <Button 
+     onClick={()=>{sort({type:'reverse'})}}>
+     reverse
+   </Button>
+   <Button 
+     onClick={()=>{sort({type:'name'})}}>
+  Name
+   </Button>
+  <Button
    onClick={()=>{dispatch(user({info:"sent all data"}))}}
    >
          call api    
    </Button>
+
+  <Row  gutter={{
+        xs: 8,
+        sm: 16,
+        md: 24,
+        lg: 32,
+      }} >
+   <Col 
+     xs={{span:24}}
+     md={{span:24}}
+     lg={{span:12}}
+   >{Lists(data1)}</Col>
+   <Col
+     xs={{span:24}}
+     md={{span:24}}
+     lg={{span:12}}
    
+   >{Lists(data2)}</Col>
+  </Row>
+
     </div>
   )
 }

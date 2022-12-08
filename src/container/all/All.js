@@ -1,4 +1,6 @@
-import React from 'react'
+import React,{useEffect} from 'react'
+import {useSearchParams} from 'react-router-dom'
+import UserProfile from '../userProfile/UserProfile'
 import Nav from '../nav/all/Navbar';
 import Login from '../login/Login'
 import CreateAccount from '../createAccount/CreateAccount'
@@ -15,6 +17,11 @@ const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
 
 
 const All = () => {
+ const [searchParams] = useSearchParams();
+const id =searchParams.get('id');
+
+if(id!==null)
+ return <UserProfile />
 
    
   return (

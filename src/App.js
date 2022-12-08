@@ -52,10 +52,8 @@ import Main from './container/main/Main'
 import NoMatch from './container/noMatch/NoMatch'
 
 function App() {
-  const navigate = useNavigate()
-  //  const data = useSelector(({user}) =>({login:user.login,currentUser:user.currentUser}))
+   const navigate = useNavigate()
   const state = useSelector((state) => state)
-  // console.log({ state }, { action })
   
   const {
     all: { login, currentUser },
@@ -64,7 +62,8 @@ function App() {
   const dispatch = useDispatch()
   
 useEffect(() => {
-  const path = window.location.pathname
+  if(!login) return ;
+ const path = window.location.pathname;
   if(path.split("/")[1]===currentUser)
     navigate(path);
   else if(path==="/")
@@ -80,16 +79,14 @@ useEffect(() => {
       dispatch(action.all.login({token}));
   }, [dispatch, login ])
 
- 
+
   if (currentUser === '/')
-    // return <Lo />
   return (
-        
       <Routes>
-        <Route path="logout" element={<Logout />} />
         <Route path="/" element={<All />} />
         <Route path="agreement" element={<Agreement />} />
-        <Route path=":id" element={<NoMatch />} />
+        <Route path="logout" element={<Logout />} />
+        <Route path="*" element={<NoMatch />} />
       </Routes>
     )
 

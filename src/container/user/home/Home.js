@@ -71,7 +71,7 @@ console.log({info})
         <RWebShare
         data={{
           text: `${JSON.stringify(info)}` ,
-          url: "http://localhost:3000",
+          url: "https://www.tuitionwalah.com/",
           title: "GET HOME TUTOR",
         }}
         onClick={() => console.log("shared successfully!")}

@@ -15,8 +15,8 @@ const initialState = {
    error:'',
    loginData :{},
    contactData:{},
-   createAccountData:{} 
-   
+   createAccountData:{}, 
+   userProfile:{}
   }
    
     const login = createAsyncThunk(
@@ -64,7 +64,24 @@ const initialState = {
 }
     }
   )
-     
+ 
+  const userProfile = createAsyncThunk(
+    'userProfile',
+    async (obj) => {
+  // console.log("contact ",{obj});
+      try { 
+  const {data} = await api.post(`/userProfile`,obj)
+  return data;
+} catch (error) {
+   return error;
+}
+    }
+  )
+ 
+ 
+  
+
+
 const {reducer, actions} = createSlice({
   name:"all",
   initialState,
@@ -144,7 +161,25 @@ const {reducer, actions} = createSlice({
      state.error = payload.error;
      state.message ="request rejected ! ";
     },  
-    
+
+   [userProfile.pending]:state => {
+      state.loading = true;
+      state.login=false;
+   },
+   [userProfile.fulfilled]: (state,{payload}) => {
+     state.all =payload;
+     state.userProfile=payload;
+     state.loading = false ;
+     state.message=payload.message;
+     state.error=payload.error;
+   },
+   [userProfile.rejected]:(state,{payload}) => {
+     state.all =payload;
+     state.loading = false;
+     state.login = payload.login;
+     state.error = payload.error;
+     state.message ="request rejected ! ";
+    },  
   } ,  
   
 })
@@ -153,5 +188,5 @@ const {changeUser} =actions;
 export const allReducer =  reducer ;
 export const allAction = {
    login , createAccount , reset , contact
-   , changeUser  
+   , changeUser ,userProfile 
   };

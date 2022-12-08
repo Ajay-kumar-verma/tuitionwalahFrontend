@@ -9,8 +9,7 @@ import { RWebShare } from "react-web-share";
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
   const [{info,Gender,ImageLink},setInfo]=useState({info:[{}],ImageLink:null,Gender:'male'});
- 
-  const dispatch = useDispatch()
+   const dispatch = useDispatch()
   const { apiCall,data} = useSelector(({ user: { home } }) => home)
   const { home } = action.user
 
@@ -18,17 +17,20 @@ const Home = () => {
    
    if(data?.user!==undefined)
    { setInfo(_=>{
-      let {FirstName ,LastName ,Gender ,Email,Mobile,userType,Active,Imgae,MyId} =data?.user;
+     const {user} =data;
+      let {Gender ,Imgae} =user;
+     
      return {
-      info:[
-        {FirstName} ,{LastName },{Gender} ,{Email},
-        {Mobile},{userType},{Active},{MyId}
-      ],Gender,ImageLink:Imgae
+      info:Object.keys(user).map(e=>{
+        const obj={};
+        obj[e]=user[e];
+        return obj;
+      }),Gender,ImageLink:Imgae
      }
    })}
 
   },[data])
-  
+  // dispatch(home())
   useEffect(() => {
     if (!apiCall) {
       dispatch(home())
@@ -36,6 +38,7 @@ const Home = () => {
     
   }, [dispatch, apiCall, home])
 
+ 
   const maleImage = 'https://img.icons8.com/color/96/null/person-male.png'
   const femaleImage = 'https://img.icons8.com/color/96/null/person-female.png'
 
@@ -61,28 +64,42 @@ console.log({info})
   <Divider />
   <List
       size="small"
-      header={<div>YOUR INFO</div>}
-      bordered
-      dataSource={info.length===1?[]:info}
-      renderItem={(item) =>
-     <Row justify="space-between">
-        <Col span={20}><List.Item>{`${Object.keys(item)[0]} : ${Object.values(item)[0]}`}</List.Item></Col>
-        <Col span={4}><a href="22" onClick={(e)=>e.preventDefault()} >edit</a></Col>
-    </Row>        
-      }   
-   
-   />    
-
-<RWebShare
+      header={
+    <Row justify="space-between">
+        <Col span={8}>MY DETAILS</Col>
+        <Col span={8}><a>
+        <RWebShare
         data={{
-          text: "Web Share - GfG",
+          text: `${JSON.stringify(info)}` ,
           url: "http://localhost:3000",
           title: "GET HOME TUTOR",
         }}
         onClick={() => console.log("shared successfully!")}
       >
-        <button>Share in web</button>
+        <Button style={{color:"#4ed973"}} type="dashed" ghost>Share in web</Button>
       </RWebShare>
+
+          </a></Col>
+    </Row>     
+
+      }
+      bordered
+      dataSource={info.length===1?[]:info}
+      renderItem={(item) =>{  
+        const key = Object.keys(item)[0];
+        const value = Object.values(item)[0];
+        if(key==="_id" || key==="__v" || key ==='Imgae')return null;
+
+       return <Row justify="space-between">
+        <Col span={20}><List.Item>{`${key} : ${value}`}</List.Item></Col>
+        <Col span={4}><a href="22" onClick={(e)=>e.preventDefault()} >edit</a></Col>
+    </Row>        
+ 
+}
+  }   
+ 
+   />    
+
       {/* <a href="whatsapp://send?text= Please Visit http://ad-test.easygov.co.in/PanAdvertisement"  rel="nofollow noopener" target="_blank" className="share-icon"><img alt="imag" style={{height:'36px'}}/>Share via Whatsapp</a> */}
       
       {/* <QRCode 

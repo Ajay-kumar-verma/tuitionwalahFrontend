@@ -24,6 +24,7 @@ const initialState = {
     async ()=>{
      try {
       const {data} = await api.get(`/user/home`)
+      console.log({data});
        return data; 
     } catch (error) {
       return error;   

@@ -24,7 +24,7 @@ const initialState = {
       async (obj) => {
         try {
         const {data} = await api.post(`/login`,obj);
-      // console.log({data})
+      console.log({data})
           return data;     
       } catch (error) {
            console.log("Error is : ",error);  
@@ -70,14 +70,14 @@ const {reducer, actions} = createSlice({
   initialState,
   reducers:{
     changeUser:(state,{payload})=>{
-
       if(state.userType.includes(payload)){
         // console.log("chnage use is called ",payload)
          state.currentUser=payload
       }
         }
-  }
-  ,   extraReducers:{
+     }
+  , 
+    extraReducers:{
    [login.pending]:(state)=> {
       state.loading = true;
       state.login=false;
@@ -86,12 +86,12 @@ const {reducer, actions} = createSlice({
      state.all = payload;
      state.loading = false ;
      const {login,token,message,user,error} =payload;
-     console.log({payload})
+    //  console.log({payload})
      const {userType} = user;
      if((login===true) && Array.isArray(userType))
-       {
-        if(!!token) localStorage.setItem('token',token);
-      state.login=true;  
+      {
+       if(!!token) localStorage.setItem('token',token);
+       state.login=true;  
       state.userType = userType.reverse();
       state.currentUser=userType[0];
     } else{

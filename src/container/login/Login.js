@@ -50,7 +50,7 @@ const onFinishFailed = (errorInfo) => {
   const state = useSelector(({ all: { loginData } }) => loginData)
 
   useEffect(() => {
-    if (state === undefined) return
+    if (state === undefined) return;
     const { login, message } = state
     const content = message
     if (login === undefined) return
@@ -62,9 +62,6 @@ const onFinishFailed = (errorInfo) => {
     const token=  gapi?.auth2?.getAuthInstance()?.
      currentUser?.get()?.getAuthResponse()?.id_token;
     //  console.log({token});
-     localStorage.setItem('token',token);
-     localStorage.setItem("currentUser","user");
-     
      dispatch(login({token}))
   }
  

@@ -8,8 +8,6 @@ const data = [
 ]
    
 const User = () => {
-    
-
   return (
     <>
    <nav>

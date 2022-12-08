@@ -18,11 +18,11 @@ const Home = () => {
    
    if(data?.user!==undefined)
    { setInfo(_=>{
-      let {FirstName ,LastName ,Gender ,Email,Mobile,userType,Active,Imgae} =data?.user;
+      let {FirstName ,LastName ,Gender ,Email,Mobile,userType,Active,Imgae,MyId} =data?.user;
      return {
       info:[
         {FirstName} ,{LastName },{Gender} ,{Email},
-        {Mobile},{userType},{Active},
+        {Mobile},{userType},{Active},{MyId}
       ],Gender,ImageLink:Imgae
      }
    })}

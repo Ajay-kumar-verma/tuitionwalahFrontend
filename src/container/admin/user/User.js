@@ -99,7 +99,12 @@ const Lists = (data)=>{
           value =<a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
      
         if(key==='Email')
-          value = <a href={`mailto:${value}`}><MailOutlined /> {value}</a>
+          value =<>
+           <a href={`mailto:${value}`}><MailOutlined /> {value}</a>
+           <a href={`https://wa.me/+91${Mobile}?text=Hi ${FirstName} ${LastName}\n
+            I am from tuitionwalah. ` }  data-action="share/whatsapp/share"  
+        target="_blank">WhatApp</a>   
+          </>
         
         if(key==='FirstName')
           value = <>{value} <Button onClick={() => setOpen(true)}>Add</Button></>

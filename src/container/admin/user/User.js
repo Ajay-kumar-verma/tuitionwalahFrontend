@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
 import { Button,message,Collapse,List,Row,Col,Tag ,Badge  ,Modal } from 'antd';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
-
+import { FaWhatsapp } from 'react-icons/fa';
 // import Menu from './Menu';
 import moment from 'moment';
 const { Panel } = Collapse;
@@ -96,16 +96,16 @@ const Lists = (data)=>{
             value=String(value);
          
         if(key==='Mobile')
-          value =<a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
-     
-        if(key==='Email')
-          value =<>
-           <a href={`mailto:${value}`}><MailOutlined /> {value}</a>
-           <a href={`https://wa.me/+91${Mobile}?text=Hi ${FirstName} ${LastName}\n
-            I am from tuitionwalah. ` }  data-action="share/whatsapp/share"  
-        target="_blank">WhatApp</a>   
-          </>
-        
+           value =<>
+           <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
+           <a style={{color:'green'}} href={`https://wa.me/+91${Mobile}?text=Hi ${FirstName} ${LastName}
+           I am from tuitionwalah. ` }  data-action="share/whatsapp/share"  
+          target="_blank"><FaWhatsapp  /></a>   
+           </>
+    
+   if(key==='Email')
+          value =<a href={`mailto:${value}`}><MailOutlined /> {value}</a>
+                 
         if(key==='FirstName')
           value = <>{value} <Button onClick={() => setOpen(true)}>Add</Button></>
           

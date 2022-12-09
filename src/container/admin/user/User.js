@@ -97,13 +97,14 @@ const Lists = (data)=>{
          
         if(key==='Mobile')
            value =<>
-           <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
-           <a style={{color:'green'}} href={`https://wa.me/+91${Mobile}?text=Hi ${FirstName} ${LastName}
-           I am from tuitionwalah. ` }  data-action="share/whatsapp/share"  
-          target="_blank"><FaWhatsapp  /></a>   
+          <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
+           <br />
+           <a style={{color:'green'}} href={`https://wa.me/+91${value}?text=Hi ` }
+            data-action="share/whatsapp/share"  
+          target="_blank"><FaWhatsapp  />{value}</a> 
            </>
     
-   if(key==='Email')
+       if(key==='Email')
           value =<a href={`mailto:${value}`}><MailOutlined /> {value}</a>
                  
         if(key==='FirstName')

@@ -6,9 +6,10 @@ import action from '../../../rtk/actions/index'
 import ImageUpload from './Fileupload';
 import { RWebShare } from "react-web-share";
 // import { QRCode } from 'react-qrcode-logo';
+
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
-  const [{info,Gender,ImageLink},setInfo]=useState({info:[{}],ImageLink:null,Gender:'male'});
+  const [{info,Gender,ImageLink,MyId},setInfo]=useState({info:[{}],ImageLink:null,Gender:'male',MyId:"0"});
    const dispatch = useDispatch()
   const { apiCall,data} = useSelector(({ user: { home } }) => home)
   const { home } = action.user
@@ -18,14 +19,14 @@ const Home = () => {
    if(data?.user!==undefined)
    { setInfo(_=>{
      const {user} =data;
-      let {Gender ,Imgae} =user;
+      let {Gender ,Imgae,MyId} =user;
      
      return {
       info:Object.keys(user).map(e=>{
         const obj={};
         obj[e]=user[e];
         return obj;
-      }),Gender,ImageLink:Imgae
+      }),Gender,ImageLink:Imgae,MyId
      }
    })}
 
@@ -50,7 +51,7 @@ const  UploadImage =()=>(
 <ImageUpload />
  </Modal>
 ) 
-console.log({info})
+// console.log({info})
 
   return (
     <div className="form">
@@ -70,9 +71,9 @@ console.log({info})
         <Col span={8}><a>
         <RWebShare
         data={{
-          text: `${JSON.stringify(info)}` ,
-          url: "https://www.tuitionwalah.com/",
-          title: "GET HOME TUTOR",
+          text: `https://www.tuitionwalah.com/?id=${MyId}` ,
+          url: `https://www.tuitionwalah.com/?id=${MyId}`,
+          title: "I AM OPEN FOR TEACHING  ",
         }}
         onClick={() => console.log("shared successfully!")}
       >

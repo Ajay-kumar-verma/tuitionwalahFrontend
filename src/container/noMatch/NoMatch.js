@@ -1,17 +1,10 @@
 import React from 'react';
-import {useParams ,useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import { Button, Result } from 'antd';
 const App = () =>{
   const Navigate = useNavigate();
- const {id}= useParams ();
+//  const {id}= useParams ();
  
- if(id.startsWith('TW') && id.length===10)
-return (
-  <>
-  {`Your Tuition walah ID is : ${id}`}
-  </>
-)
-   else
  return (
   
     <Result

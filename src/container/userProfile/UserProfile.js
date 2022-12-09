@@ -53,7 +53,24 @@ const url= window.location.href;
         header={
       <Row justify="space-between">
           <Col span={8}> <Tag color="geekblue">I AM OPEN FOR TEACHING. </Tag> </Col>
-          <Col span={8}><a>
+        <Col span={8}>  <QRCode 
+      // logoImage={ImageLink}
+      size={100}
+      logoWidth={100}
+      logoHeight={100}
+      // logoOpacity={1}~
+      removeQrCodeBehindLogo={true}
+      bgColor="#04327d"
+      fgColor="white"
+      // value="https://github.com/gcoro/react-qrcode-logo"
+      // value="https://tuitionwalah.com/"
+     value={url}
+      qrStyle='dots'
+     />
+  </Col>
+          <Col span={8}>
+          
+            <a>
           <RWebShare
           data={{
             text: {url} ,
@@ -87,8 +104,7 @@ const url= window.location.href;
             data-action="share/whatsapp/share"  
           target="_blank"><FaWhatsapp  />{value}</a>   
            </>
-    
-       if(key==='Email')
+           if(key==='Email')
           value =<a href={`mailto:${value}`}><MailOutlined /> {value}</a>
       
          return <Row justify="space-between">
@@ -100,21 +116,6 @@ const url= window.location.href;
     }   
  />    
       </Badge.Ribbon>
- 
-      <QRCode 
-      // logoImage={ImageLink}
-      size={300}
-      logoWidth={100}
-      logoHeight={100}
-      // logoOpacity={1}
-      removeQrCodeBehindLogo={true}
-      bgColor="#04327d"
-      fgColor="white"
-      // value="https://github.com/gcoro/react-qrcode-logo"
-      // value="https://tuitionwalah.com/"
-     value={url}
-      qrStyle='dots'
-     />
  
   </div>);
 }

@@ -6,10 +6,11 @@ import {List,Col,Row,Button,Divider,Badge,Tag } from 'antd';
 import { RWebShare } from "react-web-share"; 
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
+import { QRCode } from 'react-qrcode-logo';
 const App = () => {
   const [userProfile,setUserProfile] = useState([]);
  const [searchParams,setSearchParams] = useSearchParams();
- const state = useSelector((({all:{userProfile}})=>userProfile));
+ const state = useSelector(((state)=>state));
  const dispatch = useDispatch();
  //  console.log([...searchParams]);
  const id =searchParams.get('id');
@@ -22,20 +23,24 @@ const App = () => {
  //  },[searchParams])  
 
 //  console.log({action});
-//  console.log({state})
- useEffect(() => {
+ console.log({state})
+
+useEffect(() => {
   dispatch(action.all.userProfile({id}));
-const {user} = state;
-  if(!user) return ;
-setUserProfile(Object.keys(user).map(e=>{
+},[])
+
+useEffect(() => {
+ const {all:{userProfile:{user}}} = state;
+//  console.log({user})
+ if(!user) return ;
+ setUserProfile(Object.keys(user).map(e=>{
     const obj={};
     obj[e]=user[e];
     return obj;
   }))
+},[state])
 
-},[])
-
-console.log({state})
+const url= window.location.href;
     return (
         <div className="form">
         <Divider />
@@ -51,8 +56,8 @@ console.log({state})
           <Col span={8}><a>
           <RWebShare
           data={{
-            text: `${window.location.href}` ,
-            url: `${window.location.href}`,
+            text: {url} ,
+            url ,
             title: "I AM OPEN FOR TEACHING  ",
           }}
           onClick={() => console.log("shared successfully!")}
@@ -67,7 +72,7 @@ console.log({state})
         bordered
         dataSource={userProfile}
         renderItem={(item) =>{  
-            console.log({item})
+            // console.log({item})
           let key = Object.keys(item)[0];
           let value = Object.values(item)[0];
            if(key==="_id" || key==="__v" || key ==='Imgae' || key==='userType')return null;
@@ -85,9 +90,7 @@ console.log({state})
     
        if(key==='Email')
           value =<a href={`mailto:${value}`}><MailOutlined /> {value}</a>
-                 
-     
-
+      
          return <Row justify="space-between">
           <Col span={10}><List.Item>{key}</List.Item></Col>
           <Col span={12}>{value}</Col>
@@ -97,6 +100,22 @@ console.log({state})
     }   
  />    
       </Badge.Ribbon>
+ 
+      <QRCode 
+      // logoImage={ImageLink}
+      size={300}
+      logoWidth={100}
+      logoHeight={100}
+      // logoOpacity={1}
+      removeQrCodeBehindLogo={true}
+      bgColor="#04327d"
+      fgColor="white"
+      // value="https://github.com/gcoro/react-qrcode-logo"
+      // value="https://tuitionwalah.com/"
+     value={url}
+      qrStyle='dots'
+     />
+ 
   </div>);
 }
 

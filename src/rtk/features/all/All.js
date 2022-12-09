@@ -71,6 +71,7 @@ const initialState = {
   // console.log("contact ",{obj});
       try { 
   const {data} = await api.post(`/userProfile`,obj)
+  // console.log({data});
   return data;
 } catch (error) {
    return error;

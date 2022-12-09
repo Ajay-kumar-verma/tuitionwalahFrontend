@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import ImageUpload from './Fileupload';
 import { RWebShare } from "react-web-share";
-// import { QRCode } from 'react-qrcode-logo';
+import { QRCode } from 'react-qrcode-logo';
 
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
@@ -103,7 +103,7 @@ const  UploadImage =()=>(
 
       {/* <a href="whatsapp://send?text= Please Visit http://ad-test.easygov.co.in/PanAdvertisement"  rel="nofollow noopener" target="_blank" className="share-icon"><img alt="imag" style={{height:'36px'}}/>Share via Whatsapp</a> */}
       
-      {/* <QRCode 
+     <QRCode 
       // logoImage={ImageLink}
       size={300}
       logoWidth={100}
@@ -116,8 +116,7 @@ const  UploadImage =()=>(
       // value="https://tuitionwalah.com/"
     value={JSON.stringify(info)}
       qrStyle='dots'
-     />, */}
-   
+     />,    
     </div>
   )
 }

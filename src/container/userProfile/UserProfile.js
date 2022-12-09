@@ -67,6 +67,7 @@ console.log({state})
         bordered
         dataSource={userProfile}
         renderItem={(item) =>{  
+            console.log({item})
           let key = Object.keys(item)[0];
           let value = Object.values(item)[0];
            if(key==="_id" || key==="__v" || key ==='Imgae' || key==='userType')return null;

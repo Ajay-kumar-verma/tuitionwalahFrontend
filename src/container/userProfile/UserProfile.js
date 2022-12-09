@@ -44,7 +44,14 @@ const url= window.location.href;
     return (
         <div className="form">
         <Divider />
-        <Badge.Ribbon key={0}   text={<a href="1" style={{color:`white`}}
+       
+     <Divider />
+    <div style={{color:"white",backgroundColor:"blue",textAlign:"center",fontFamily:"sans-serif",
+    height:"45px",
+    fontSize:"30px"}} >I AM OPEN FOR TEACHING. </div> 
+   <Divider/>     
+  
+   <Badge.Ribbon key={0}   text={<a href="1" style={{color:`white`}}
        onClick={(e)=>e.preventDefault()}>CREATE YOUR PROFILE  </a>}
         color={`#${Math.floor(100000 + Math.random() * 900000)}`} 
         >
@@ -52,8 +59,7 @@ const url= window.location.href;
         size="small"
         header={
       <Row justify="space-between">
-          <Col span={8}> <Tag color="geekblue">I AM OPEN FOR TEACHING. </Tag> </Col>
-        <Col span={8}>  <QRCode 
+     <Col span={8}>  <QRCode 
       // logoImage={ImageLink}
       size={100}
       logoWidth={100}

@@ -61,7 +61,7 @@ const url= window.location.href;
       <Row justify="space-between">
      <Col span={8}>  <QRCode 
       // logoImage={ImageLink}
-      size={100}
+      size={500}
       logoWidth={100}
       logoHeight={100}
       // logoOpacity={1}~
@@ -70,7 +70,7 @@ const url= window.location.href;
       fgColor="white"
       // value="https://github.com/gcoro/react-qrcode-logo"
       // value="https://tuitionwalah.com/"
-     value={url}
+     value={'https:www.tuitionwalah.com'}
       qrStyle='dots'
      />
   </Col>

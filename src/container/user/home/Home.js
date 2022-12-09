@@ -105,7 +105,7 @@ const  UploadImage =()=>(
       
      <QRCode 
       // logoImage={ImageLink}
-      size={300}
+      size={100}
       logoWidth={100}
       logoHeight={100}
       // logoOpacity={1}

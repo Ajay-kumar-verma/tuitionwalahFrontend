@@ -16,26 +16,17 @@ const App = () => {
  const state = useSelector(({admin:{user}}) => user)
  const {admin:{user}}  = action;
 
-
-// console.log({ data })
-
 useEffect(() => {
  const {data}  = state ;
- const {recieved,users} = data;
- if(!recieved){
-  const type = 'error'; 
-  messageApi.open({type,content:"Error"})
-  return ;
-  }
- 
-
+ const {users} = data;
   const type ='success';
     messageApi.open({type,content:data.data})
     setData(users)
-
 },[state])
- 
 
+useEffect(() => {
+  dispatch(user({info:"sent all data"}));
+},[])
   
 const sort =({type}) =>{
   const newData = [...data];
@@ -51,14 +42,15 @@ const sort =({type}) =>{
  }
 }  
 
-const len = data.length;
-const data1 = data.slice(0,len/2);
-const data2 = data.slice(len/2);
+const len = data?.length;
+const data1 = len===0?[]:data?.slice(0,len/2);
+const data2 = len===0?[]:data?.slice(len/2);
 
 const Lists = (data)=>{
-
+  console.log({data});
+  
  return  <Collapse accordion>
-   {data.map((e,i)=>{
+   {data?.map((e,i)=>{
     const {FirstName,LastName,Mobile} = e; 
      const keys =Object.keys(e);
       const indx = keys.indexOf('TimeAtCreated');
@@ -144,22 +136,14 @@ const Lists = (data)=>{
   <p>some contents...</p>
   <p>some contents...</p>
 </Modal>
-
-    <Button 
-     onClick={()=>{sort({type:'reverse'})}}>
-     reverse
-   </Button>
-   <Button 
-     onClick={()=>{sort({type:'name'})}}>
-  Name
-   </Button>
-  <Button
-   onClick={()=>{dispatch(user({info:"sent all data"}))}}
-   >
-         call api    
+    <Button  onClick={()=>{sort({type:'reverse'})}}>
+     reverse </Button>
+   <Button  onClick={()=>{sort({type:'name'})}}>
+     Name  </Button>
+  <Button  onClick={()=>{dispatch(user({info:"sent all data"}))}} >
+    refresh    
    </Button>
   
-
   <Row  gutter={{
         xs: 8,
         sm: 16,

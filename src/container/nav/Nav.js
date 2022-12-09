@@ -48,7 +48,7 @@ const Navbar = ({data}) => {
   {"TWU0000001"}
   {data}
  {usertypes}
- {currentUser==='admin'?null:settings}
+ {currentUser!=='user'?null:settings}
  <Logout /> 
   </div>
        
@@ -63,7 +63,7 @@ const Navbar = ({data}) => {
  {"TWU0000001"}
   {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
   <Divider>{usertypes} </Divider>
-  <Divider>  {currentUser==='admin'?null:settings}</Divider>
+  <Divider>  {currentUser!=='user'?null:settings}</Divider>
   <Divider> <Logout /> </Divider>
     
  

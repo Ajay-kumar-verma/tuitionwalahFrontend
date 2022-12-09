@@ -6,7 +6,7 @@ import action from '../../../rtk/actions/index'
 import ImageUpload from './Fileupload';
 import { RWebShare } from "react-web-share";
 import { QRCode } from 'react-qrcode-logo';
-
+import moment from 'moment';
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
   const [{info,Gender,ImageLink,MyId},setInfo]=useState({info:[{}],ImageLink:null,Gender:'male',MyId:"0"});
@@ -68,8 +68,7 @@ const  UploadImage =()=>(
       header={
     <Row justify="space-between">
         <Col span={8}>MY DETAILS</Col>
-        <Col span={8}><a>
-        <RWebShare
+        <Col span={8}><RWebShare
         data={{
           text: `https://www.tuitionwalah.com/?id=${MyId}` ,
           url: `https://www.tuitionwalah.com/?id=${MyId}`,
@@ -77,20 +76,24 @@ const  UploadImage =()=>(
         }}
         onClick={() => console.log("shared successfully!")}
       >
-        <Button style={{color:"#4ed973"}} type="dashed" ghost>Share in web</Button>
+        <Button style={{color:"#4ed973"}} type="dashed" >Share in web</Button>
       </RWebShare>
-
-          </a></Col>
+        </Col>
+  <Col span={8}>
+    <Button style={{color:"#4ed973"}} onClick={()=>{dispatch(home())}} type="dashed" >refresh</Button>
+  </Col>
     </Row>     
 
       }
       bordered
-      dataSource={info.length===1?[]:info}
+      dataSource={info?.length===1?[]:info}
       renderItem={(item) =>{  
         const key = Object.keys(item)[0];
-        const value = Object.values(item)[0];
+        let value = Object.values(item)[0];
         if(key==="_id" || key==="__v" || key ==='Imgae')return null;
-
+        if('TimeAtCreated'===key || 'DateOfBirth'===key)
+        value = moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a")
+        
        return <Row justify="space-between">
         <Col span={20}><List.Item>{`${key} : ${value}`}</List.Item></Col>
         <Col span={4}><a href="22" onClick={(e)=>e.preventDefault()} >edit</a></Col>

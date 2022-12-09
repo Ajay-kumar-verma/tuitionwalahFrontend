@@ -132,7 +132,7 @@ useEffect(() => {
       <Routes>
           <Route path="logout" element={<Logout />} />
          <Route path="agent"  element={<Agent />} >
-          <Route index element={<Agent />} />
+          <Route index element={<></>} />
           <Route path="student" element={<Student />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="parent" element={<Parent />} />

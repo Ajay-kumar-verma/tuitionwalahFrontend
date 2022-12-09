@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import React,{useState} from 'react'
-import {Button,Drawer,Divider ,Select  } from 'antd';
+import {Button,Drawer,Divider ,Select,Tag  } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
 import Logout from '../logout/Logout'
 import action from '../../rtk/actions/index'
@@ -12,8 +12,10 @@ const Navbar = ({data}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch() 
-  const {userType,currentUser} = useSelector(({all})=>all);
-  
+  let {userType,currentUser,all:{user:{MyId}}} = useSelector(({all})=>all);
+//  console.log(useSelector(state=>state));
+  // const  MyId= "24e234" 
+ MyId= <Button style={{color:"#4ed973"}} type="dashed" >{MyId}</Button>;
   const showDrawer = () => {
     setOpen(true);
   };
@@ -33,8 +35,7 @@ const Navbar = ({data}) => {
   
   defaultValue={currentUser}
   onChange={(value)=>{
-    localStorage.setItem('currentUser',value)
-    dispatch(action.all.changeUser(value));
+     dispatch(action.all.changeUser(value));
      navigate(`/${value}`)
      }}
    style={{width: 150}}>
@@ -45,7 +46,7 @@ const Navbar = ({data}) => {
   return (
  <>
  <div className="desktop" >
-  {"TWU0000001"}
+  {MyId}
   {data}
  {usertypes}
  {currentUser!=='user'?null:settings}
@@ -60,8 +61,9 @@ const Navbar = ({data}) => {
 
 <Drawer title="TUITION WALAH"  width={220}
  placement="right" onClose={onClose} open={open}>
- {"TWU0000001"}
-  {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
+ 
+  <Divider> {MyId} </Divider>
+  {data.map((e, i)=>i===0?null:<Divider key={i} >{e}</Divider>)}
   <Divider>{usertypes} </Divider>
   <Divider>  {currentUser!=='user'?null:settings}</Divider>
   <Divider> <Logout /> </Divider>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useState} from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import {Spin} from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
@@ -52,9 +52,9 @@ import Main from './container/main/Main'
 import NoMatch from './container/noMatch/NoMatch'
 
 function App() {
-   const navigate = useNavigate()
+  const navigate = useNavigate()
   const state = useSelector((state) => state)
-  
+  const [x,setX]= useState(true);
   const {
     all: { login, currentUser },
   } = state
@@ -68,8 +68,8 @@ useEffect(() => {
     navigate(path);
   else if(path==="/")
     navigate(currentUser); 
-  setTimeout(()=>dispatch(action.all.changeUser(path.split("/")[1])),0)
 
+  setTimeout(()=>dispatch(action.all.changeUser(path.split("/")[1])),0)
     
 },[currentUser])
 

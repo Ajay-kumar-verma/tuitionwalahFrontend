@@ -16,8 +16,7 @@ const initialState = {
    document:{apiCall:false, data:{}},
    otherDetail:{apiCall:false, data:{}},
    payment:{apiCall:false, data:{}},
-   agent:{apiCall:false, data:{}},
-  }
+   }
   
   const home = createAsyncThunk(
     'home',
@@ -74,18 +73,6 @@ const initialState = {
 
 
 
-const agent = createAsyncThunk(
-  'agent',
-  async (obj)=>{
-    try {
-      const {data} = await  api.post(`/agent/client`,obj)
-        return data; 
-     } catch (error) {
-       console.log("error",error);
-       return error;   
-     }
-  }
-)
 
 
 const otherDetail = createAsyncThunk(
@@ -290,25 +277,6 @@ const {reducer ,actions } = createSlice({
   state.message ="request rejected ! ";
  }, 
    
- [agent.pending]: state => {
-  state.loading = true; 
-  },
-  [agent.fulfilled]:(state,{payload}) => {
-  state.all =payload;
-  state.agent.data = payload;
-  state.agent.apiCall = true;
-  state.loading = false ;
-  state.message=payload?.message;
-  state.error=payload?.error; 
-  },
-  [agent.rejected]:(state,{payload}) => {
-  state.all =payload; 
-  state.loading = false;
-  state.error = payload.error;
-  state.message ="request rejected ! ";
- }, 
-    
-   
    [reset.pending]:state => {
       state.loading = true;
       state.login=false;
@@ -356,6 +324,6 @@ export const userReducer =  reducer ;
 export const userActions = { userType,logout ,
 home,contact,address,education ,document,otherDetail,
 settingChangePassword ,settingResetPassword ,settingDeleteAccount,
-teacherTeacherDetail ,reset,agent,
+teacherTeacherDetail ,reset,
 parentParentDetail ,parentChildrenDetail,deleteUser
 };

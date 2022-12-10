@@ -1,7 +1,7 @@
 import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
-import { Button,message,Collapse,List,Row,Col,Tag ,Badge  ,Modal } from 'antd';
+import { Button,message,Collapse,List,Row,Col,Tag ,Badge  ,Modal,Switch ,Divider } from 'antd';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
 // import Menu from './Menu';
@@ -86,7 +86,13 @@ const Lists = (data)=>{
         
         if(key==="userType" || key==="Active" || key==="Block")
             value=String(value);
-         
+      if(key==="Active" || key==="Block") 
+        value = <Switch 
+        checkedChildren="Active" unCheckedChildren="Inactive" 
+        defaultChecked 
+        // onChange={onChange} 
+        />;
+
         if(key==='Mobile')
            value =<>
           <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>

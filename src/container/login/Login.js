@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { GoogleLogin, } from 'react-google-login'
 import { gapi } from 'gapi-script'
 // import { useGoogleOneTapLogin } from 'react-google-one-tap-login'
-
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Tooltip, Divider } from 'antd'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -100,7 +100,9 @@ const onFinishFailed = (errorInfo) => {
           },
         ]}
       >
-        <Input showCount maxLength="70" />
+        <Input  
+         prefix={<UserOutlined className="site-form-item-icon" />}
+         showCount maxLength="70" />
       </Form.Item>
       <Form.Item
         name="Password"
@@ -112,7 +114,9 @@ const onFinishFailed = (errorInfo) => {
           },
         ]}
       >
-        <Input.Password />
+        <Input.Password 
+          prefix={<LockOutlined className="site-form-item-icon" />}
+        />
       </Form.Item>
 
       <Form.Item name="remember" valuePropName="checked" noStyle>

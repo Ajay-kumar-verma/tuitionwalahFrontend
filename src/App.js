@@ -44,6 +44,10 @@ import Aagent from './container/admin/agent/Agent';
 import Ateam from './container/admin/team/Team';
 import Aadmin from './container/admin/admin/Admin';
 
+import Lead from './container/leads/Lead';
+import Incommingcalls from './container/leads/inCommingCalls/InCommingCall'
+import Outcommingcalls from './container/leads/outGoingCall/OutgoingCall'
+
 import Student from './container/admin/student/Student'
 import Team from './container/admin/team/Team'
 
@@ -159,8 +163,27 @@ useEffect(() => {
     </Route>
   </Routes>
    )
+
+   if (currentUser === 'lead')
+   return (
+    <Routes>
+       <Route path="logout" element={<Logout />} />
+       <Route path="lead" element={<Lead />}>
+      <Route index element={<Incommingcalls />} />
+      <Route path="incommingcalls" element={<Incommingcalls />} />
+      <Route path="outcommingcalls" element={<Outcommingcalls />} />
+      <Route path="outgoingcalls" element={<Ateacher />} />
+      <Route path="parent" element={<Aparent />} />
+      <Route path="agent" element={<Aagent />} />
+      <Route path="team" element={<Ateam />} />
+      <Route path="admin" element={<Aadmin />} />
+      <Route path="*" element={<NoMatch />} />
+    </Route>
+  </Routes>
+   )
+
  
-   if (currentUser === 'main')
+  if (currentUser === 'main')
    return (
    <Routes>
       <Route path="logout" element={<Logout />} />

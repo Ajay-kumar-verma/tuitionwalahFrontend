@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import action from '../../rtk/actions/index'
+import action from '../../../rtk/actions/index'
 import { NumericInput } from './NumberInput'
-import NavBar from '../nav/Nav'
 import moment from 'moment'
 import { Button, Form, Input, Table, message, Divider } from 'antd'
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
@@ -11,14 +9,6 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { Collapse, Select } from 'antd'
 const { Panel } = Collapse
 const { Option } = Select
-const list = (data) =>
-  data.map((e) => (
-    <NavLink className="anchor" to={`${e}`}>
-      {' '}
-      {e}{' '}
-    </NavLink>
-  ))
-const lists = list(['home', 'contact'])
 
 const columns = [
   {
@@ -190,10 +180,6 @@ const Agent = () => {
 
   return (
     <>
-      <nav>
-        <NavBar data={lists} />
-      </nav>
-      <Outlet />
       {contextHolder}
       <div className="form">
         <Divider />

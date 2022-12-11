@@ -63,7 +63,7 @@ const Navbar = ({data}) => {
  placement="right" onClose={onClose} open={open}>
  
   <Divider> {MyId} </Divider>
-  {data.map((e, i)=>i===0?null:<Divider key={i} >{e}</Divider>)}
+  {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
   <Divider>{usertypes} </Divider>
   <Divider>  {currentUser!=='user'?null:settings}</Divider>
   <Divider> <Logout /> </Divider>

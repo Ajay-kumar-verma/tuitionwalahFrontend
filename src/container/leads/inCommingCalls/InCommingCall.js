@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import { NumericInput } from './NumberInput'
 import moment from 'moment'
-import { Button, Form, Input, Table, message, Divider } from 'antd'
-import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Table, message, Divider ,Space,Collapse ,Select} from 'antd'
+import { MailOutlined, PhoneOutlined ,PlusOutlined,MinusCircleOutlined} from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
-import { Collapse, Select } from 'antd'
 const { Panel } = Collapse
 const { Option } = Select
 
@@ -61,10 +60,23 @@ const columns = [
   },
 ]
 
-const Agent = () => {
+const valLab =(e)=>({value:e,label:e});
+const ar = ['name','number','altNumber','address',
+'state', 'city','zipNo','board','other']
+const  ParentOption =[...ar,'childName',`childClass`].map(e=>valLab(e));
+const TeacherOption =[...ar,'exprce','fresher',
+  'vehicycle','expectedFee',`distancego `].map(e=>valLab(e))
+
+
+const App = () => {
+  const [form] = Form.useForm();
+  const {resetFields,setFieldsValue} =form ;
   const [value, setValue] = useState('')
+  const [userType, SetUserType] = useState('all');
+  const [inputType,setInputType] = useState('text');
   const [data, setDate] = useState([])
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  
   const {
     agent: { agent },
   } = action
@@ -78,8 +90,10 @@ const Agent = () => {
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
-  const onFinish = (val) => callApi(val)
-  const onFinishFailed = (errorInfo) => {
+  const onFinish =console.log;
+    // (val) =>  callApi(val) 
+  
+    const onFinishFailed = (errorInfo) => {
     //console.log('Failed:', errorInfo)
     Notification({ type: 'error', content: JSON.stringify(errorInfo) })
   }
@@ -87,7 +101,7 @@ const Agent = () => {
   const { apiCall } = state
   const { myClinets } = state.data
 
-  // return <></>;
+
   useEffect(() => {
     setDate(
       myClinets?.map((e, i) => ({
@@ -100,10 +114,11 @@ const Agent = () => {
     )
   }, [myClinets])
 
-  const obj = (e) => <Option value={e}>{e}</Option>
+ console.log({userType})
   const getForm = () => {
     return (
-      <Form
+        <Form 
+        form={form}
         name="basic"
         labelCol={{ span: 24 }}
         wrapperCol={{ span: 24 }}
@@ -159,22 +174,119 @@ const Agent = () => {
             },
           ]}
         >
-          <Select defaultValue="select" style={{ width: '100%' }}>
-            {[
-              'student छात्र',
-              `teacher  शिक्षक`,
-              'parent माता-पिता ',
-              `other`,
-            ].map((e) => obj(e))}
+          <Select defaultValue="select"
+          onChange={(e) =>SetUserType(e)}
+          style={{ width: '100%' }}>
+            {['student',`teacher`,
+              'parent',`other`,
+            ].map(e =><Option value={e}>{e}</Option>)}
+
           </Select>
         </Form.Item>
-        <Form.Item>
+        
+        <Form.List name="users">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(({ key, name, ...restField }) => (
+              <Space
+                key={key}
+                style={{
+                  display: 'flex',
+                  marginBottom: 8,
+                }}
+                align="baseline"
+              >
+              
+                <Form.Item
+                  {...restField}
+                  name={[name, 'type']}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Missing type ',
+                    },
+                  ]}
+                  >
+     
+                <Select  
+           onChange={e=>{
+             let val =`text`; 
+             if(e==='number')
+               val='number'
+               if(e==='expectedFee')
+                 val='range';
+            setInputType(val)
+           }}
+               allowClear
+       showSearch
+        style={{width: '100%',}}
+    placeholder="Search to Select"
+    optionFilterProp="children"
+    filterOption={(input, option) => (option?.label ?? '').includes(input)}
+    filterSort={(optionA, optionB) =>
+      (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+    }
+    options={userType==='parent'?ParentOption:
+    userType==='teacher'?TeacherOption:[...ParentOption,TeacherOption]}
+    />
+</Form.Item>
+              <Form.Item
+                  {...restField}
+                  name={[name, 'value']}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Missing value',
+                    },
+                  ]}
+                >
+             {inputType==='text'?
+             <Input 
+             style={{width: '100%',}}
+             allowClear maxLength={50}
+               placeholder=" Enter value" /> :null}
+                {inputType==='number'?
+               <NumericInput
+               addonBefore=<PhoneOutlined />
+            maxLength="10" showCount style={{ width: '100%' }}
+            value={value}
+            onChange={setValue}
+          />
+          :null}
+         {inputType==='range'?<Select  
+              style={{width: '100%',}}
+         
+              defaultValue="1000 - 1500"
+          >
+            {['1000 - 1500',`1000 - 2000`,
+              '1500 - 2000','2000 - 2500','2000 - 3000',`3000 - 4000` ,
+              `4000 - 5000` ,`more than 5k`,
+            ].map(e =><Option value={e}>{e}</Option>)}
+
+          </Select>:null}
+
+                           </Form.Item>
+
+                <MinusCircleOutlined onClick={() => remove(name)} />
+              </Space>
+            ))}
+            <Form.Item>
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                Add field
+              </Button>
+            </Form.Item>
+          </>
+        )}
+
+      </Form.List>
+      <Form.Item>
           <Button style={{ width: '100%' }} type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
       </Form>
-    )
+   )
+
   }
 // console.log({data});
 
@@ -185,7 +297,7 @@ const Agent = () => {
         <Divider />
         <Collapse accordion>
           <Panel
-            header="Add student , teacher and parent "
+            header="Add leads "
             extra={
               <Button
                 style={{ color: '#4ed973' }}
@@ -201,7 +313,7 @@ const Agent = () => {
           >
             {getForm()}
           </Panel>
-          <Panel header="TOTAL USERS" key="2">
+          <Panel header="Totals leads" key="2">
             <Table columns={columns} dataSource={data} />
           </Panel>
         </Collapse>
@@ -210,4 +322,4 @@ const Agent = () => {
   )
 }
 
-export default Agent
+export default App

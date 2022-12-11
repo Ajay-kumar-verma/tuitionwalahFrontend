@@ -35,16 +35,6 @@ import { Form, Input, Button,
     
  
   
-  const vehicles = ["Nothing","Bike","Bicyle","other"]
-  const  vehicleOption=selectInput("Vehicles you have ","vehicles",vehicles);
-          formData.push(vehicleOption)
- 
-  const distanceOption =selectInput("How far can you go from your current location ","distance",new Array(5).fill(0).map((_,i)=>2*(i+1)+" KM" ));
-        formData.push(distanceOption);
-
-  const expectedFeeOption = selectInput("your fee expectation ","expectedFee",new Array(4).fill(0).map((_,i)=>500*(i+1)+" Rupees " ))
-    formData.push(expectedFeeOption);
-
   // const [form] = Form.useForm();
   // const data = Form.useWatch('sunday',form);
   // console.log('Form data is :',data)

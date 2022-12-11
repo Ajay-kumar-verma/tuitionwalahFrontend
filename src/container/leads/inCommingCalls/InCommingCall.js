@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import { NumericInput } from './NumberInput'
+import Address from './Address';
+import Teacher from './Teacher';
 import moment from 'moment'
 import { Button, Form, Input, Table, message, Divider ,Space,Collapse ,Select} from 'antd'
 import { MailOutlined, PhoneOutlined ,PlusOutlined,MinusCircleOutlined} from '@ant-design/icons'
@@ -9,56 +11,6 @@ import { FaWhatsapp } from 'react-icons/fa';
 const { Panel } = Collapse
 const { Option } = Select
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    width: '30%',
-    sorter: (a, b) => a.name.localeCompare(b.name),
-  },
-  {
-    title: 'Number',
-    dataIndex: 'number',
-    sorter: (a, b) => a.number - b.number,
-    render:(number)=><>
-    <a href={`tel:+91 ${number}`}><PhoneOutlined /> {number}</a>
-     <br />
-     <a style={{color:'green'}} href={`https://wa.me/+91${number}?text=Hi ` }
-      data-action="share/whatsapp/share"  
-    target="_blank"><FaWhatsapp  />{number}</a> 
-     </>,
-       width: '40%',
-  },
-  {
-    title: 'userType',
-    dataIndex: 'userType',
-
-    filters: [
-      {
-        text: 'student',
-        value: 'student',
-      },
-      {
-        text: 'teacher',
-        value: 'teacher',
-      },
-      {
-        text: 'parent',
-        value: 'parent',
-      },
-    ],
-    sorter: (a, b) => a.userType.localeCompare(b.usertype),
-    onFilter: (value, record) => record.userType.startsWith(value),
-    filterSearch: true,
-    width: '20%',
-  },
-  {
-    title: 'time',
-    dataIndex: 'time',
-    render: (e) => moment(e).format('dddd, MMMM Do YYYY, h:mm:ss a'),
-    sorter: (a, b) => a?.time.localeCompare(b?.time),
-  },
-]
 
 const valLab =(e)=>({value:e,label:e});
 const ar = ['name','number','altNumber','address',
@@ -127,6 +79,27 @@ const App = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
+ <Form.Item
+          name="userType"
+          label="User Type"
+          rules={[
+            {
+              required: true,
+              message: 'Please choose your type',
+            },
+          ]}
+        >
+          <Select defaultValue="select"
+          onChange={(e) =>SetUserType(e)}
+          style={{ width: '100%' }}>
+            {['student',`teacher`,
+              'parent',`other`,
+            ].map(e =><Option value={e}>{e}</Option>)}
+
+          </Select>
+        </Form.Item>
+
+
         <Form.Item
           name="Name"
           label="Name"
@@ -164,25 +137,7 @@ const App = () => {
           />
         </Form.Item>
 
-        <Form.Item
-          name="userType"
-          label="User Type"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your phone number!',
-            },
-          ]}
-        >
-          <Select defaultValue="select"
-          onChange={(e) =>SetUserType(e)}
-          style={{ width: '100%' }}>
-            {['student',`teacher`,
-              'parent',`other`,
-            ].map(e =><Option value={e}>{e}</Option>)}
-
-          </Select>
-        </Form.Item>
+       
         
         <Form.List name="users">
         {(fields, { add, remove }) => (
@@ -311,10 +266,11 @@ const App = () => {
             }
             key="1"
           >
-            {getForm()}
+          {getForm()}
           </Panel>
           <Panel header="Totals leads" key="2">
-            <Table columns={columns} dataSource={data} />
+           {/* <Address /> */}
+           <Teacher />
           </Panel>
         </Collapse>
       </div>

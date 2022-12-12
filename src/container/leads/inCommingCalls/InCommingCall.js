@@ -23,8 +23,8 @@ const TeacherOption =[...ar,'exprce','fresher',
 const App = () => {
   const [form] = Form.useForm();
   const {resetFields,setFieldsValue} =form ;
-  const [value, setValue] = useState('')
-  const [userType, SetUserType] = useState('all');
+
+  const [userType, SetUserType] = useState('parent');
   const [inputType,setInputType] = useState('text');
   const [data, setDate] = useState([])
   const dispatch = useDispatch();

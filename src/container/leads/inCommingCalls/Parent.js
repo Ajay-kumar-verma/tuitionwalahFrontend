@@ -43,7 +43,7 @@ filterOption={(input, option) => (option?.label ?? '').includes(input)}
 filterSort={(optionA, optionB) =>
   (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
 }
-options={data[2].map(e=>valLab(e))}
+options={data[2].map(e=>({value:e,label:e}))}
 />
 
 </Form.Item>

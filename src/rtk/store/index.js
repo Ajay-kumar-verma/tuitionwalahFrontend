@@ -4,6 +4,7 @@ import  {userReducer} from  '../features/users/userSlice'
 import  {allReducer} from  '../features/all/All'
 import  {adminReducer} from  '../features/admin/Admin'
 import  {agentReducer} from  '../features/agent/Agent'
+import  {leadReducer} from  '../features/lead/lead'
 
 
 const store = configureStore({
@@ -11,7 +12,8 @@ const store = configureStore({
     user:userReducer,
     all:allReducer,
     admin:adminReducer,
-    agent:agentReducer
+    agent:agentReducer,
+    lead:leadReducer,
   },
 
 })

@@ -1,8 +1,9 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import action from '../../../rtk/actions/index'
 import { Form, Input, Button,
   notification  ,Select ,Divider,Row, Col} from 'antd';
  import AddField from './Addfield';
- 
  const zipList = [
      ...new Array(30).fill(0).map((_,i)=>800000+(i+1)),
      801105,801113,801503,801505,801506,801507,804453,"other"
@@ -94,9 +95,11 @@ options={data[2].map(e=>({value:e,label:e}))}
                  formData.push(daysOption)
    
 const Parent = () => {
-  const onFinish = (values) => {
-    console.log('Parent form ', values);
-  };  
+  const dispatch = useDispatch();
+  const {lead: { lead }} = action
+  const callApi = (val) => dispatch(lead(val));
+ 
+  const onFinish = (values) =>callApi(values)
 
   const onFinishFailed = (errorInfo) => { 
     notification['error']({
@@ -105,12 +108,13 @@ const Parent = () => {
         'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
         placement:"bottom", 
       });
-     
     console.log('Failed:', errorInfo);
   };
-  
-
-
+ 
+  // const state = useSelector(({ lead: { lead } }) => lead)
+  // useEffect(() => {
+  //   callApi({ info: 'no-data' })
+  // }, [])
 
   return (
 

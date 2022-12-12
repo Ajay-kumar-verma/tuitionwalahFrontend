@@ -1,4 +1,6 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import action from '../../../rtk/actions/index'
 import { Form, Input, Button,
   notification  ,Select ,Divider,Row, Col,} from 'antd';
 import AddField from './Addfield';
@@ -110,10 +112,11 @@ options={data[2].map(e=>({value:e,label:e}))}
     formData.push(expectedFeeOption);
 
  const Teacher = () => {
+  const dispatch = useDispatch();
+  const {lead: { lead }} = action
+  const callApi = (val) => dispatch(lead(val));
  
-  const onFinish = (values) => {
-    console.log('Teacher form: ', values);
-  };  
+  const onFinish = (values) =>callApi(values)
 
   const onFinishFailed = (errorInfo) => { 
     notification['error']({

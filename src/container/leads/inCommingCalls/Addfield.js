@@ -1,18 +1,12 @@
 import React from 'react'
-import { Form, Input, Button,
-  notification  ,Select ,Divider,Row, Col,Space} from 'antd';
-  import { MailOutlined, PhoneOutlined ,PlusOutlined,MinusCircleOutlined} from '@ant-design/icons'
-  const valLab =(e)=>({value:e,label:e});
-  const ar = ['name','number','altNumber','address',
-  'state', 'city','zipNo','board','other']
-  const  ParentOption =[...ar,'childName',`childClass`].map(e=>valLab(e));
-  const TeacherOption =[...ar,'exprce','fresher',
-    'vehicycle','expectedFee',`distancego `].map(e=>valLab(e))
+import { Form, Input, Button, Select, Row, Col} from 'antd';
+import { PlusOutlined,MinusCircleOutlined} from '@ant-design/icons'
+  
+const Options = ['altNumber',`childName`,
+'Any Expectation','borad','other'].map(e=>({value:e,label:e}));
   
  const App =({name})=>{
-
-
-return (
+ return (
     <Form.List name={name}>
     {(fields, { add, remove }) => (
       <>
@@ -44,7 +38,7 @@ filterOption={(input, option) => (option?.label ?? '').includes(input)}
 filterSort={(optionA, optionB) =>
   (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
 }
-options={[...ParentOption,...TeacherOption]}
+options={Options}
 />
 </Form.Item>
 </Col>

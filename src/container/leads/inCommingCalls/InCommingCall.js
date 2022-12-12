@@ -122,7 +122,7 @@ options={['student',`teacher`,'parent','other'].map(e=>({value:e,label:e}))}
          >
            <Button 
     style={{ color: '#4ed973',width:"100%" }}
-    onClick={()=>callApi({ info: 'no-data' })}
+    onClick={()=>resetFields()}
     type="dashed"
               >
    Reset form 

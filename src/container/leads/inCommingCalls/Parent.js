@@ -1,14 +1,7 @@
 import React from 'react'
 import { Form, Input, Button,
-  notification  ,Select ,Divider,Row, Col,Space} from 'antd';
+  notification  ,Select ,Divider,Row, Col} from 'antd';
  import AddField from './Addfield';
-  
- const valLab =(e)=>({value:e,label:e});
- const ar = ['name','number','altNumber','address',
- 'state', 'city','zipNo','board','other']
- const  ParentOption =[...ar,'childName',`childClass`].map(e=>valLab(e));
- const TeacherOption =[...ar,'exprce','fresher',
-   'vehicycle','expectedFee',`distancego `].map(e=>valLab(e))
  
  const zipList = [
      ...new Array(30).fill(0).map((_,i)=>800000+(i+1)),
@@ -102,7 +95,7 @@ options={data[2].map(e=>valLab(e))}
    
 const Parent = () => {
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    console.log('Parent form ', values);
   };  
 
   const onFinishFailed = (errorInfo) => { 
@@ -116,8 +109,6 @@ const Parent = () => {
     console.log('Failed:', errorInfo);
   };
   
-
-
 
 
 
@@ -141,7 +132,7 @@ const Parent = () => {
        >
         {e}</Col>)}
     </Row>
-    <AddField name="parent" />
+    <AddField name="ExtraParent" />
          <Form.Item>
            <Button 
            type="primary" htmlType="submit"  

@@ -1,16 +1,8 @@
 import React from 'react'
 import { Form, Input, Button,
   notification  ,Select ,Divider,Row, Col,} from 'antd';
-import {PlusOutlined,MinusCircleOutlined} from '@ant-design/icons'
 import AddField from './Addfield';
  
-  const valLab =(e)=>({value:e,label:e});
-  const ar = ['name','number','altNumber','address',
-  'state', 'city','zipNo','board','other']
-  const  ParentOption =[...ar,'childName',`childClass`].map(e=>valLab(e));
-  const TeacherOption =[...ar,'exprce','fresher',
-    'vehicycle','expectedFee',`distancego `].map(e=>valLab(e))
-  
   const zipList = [
       ...new Array(30).fill(0).map((_,i)=>800000+(i+1)),
       801105,801113,801503,801505,801506,801507,804453,"other"
@@ -40,7 +32,7 @@ filterOption={(input, option) => (option?.label ?? '').includes(input)}
 filterSort={(optionA, optionB) =>
   (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
 }
-options={data[2].map(e=>valLab(e))}
+options={data[2].map(e=>({value:e,label:e}))}
 />
 
 </Form.Item>
@@ -116,11 +108,11 @@ options={data[2].map(e=>valLab(e))}
  `4000 - 5000`,`more than 5000` 
 ].map((e)=>e+" Rupees " ))
     formData.push(expectedFeeOption);
-const Teacher = () => {
 
-
+ const Teacher = () => {
+ 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    console.log('Teacher form: ', values);
   };  
 
   const onFinishFailed = (errorInfo) => { 
@@ -147,6 +139,7 @@ const Teacher = () => {
        >
   <Divider>teacher details</Divider>   
   <Row justify="space-between">
+    
   {formData.map(e=><Col 
           xs={{span:23}}
           md={{span:11}}
@@ -154,7 +147,7 @@ const Teacher = () => {
        >
         {e}</Col>)}
    </Row>  
- <AddField name='teacher' />
+ <AddField name='ExtraTeacher' />
          <Form.Item>
            <Button 
            type="primary" htmlType="submit"  

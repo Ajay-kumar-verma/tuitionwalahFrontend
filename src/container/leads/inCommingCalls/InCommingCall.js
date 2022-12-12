@@ -52,8 +52,6 @@ const App = () => {
 
   const { apiCall } = state
   const { myClinets } = state.data
-
-
   useEffect(() => {
     setDate(
       myClinets?.map((e, i) => ({
@@ -66,185 +64,7 @@ const App = () => {
     )
   }, [myClinets])
 
- console.log({userType})
-  const getForm = () => {
-    return (
-        <Form 
-        form={form}
-        name="basic"
-        labelCol={{ span: 24 }}
-        wrapperCol={{ span: 24 }}
-        initialValues={{ remember: true, Mobile: '', Password: '' }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
- <Form.Item
-          name="userType"
-          label="User Type"
-          rules={[
-            {
-              required: true,
-              message: 'Please choose your type',
-            },
-          ]}
-        >
-          <Select defaultValue="select"
-          onChange={(e) =>SetUserType(e)}
-          style={{ width: '100%' }}>
-            {['student',`teacher`,
-              'parent',`other`,
-            ].map(e =><Option value={e}>{e}</Option>)}
-
-          </Select>
-        </Form.Item>
-
-
-        <Form.Item
-          name="Name"
-          label="Name"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your  Name!',
-            },
-            {
-              pattern: new RegExp(/^[a-zA-Z_ ]*$/),
-              message: 'Only Aplhabet is allowed',
-            },
-          ]}
-        >
-          <Input maxLength={50} showCount placeholder="Enter  Name" />
-        </Form.Item>
-
-        <Form.Item
-          name="Mobile"
-          label="Mobile"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your phone number!',
-            },
-          ]}
-        >
-          <NumericInput
-            addonBefore=<PhoneOutlined />
-            maxLength="10"
-            showCount
-            style={{ width: '100%' }}
-            value={value}
-            onChange={setValue}
-          />
-        </Form.Item>
-
-       
-        
-        <Form.List name="users">
-        {(fields, { add, remove }) => (
-          <>
-            {fields.map(({ key, name, ...restField }) => (
-              <Space
-                key={key}
-                style={{
-                  display: 'flex',
-                  marginBottom: 8,
-                }}
-                align="baseline"
-              >
-              
-                <Form.Item
-                  {...restField}
-                  name={[name, 'type']}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Missing type ',
-                    },
-                  ]}
-                  >
-     
-                <Select  
-           onChange={e=>{
-             let val =`text`; 
-             if(e==='number')
-               val='number'
-               if(e==='expectedFee')
-                 val='range';
-            setInputType(val)
-           }}
-               allowClear
-       showSearch
-        style={{width: '100%',}}
-    placeholder="Search to Select"
-    optionFilterProp="children"
-    filterOption={(input, option) => (option?.label ?? '').includes(input)}
-    filterSort={(optionA, optionB) =>
-      (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-    }
-    options={userType==='parent'?ParentOption:
-    userType==='teacher'?TeacherOption:[...ParentOption,TeacherOption]}
-    />
-</Form.Item>
-              <Form.Item
-                  {...restField}
-                  name={[name, 'value']}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Missing value',
-                    },
-                  ]}
-                >
-             {inputType==='text'?
-             <Input 
-             style={{width: '100%',}}
-             allowClear maxLength={50}
-               placeholder=" Enter value" /> :null}
-                {inputType==='number'?
-               <NumericInput
-               addonBefore=<PhoneOutlined />
-            maxLength="10" showCount style={{ width: '100%' }}
-            value={value}
-            onChange={setValue}
-          />
-          :null}
-         {inputType==='range'?<Select  
-              style={{width: '100%',}}
-         
-              defaultValue="1000 - 1500"
-          >
-            {['1000 - 1500',`1000 - 2000`,
-              '1500 - 2000','2000 - 2500','2000 - 3000',`3000 - 4000` ,
-              `4000 - 5000` ,`more than 5k`,
-            ].map(e =><Option value={e}>{e}</Option>)}
-
-          </Select>:null}
-
-                           </Form.Item>
-
-                <MinusCircleOutlined onClick={() => remove(name)} />
-              </Space>
-            ))}
-            <Form.Item>
-              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                Add field
-              </Button>
-            </Form.Item>
-          </>
-        )}
-
-      </Form.List>
-      <Form.Item>
-          <Button style={{ width: '100%' }} type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-   )
-
-  }
-// console.log({data});
-
+ 
   return (
     <>
       {contextHolder}
@@ -266,11 +86,12 @@ const App = () => {
             }
             key="1"
           >
-          {getForm()}
+       
+
           </Panel>
           <Panel header="Totals leads" key="2">
             <Parent />
-           <Teacher />
+           <Teacher name="parent" />
           </Panel>
         </Collapse>
       </div>

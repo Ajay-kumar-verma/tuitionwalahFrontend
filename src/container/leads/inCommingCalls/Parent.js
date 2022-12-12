@@ -1,15 +1,7 @@
 import React from 'react'
 import { Form, Input, Button,
-  notification  ,Select ,Divider,Row, Col,} from 'antd';
-import {PlusOutlined,MinusCircleOutlined} from '@ant-design/icons'
-import AddField from './Addfield';
- 
-  const valLab =(e)=>({value:e,label:e});
-  const ar = ['name','number','altNumber','address',
-  'state', 'city','zipNo','board','other']
-  const  ParentOption =[...ar,'childName',`childClass`].map(e=>valLab(e));
-  const TeacherOption =[...ar,'exprce','fresher',
-    'vehicycle','expectedFee',`distancego `].map(e=>valLab(e))
+  notification  ,Select ,Divider,Row, Col,Space} from 'antd';
+ import AddField from './Addfield';
   
   const zipList = [
     ...new Array(30).fill(0).map((_,i)=>800000+(i+1)),
@@ -58,41 +50,30 @@ import AddField from './Addfield';
   const landMark = dataInput("landMark ","landmark",{maxLength:100})
   formData.push(landMark);
 
-  const qualifications = ["BCA","10th","12th","Bachelor","B.E","BSC",]
-  const qualificationsOption =selectInput("Enter your qualification  ","qualification ",qualifications);
-     formData.push(qualificationsOption);     
-
   const subjects =["Hindi","English","Math","Science","Computer","All"]
-  const subjectsOption =selectInput("Subjects you want to  teach","subjects",subjects);
+  const subjectsOption =selectInput("Subjects for  you want to  hire teacher","subjects",subjects);
        formData.push(subjectsOption);
-  
   const classes =["NC","LKG","UKG",...new Array(12).fill(0).map((_,i)=>i+1+" class")]
-  const classesOption = selectInput("which all classes  you want to  teach","classes",classes);
+  const classesOption = selectInput("for  which classes  you want to  hire","classes",classes);
         formData.push(classesOption);
-  const boards =["CBSE","NCERT","BSEB","Other"];
-  const BoardOption =selectInput("which all Board  you want to  teach","board",boards);
+  
+        const boards =["CBSE","NCERT","BSEB","Other"];
+  const BoardOption =selectInput("Board  of student ","board",boards);
         formData.push(BoardOption)
-  const days =["All days",'Sunday',"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
- const daysOption=selectInput("Days you are free to take classes","freeDaya",days);
-              formData.push(daysOption)
-      
-  const vehicles = ["Nothing","Bike","Bicyle","other"]
-  const  vehicleOption=selectInput("Vehicles you have ","vehicles",vehicles);
-          formData.push(vehicleOption)
- 
-  const distanceOption =selectInput("How far can you go from your current location ","distance",new Array(5).fill(0).map((_,i)=>2*(i+1)+" KM" ));
-        formData.push(distanceOption);
 
-   const teachingExperience = selectInput("your teaching experience "," teaching Experience",['fresher',...new Array(5).fill(0).map((_,i)=>`Below ${(i+1)} year`),'Above 5 year'])
-   formData.push(teachingExperience);
-    
 
-  const expectedFeeOption = selectInput("your fee expectation ","expectedFee",new Array(4).fill(0).map((_,i)=>500*(i+1)+" Rupees " ))
+ const expectedFeeOption = selectInput("how much you can pay  ","expectedFee",
+ [`below 1000`, '1000 - 1500',`1000 - 2000`,
+ '1500 - 2000','2000 - 2500','2000 - 3000',`3000 - 4000` ,
+ `4000 - 5000`,`more than 5000` 
+].map((e)=>e+" Rupees " ))
     formData.push(expectedFeeOption);
 
-const Teacher = () => {
-
-
+    const days =["All days",'Sunday',"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const daysOption=selectInput("Days you want to take classes","daysOfClass",days);
+                 formData.push(daysOption)
+   
+const Parent = () => {
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };  
@@ -108,6 +89,11 @@ const Teacher = () => {
     console.log('Failed:', errorInfo);
   };
   
+
+
+
+
+
   return (
 
     <Form  
@@ -119,16 +105,16 @@ const Teacher = () => {
     initialValues={{ remember: true }}
     scrollToFirstError
        >
-  <Divider>teacher details</Divider>   
+  <Divider>Parent details</Divider>   
   <Row justify="space-between">
-  {formData.map(e=><Col 
+    {formData.map(e=><Col 
           xs={{span:23}}
           md={{span:11}}
           lg={{span:7}}
        >
         {e}</Col>)}
-   </Row>  
- <AddField name='teacher' />
+    </Row>
+    <AddField name="parent" />
          <Form.Item>
            <Button 
            type="primary" htmlType="submit"  
@@ -141,4 +127,4 @@ const Teacher = () => {
     )
 }
 
-export default Teacher
+export default Parent

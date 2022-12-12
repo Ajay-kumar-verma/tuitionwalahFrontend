@@ -65,12 +65,6 @@ const dataInput =(...data)=>{
      formData.push(landMark);
 
 
-     const qualifications = ["BCA","10th","12th","Bachelor","B.E","BSC",]
-     const qualificationsOption =selectInput("Enter your qualification  ","qualification ",qualifications);
-        formData.push(qualificationsOption);     
-   
-     
-
 const App = () => {
   const [addressData,setAddressData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -113,8 +107,7 @@ useEffect(() => {
     
 <div className="form">
   <Divider />
-  {/* {JSON.stringify(data.AddressObject.Address.address)} */}
-<List 
+ <List 
       size="small"
       header={<div>Address Details</div>}
       bordered
@@ -130,23 +123,8 @@ useEffect(() => {
     </Row>        }
       }   
    />    
-      <Form.Item>
-           <Button 
-           onClick={()=>{setIsModalOpen(true)}}
-      type="primary" htmlType="submit"  
-            style={{width:"100%"}}
-           >
-           submit Address  
-           </Button>
-         </Form.Item>
-       
-      <Modal title="Address details" open={isModalOpen}
-       onOk={()=>{setIsModalOpen(false)}}
-       onCancel={()=>{setIsModalOpen(false)}}
-       width={1000}
-       height='150vh'
-      >
-
+     
+     
 <Form  className="form"
      onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -157,20 +135,13 @@ useEffect(() => {
         >
        
        <Row justify="space-between">
-        <Col  span={10}><List.Item>{formData[0]}</List.Item></Col>
-        <Col  span={10}><List.Item>{formData[1]}</List.Item></Col>
-      </Row>  
-    <Row justify="space-between">
-        <Col  span={8}><List.Item>{formData[2]}</List.Item></Col>
-        <Col  span={8}><List.Item>{formData[3]}</List.Item></Col>
-        <Col  span={8}><List.Item>{formData[4]}</List.Item></Col>
-    </Row>  
-
-
-      {formData.map((e,i)=>{
-         if(i>4)
-        return e;
-      })}
+  {formData.map(e=><Col 
+          xs={{span:23}}
+          md={{span:11}}
+          lg={{span:7}}
+       >
+        {e}</Col>)}
+   </Row>  
 
           <Form.Item>
             <Button 
@@ -182,8 +153,6 @@ useEffect(() => {
    
         </Form>
 
-      </Modal>
- 
 </div>
 
 

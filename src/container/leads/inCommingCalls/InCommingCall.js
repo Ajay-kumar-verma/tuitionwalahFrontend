@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import { NumericInput } from './NumberInput'
-import Address from './Address';
+import Parent from './Parent';
 import Teacher from './Teacher';
 import moment from 'moment'
 import { Button, Form, Input, Table, message, Divider ,Space,Collapse ,Select} from 'antd'
@@ -269,7 +269,7 @@ const App = () => {
           {getForm()}
           </Panel>
           <Panel header="Totals leads" key="2">
-           {/* <Address /> */}
+            <Parent />
            <Teacher />
           </Panel>
         </Collapse>

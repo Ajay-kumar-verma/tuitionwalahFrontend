@@ -100,17 +100,17 @@ options={data[2].map(e=>valLab(e))}
               formData.push(daysOption)
       
   const vehicles = ["Nothing","Bike","Bicyle","other"]
-  const  vehicleOption=selectInput("Vehicles you have ","vehicles",vehicles);
+  const  vehicleOption=selectOptions("Vehicles you have ","vehicles",vehicles);
           formData.push(vehicleOption)
  
-  const distanceOption =selectInput("How far can you go from your current location ","distance",new Array(5).fill(0).map((_,i)=>2*(i+1)+" KM" ));
+  const distanceOption =selectOptions("How far can you go from your current location ","distance",new Array(5).fill(0).map((_,i)=>2*(i+1)+" KM" ));
         formData.push(distanceOption);
 
-   const teachingExperience = selectInput("your teaching experience "," teaching Experience",['fresher',...new Array(5).fill(0).map((_,i)=>`Below ${(i+1)} year`),'Above 5 year'])
+   const teachingExperience = selectOptions("your teaching experience "," teaching Experience",['fresher',...new Array(5).fill(0).map((_,i)=>`Below ${(i+1)} year`),'Above 5 year'])
    formData.push(teachingExperience);
     
 
-  const expectedFeeOption = selectOptions("how much you can pay  ","expectedFee",
+  const expectedFeeOption = selectOptions("Expecyted fee  ","expectedFee",
  [`below 1000`, '1000 - 1500',`1000 - 2000`,
  '1500 - 2000','2000 - 2500','2000 - 3000',`3000 - 4000` ,
  `4000 - 5000`,`more than 5000` 

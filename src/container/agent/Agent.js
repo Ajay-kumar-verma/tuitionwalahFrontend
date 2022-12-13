@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import { NumericInput } from './NumberInput'
 import NavBar from '../nav/Nav'
-import List from './List'
+// import List from './List'
+import Table from './Table';
 import { Button, Form, Input, message, Divider } from 'antd'
 import { PhoneOutlined } from '@ant-design/icons'
 import { Collapse, Select } from 'antd'
@@ -46,6 +47,7 @@ const Agent = () => {
   }
 
   useEffect(() => {
+    
     setDate(client?.data?.client[0]);
     },[client])
 
@@ -155,10 +157,10 @@ const Agent = () => {
             {getForm()}
           </Panel>
           <Panel header="TOTAL USERS" key="2">
-            {/* <Table columns={columns} dataSource={} /> */}
-            {JSON.stringify(data)}
-             <List data={data} />
-
+          
+            {/* {JSON.stringify(data)} */}
+             {/* <List data={data} /> */}
+             <Table  data={data} />
           </Panel>
         </Collapse>
       </div>

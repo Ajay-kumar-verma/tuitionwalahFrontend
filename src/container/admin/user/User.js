@@ -1,7 +1,7 @@
 import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
-import { Button,message,Collapse,List,Row,Col,Tag ,Badge  ,Modal,Switch ,Divider,Radio } from 'antd';
+import { Button,message,Collapse,List,Row,Col,Tag ,Badge  ,Modal,Radio } from 'antd';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 
 import { FaWhatsapp } from 'react-icons/fa';
@@ -23,11 +23,11 @@ useEffect(() => {
   const type ='success';
     messageApi.open({type,content:data.data})
     setData(users)
-},[state])
+},[state,messageApi])
 
 useEffect(() => {
   dispatch(user({info:"sent all data"}));
-},[])
+},[dispatch,user])
   
 const sort =({type}) =>{
   const newData = [...data];
@@ -109,7 +109,7 @@ const Lists = (data)=>{
           <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
            <br />
            <a style={{color:'green'}} href={`https://wa.me/+91${value}?text=Hi ` }
-            data-action="share/whatsapp/share"  
+            data-action="share/whatsapp/share"  rel="noreferrer"
           target="_blank"><FaWhatsapp  />{value}</a> 
            </>
     

@@ -2,7 +2,6 @@ import React from 'react'
 import {List,Row,Col ,Badge  ,Divider } from 'antd';
 import { PhoneOutlined } from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
-// import Menu from './Menu';
 import moment from 'moment';
 
 const getList=(data)=>{
@@ -10,8 +9,11 @@ const getList=(data)=>{
   {
     data.map((e,i)=>{ 
      const keys= Object.keys(e); 
-     const {Lead} = e;  
-    return <Col 
+     const {Lead} = e;
+     const indx = keys.indexOf('date');
+          keys.splice(indx,1);
+          keys.unshift('date'); 
+     return <Col 
       xs={{span:23,}}
       md={{span:23,}}
       lg={{span:11}}
@@ -31,9 +33,12 @@ const getList=(data)=>{
          <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
           <br />
           <a style={{color:'green'}} href={`https://wa.me/+91${value}?text=Hi ` }
-           data-action="share/whatsapp/share"  
+           data-action="share/whatsapp/share"  rel="noreferrer"
          target="_blank"><FaWhatsapp  />{value}</a> 
           </>
+        if(key==='date')
+        value=moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a") 
+
 
         return<Row style={{padding:'1%'}} justify="space-between">
           <Col span={5}>{key}</Col>
@@ -54,7 +59,7 @@ const Lists = ({data})=>{
    if(data===undefined )
     return "No data ,refresh or add"
   
-  const {lists, message} = data;
+  const {lists} = data;
   if(lists===undefined) 
   return "No data ,refresh or add"
   

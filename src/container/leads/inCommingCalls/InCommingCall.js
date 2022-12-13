@@ -5,18 +5,7 @@ import Parent from './Parent';
 import Teacher from './Teacher';
 import List from './List'; 
 import { Button, Form, message, Divider ,Col,Row,Collapse ,Select} from 'antd'
-import { MailOutlined, PhoneOutlined ,PlusOutlined,MinusCircleOutlined} from '@ant-design/icons'
-import { FaWhatsapp } from 'react-icons/fa';
 const { Panel } = Collapse
-
-
-const valLab =(e)=>({value:e,label:e});
-const ar = ['name','number','altNumber','address',
-'state', 'city','zipNo','board','other']
-const  ParentOption =[...ar,'childName',`childClass`].map(e=>valLab(e));
-const TeacherOption =[...ar,'exprce','fresher',
-  'vehicycle','expectedFee',`distancego `].map(e=>valLab(e))
-
 
 const App = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -25,17 +14,16 @@ const App = () => {
   const dispatch = useDispatch();
   const {lead: { add,list }} = action
   const { all,client} = useSelector(({ lead: { all,client } }) => ({all,client}))
-  useEffect(() =>dispatch(list()),[])
+  useEffect(() =>dispatch(list()),[dispatch,list])
   console.log({add,list,all,client}) 
 
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
-  useEffect(() => {
+ useEffect(() => {
   setDate(client?.data);
+ }, [client]);
 
-}, [client]);
-
-useEffect(() => {
+ useEffect(() => {
  Notification({ type: 'info', content:data?.message })
 },[data])  
 

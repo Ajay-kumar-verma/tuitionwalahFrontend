@@ -30,7 +30,7 @@ const Agent = () => {
   const {all,client} = useSelector(({agent:{all,client}}) =>({all,client}))
   const {agent:{add,clients}} = action ;
   console.log({ all,client,add,clients })
-  useEffect(() =>dispatch(clients()),[]) 
+  useEffect(() =>dispatch(clients()),[dispatch,clients]) 
 
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })

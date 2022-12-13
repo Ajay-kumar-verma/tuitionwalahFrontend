@@ -18,6 +18,7 @@ const Lists = ({data})=>{
 return  <Collapse accordion>
      {[client]?.map((e,i)=>{
       const {FirstName,LastName,Mobile} = e; 
+      
        const keys =Object.keys(e);
         const indx = keys.indexOf('TimeAtCreated');
           keys.splice(indx,1);

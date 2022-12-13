@@ -26,8 +26,8 @@ const getList=(data)=>{
         size="small"
         bordered
         dataSource={keys}
-        renderItem={(key,i)=>{
-      let value = e[key];
+        renderItem={(key)=>{
+       let value = e[key];
           if(key==='number')
           value =<>
          <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
@@ -40,7 +40,7 @@ const getList=(data)=>{
         value=moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a") 
 
 
-        return<Row style={{padding:'1%'}} justify="space-between">
+        return<Row key={String(i)} style={{padding:'1%'}} justify="space-between">
           <Col span={5}>{key}</Col>
           <Col span={1}>:</Col>
           <Col span={16} >{value}</Col>
@@ -72,54 +72,3 @@ return getList(client)
   
 export default  Lists;
 
-
-
-
-// <List 
-// size="small"
-// bordered
-// dataSource={keys}
-// renderItem={(key,i) =>{
-// //   if(key==="_id" || key==="__v") return null;
-// //   let value =e[key] 
-// //   if('TimeAtCreated'===key || 'DateOfBirth'===key)
-// //   value = moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a")
-  
-// //   if(key==="userType" || key==="Active" || key==="Block")
-// //       value=String(value);
-// // if(key==="Active" || key==="Block") 
-// //   value = <Switch 
-// //   checkedChildren="Active" unCheckedChildren="Inactive" 
-// //   defaultChecked 
-// //   // onChange={onChange} 
-// //   />;
-
-// if(key==="Active" || key==="Block") 
-//   value= <Radio.Group
-//   //  defaultValue="Active"
-//     buttonStyle="solid" 
-//   // onChange={(e)=>{console.log(e.target)}}
-// >
-//   <Radio.Button value="Active">Active</Radio.Button>
-//   <Radio.Button value="Inactive">Inactive</Radio.Button>
-// </Radio.Group>
-
-//   if(key==='number')
-//      value =<>
-//     <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
-//      <br />
-//      <a style={{color:'green'}} href={`https://wa.me/+91${value}?text=Hi ` }
-//       data-action="share/whatsapp/share"  
-//     target="_blank"><FaWhatsapp  />{value}</a> 
-//      </>
-
-//  if(key==='Email')
-//     value =<a href={`mailto:${value}`}><MailOutlined /> {value}</a>
-           
-//      return <Row justify="space-between">
-//   <Col span={8}><List.Item>{key}</List.Item></Col>
-//   <Col span={0.2}></Col>
-//   <Col span={12}><List.Item>{value}</List.Item></Col>
-//       </Row>        }
-// }   
-// />    

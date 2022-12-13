@@ -119,7 +119,7 @@ const Lists = (data)=>{
         if(key==='FirstName')
           value = <>{value} <Button onClick={() => setOpen(true)}>Add</Button></>
           
-           return <Row justify="space-between">
+       return <Row key={String(i)}justify="space-between">
         <Col span={8}><List.Item>{key}</List.Item></Col>
         <Col span={0.2}></Col>
         <Col span={12}><List.Item>{value}</List.Item></Col>

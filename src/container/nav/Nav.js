@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import React,{useState} from 'react'
-import {Button,Drawer,Divider ,Select,Tag  } from 'antd';
+import {Button,Drawer,Divider ,Select  } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
 import Logout from '../logout/Logout'
 import action from '../../rtk/actions/index'

@@ -14,7 +14,7 @@ const App = () => {
   const dispatch = useDispatch();
   const {lead: { add,list }} = action
   const { all,client} = useSelector(({ lead: { all,client } }) => ({all,client}))
-  useEffect(() =>dispatch(list()),[dispatch,list])
+  useEffect(() =>{dispatch(list())},[dispatch,list])
   console.log({add,list,all,client}) 
 
   const Notification = ({ type, content }) => messageApi.open({ type, content })

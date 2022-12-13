@@ -4,14 +4,15 @@ const {createAsyncThunk,createSlice} = require('@reduxjs/toolkit');
 
 // read only 
 const initialState = {
-    agent:{apiCall:false, data:{}},
- 
-}
+    client:{apiCall:false, data:{}},
+    all:{},
+    loading:false, 
+    error:"",
+    message:""
+  }
 
-
-
-const agent = createAsyncThunk(
-    'agent',
+const add = createAsyncThunk(
+    'add',
     async (obj)=>{
       try {
         const {data} = await  api.post(`/agent/client`,obj)
@@ -23,29 +24,54 @@ const agent = createAsyncThunk(
     }
   )
 
+  const clients = createAsyncThunk(
+    'clients',
+    async ()=>{
+      try {
+        const {data} = await  api.get(`/agent/client`)
+          return data; 
+       } catch (error) {
+         console.log("error",error);
+         return error;   
+       }
+    }
+  )
   
 const {reducer } = createSlice({
   name:"agent",
   initialState,
     extraReducers:{
-   [agent.pending]: state => {
+   
+   [add.pending]: state => {
     state.loading = true; 
     },
-    [agent.fulfilled]:(state,{payload}) => {
+    [add.fulfilled]:(state,{payload}) => {
     state.all =payload;
-    state.agent.data = payload;
-    state.agent.apiCall = true;
-    state.loading = false ;
-    state.message=payload?.message;
-    state.error=payload?.error; 
     },
-    [agent.rejected]:(state,{payload}) => {
+    [add.rejected]:(state,{payload}) => {
     state.all =payload; 
     state.loading = false;
     state.error = payload.error;
     state.message ="request rejected ! ";
    }, 
     
+   [clients.pending]: state => {
+    state.loading = true; 
+    },
+    [clients.fulfilled]:(state,{payload}) => {
+    state.all =payload;
+    state.client.data = payload;
+    state.client.apiCall = true;
+    state.loading = false ;
+    state.message=payload?.message;
+    state.error=payload?.error; 
+    },
+    [clients.rejected]:(state,{payload}) => {
+    state.all =payload; 
+    state.loading = false;
+    state.error = payload.error;
+    state.message ="request rejected ! ";
+   }, 
     } ,  
   
   })
@@ -53,5 +79,5 @@ const {reducer } = createSlice({
   
   export const agentReducer =  reducer ;
   
-  export const agentActions = {agent};
+  export const agentActions = {add,clients};
   

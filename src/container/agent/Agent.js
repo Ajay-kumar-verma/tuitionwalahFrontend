@@ -4,10 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import { NumericInput } from './NumberInput'
 import NavBar from '../nav/Nav'
-import moment from 'moment'
-import { Button, Form, Input, Table, message, Divider } from 'antd'
-import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
-import { FaWhatsapp } from 'react-icons/fa';
+import List from './List'
+import { Button, Form, Input, message, Divider } from 'antd'
+import { PhoneOutlined } from '@ant-design/icons'
 import { Collapse, Select } from 'antd'
 const { Panel } = Collapse
 const { Option } = Select
@@ -18,102 +17,43 @@ const list = (data) =>
       {e}{' '}
     </NavLink>
   ))
-const lists = list(['home', 'contact'])
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    width: '30%',
-    sorter: (a, b) => a.name.localeCompare(b.name),
-  },
-  {
-    title: 'Number',
-    dataIndex: 'number',
-    sorter: (a, b) => a.number - b.number,
-    render:(number)=><>
-    <a href={`tel:+91 ${number}`}><PhoneOutlined /> {number}</a>
-     <br />
-     <a style={{color:'green'}} href={`https://wa.me/+91${number}?text=Hi ` }
-      data-action="share/whatsapp/share"  
-    target="_blank"><FaWhatsapp  />{number}</a> 
-     </>,
-       width: '20%',
-  },
-  {
-    title: 'userType',
-    dataIndex: 'userType',
-
-    filters: [
-      {
-        text: 'student',
-        value: 'student',
-      },
-      {
-        text: 'teacher',
-        value: 'teacher',
-      },
-      {
-        text: 'parent',
-        value: 'parent',
-      },
-    ],
-    sorter: (a, b) => a.userType.localeCompare(b.usertype),
-    onFilter: (value, record) => record.userType.startsWith(value),
-    filterSearch: true,
-    width: '10%',
-  },
-  {
-    title: 'time',
-    dataIndex: 'time',
-    render: (e) => moment(e).format('dddd, MMMM Do YYYY, h:mm:ss a'),
-    sorter: (a, b) => a?.time.localeCompare(b?.time),
-  },
-]
-
+  const lists = list(['home', 'contact'])
 const Agent = () => {
-  const [value, setValue] = useState('')
+  const [value, setValue] =useState('')
+  const [form] = Form.useForm();
+  const {resetFields} = form;
+  // console.log({form});
   const [data, setDate] = useState([])
   const dispatch = useDispatch()
-  const {
-    agent: { agent },
-  } = action
-  const state = useSelector(({ agent: { agent } }) => agent)
-  const callApi = (val) => dispatch(agent(val))
+  const {all,client} = useSelector(({agent:{all,client}}) =>({all,client}))
+  const {agent:{add,clients}} = action ;
+  console.log({ all,client,add,clients })
+
   useEffect(() => {
-    callApi({ info: 'no-data' })
-  }, [])
-  //console.log({ state })
+    dispatch(clients());
+  },[]) 
 
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
+  const onFinish = (val) =>{
+    dispatch(add(val));
+    resetFields();
+  };
 
-  const onFinish = (val) => callApi(val)
   const onFinishFailed = (errorInfo) => {
-    //console.log('Failed:', errorInfo)
-    Notification({ type: 'error', content: JSON.stringify(errorInfo) })
+      Notification({ type: 'error', content: JSON.stringify(errorInfo) })
   }
 
-  const { apiCall } = state
-  const { myClinets } = state.data
-
-  // return <></>;
   useEffect(() => {
-    setDate(
-      myClinets?.map((e, i) => ({
-        key: i,
-        name: e?.client?.Name,
-        number: e?.client?.Mobile,
-        userType: e?.client?.userType,
-        time: e?.date,
-      })),
-    )
-  }, [myClinets])
+    setDate(client?.data?.client[0]);
+    },[client])
 
   const obj = (e) => <Option value={e}>{e}</Option>
   const getForm = () => {
     return (
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 24 }}
         wrapperCol={{ span: 24 }}
@@ -165,15 +105,17 @@ const Agent = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your phone number!',
+              message: 'Please input type !',
             },
           ]}
         >
-          <Select defaultValue="select" style={{ width: '100%' }}>
+          <Select defaultValue={'select'}
+          // onChange={(e)=>localStorage.setItem('agentUserType',e)}
+          style={{ width: '100%' }}>
             {[
-              'student छात्र',
-              `teacher  शिक्षक`,
-              'parent माता-पिता ',
+              'student ',
+              `teacher `,
+              'parent  ',
               `other`,
             ].map((e) => obj(e))}
           </Select>
@@ -197,26 +139,26 @@ const Agent = () => {
       {contextHolder}
       <div className="form">
         <Divider />
-        <Collapse accordion>
-          <Panel
-            header="Add student , teacher and parent "
-            extra={
-              <Button
-                style={{ color: '#4ed973' }}
-                onClick={() => {
-                  callApi({ info: 'no-data' })
-                }}
+        <Button
+          style={{ color: '#4ed973' }}
+          onClick={() =>dispatch(clients()) }
                 type="dashed"
               >
                 refresh
               </Button>
-            }
+        <Collapse accordion>
+          <Panel
+            header="Add student , teacher and parent "
+           
             key="1"
           >
             {getForm()}
           </Panel>
           <Panel header="TOTAL USERS" key="2">
-            <Table columns={columns} dataSource={data} />
+            {/* <Table columns={columns} dataSource={} /> */}
+            {JSON.stringify(data)}
+             <List data={data} />
+
           </Panel>
         </Collapse>
       </div>

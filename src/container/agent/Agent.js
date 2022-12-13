@@ -38,7 +38,7 @@ const columns = [
       data-action="share/whatsapp/share"  
     target="_blank"><FaWhatsapp  />{number}</a> 
      </>,
-       width: '40%',
+       width: '20%',
   },
   {
     title: 'userType',
@@ -61,7 +61,7 @@ const columns = [
     sorter: (a, b) => a.userType.localeCompare(b.usertype),
     onFilter: (value, record) => record.userType.startsWith(value),
     filterSearch: true,
-    width: '20%',
+    width: '10%',
   },
   {
     title: 'time',

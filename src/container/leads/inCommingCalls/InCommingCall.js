@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import Parent from './Parent';
 import Teacher from './Teacher';
-import moment from 'moment'
+import List from './List'; 
 import { Button, Form, message, Divider ,Col,Row,Collapse ,Select} from 'antd'
 import { MailOutlined, PhoneOutlined ,PlusOutlined,MinusCircleOutlined} from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
@@ -19,24 +19,27 @@ const TeacherOption =[...ar,'exprce','fresher',
 
 
 const App = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [userType, SetUserType] = useState('parent');
-  const [data, setDate] = useState([])
+  const [data, setDate] = useState()
   const dispatch = useDispatch();
-  
-  const {
-    lead: { lead },
-  } = action
-  const state = useSelector(({ lead: { lead } }) => lead)
-  const callApi = (val) => dispatch(lead(val));
-  
-  const [messageApi, contextHolder] = message.useMessage()
+  const {lead: { add,list }} = action
+  const { all,client} = useSelector(({ lead: { all,client } }) => ({all,client}))
+  useEffect(() =>dispatch(list()),[])
+  console.log({add,list,all,client}) 
+
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
   useEffect(() => {
-console.log({state})
-  }, [state])
+  setDate(client?.data);
 
-   return (
+}, [client]);
+
+useEffect(() => {
+ Notification({ type: 'info', content:data?.message })
+},[data])  
+
+return (
     <>
       {contextHolder}
       <div className="form">
@@ -77,13 +80,7 @@ options={['student',`teacher`,'parent','other'].map(e=>({value:e,label:e}))}
       md={{span:11,order:2}}
       lg={{span:7,order:2}}
        >
-   <Button 
-    style={{ color: '#4ed973',width:"100%" }}
-    onClick={()=>callApi({ info: 'no-data' })}
-    type="dashed"
-              >
-    refresh
-    </Button>
+  
      </Col>
     
     </Row>
@@ -94,6 +91,18 @@ options={['student',`teacher`,'parent','other'].map(e=>({value:e,label:e}))}
      
           </Panel>
           <Panel header="Totals leads" key="2">
+         <>
+   <Button  style={{ color: '#4ed973',width:"100%" }}
+    onClick={()=>dispatch(list())}
+    type="dashed"
+  > refresh
+   </Button>
+  
+    <List data={data} />
+   
+       {/* {JSON.stringify(data)} */}
+
+         </>
           </Panel>
         </Collapse>
       </div>

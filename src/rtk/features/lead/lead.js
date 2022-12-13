@@ -3,15 +3,31 @@ const {createAsyncThunk,createSlice} = require('@reduxjs/toolkit');
 
 // read only 
 const initialState = {
-    lead:{apiCall:false, data:{}},
+  client:{apiCall:false, data:{}},
+  all:{},
+  loading:false, 
+  error:"",
+  message:""
 }
 
-
-const lead = createAsyncThunk(
+const add = createAsyncThunk(
     'lead',
     async (obj)=>{
       try {
         const {data} = await  api.post(`/lead/client`,obj)
+          return data; 
+       } catch (error) {
+         console.log("error",error);
+         return error;   
+       }
+    }
+  )
+
+  const list = createAsyncThunk(
+    'lead',
+    async ()=>{
+      try {
+        const {data} = await  api.get(`/lead/client`);
           return data; 
        } catch (error) {
          console.log("error",error);
@@ -25,24 +41,38 @@ const {reducer } = createSlice({
   name:"lead",
   initialState,
     extraReducers:{
-   [lead.pending]: state => {
+   [add.pending]: state => {
     state.loading = true; 
     },
-    [lead.fulfilled]:(state,{payload}) => {
+    [add.fulfilled]:(state,{payload}) => {
     state.all =payload;
-    state.lead.data = payload;
-    state.lead.apiCall = true;
     state.loading = false ;
     state.message=payload?.message;
     state.error=payload?.error; 
     },
-    [lead.rejected]:(state,{payload}) => {
+    [add.rejected]:(state,{payload}) => {
     state.all =payload; 
     state.loading = false;
     state.error = payload.error;
     state.message ="request rejected ! ";
    }, 
-    
+   [list.pending]: state => {
+    state.loading = true; 
+    },
+   [list.fulfilled]:(state,{payload}) => {
+    state.all =payload;
+    state.client.data= payload;
+    state.client.apiCall = true;
+    state.loading = false ;
+    state.message=payload?.message;
+    state.error=payload?.error; 
+    },
+   [list.rejected]:(state,{payload}) => {
+    state.all =payload; 
+    state.loading = false;
+    state.error = payload.error;
+    state.message ="request rejected ! ";
+   }, 
     } ,  
   
   })
@@ -50,5 +80,5 @@ const {reducer } = createSlice({
   
   export const leadReducer =  reducer ;
   
-  export const leadActions = {lead};
+  export const leadActions = {add,list};
   

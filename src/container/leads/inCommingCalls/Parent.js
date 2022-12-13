@@ -1,5 +1,5 @@
-import React,{useEffect,useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import { Form, Input, Button,
   notification  ,Select ,Divider,Row, Col} from 'antd';
@@ -95,11 +95,15 @@ options={data[2].map(e=>({value:e,label:e}))}
                  formData.push(daysOption)
    
 const Parent = () => {
+  const [form] = Form.useForm();
+  const {resetFields} = form;
   const dispatch = useDispatch();
-  const {lead: { lead }} = action
-  const callApi = (val) => dispatch(lead(val));
- 
-  const onFinish = (values) =>callApi(values)
+  const {lead: { add }} = action
+  const onFinish = (values) =>{
+       dispatch(add({...values,Lead:'parent'}))
+        resetFields();
+      }
+
 
   const onFinishFailed = (errorInfo) => { 
     notification['error']({
@@ -119,7 +123,7 @@ const Parent = () => {
   return (
 
     <Form  
-    //  className="form"
+  form={form}
     onFinish={onFinish}
      onFinishFailed={onFinishFailed}
      labelCol={{span: 24,}}

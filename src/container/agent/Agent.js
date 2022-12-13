@@ -25,15 +25,12 @@ const Agent = () => {
   const [form] = Form.useForm();
   const {resetFields} = form;
   // console.log({form});
-  const [data, setDate] = useState([])
+  const [data, setDate] = useState()
   const dispatch = useDispatch()
   const {all,client} = useSelector(({agent:{all,client}}) =>({all,client}))
   const {agent:{add,clients}} = action ;
   console.log({ all,client,add,clients })
-
-  useEffect(() => {
-    dispatch(clients());
-  },[]) 
+  useEffect(() =>dispatch(clients()),[]) 
 
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
@@ -47,8 +44,7 @@ const Agent = () => {
   }
 
   useEffect(() => {
-    
-    setDate(client?.data?.client[0]);
+    setDate(client?.data?.client);
     },[client])
 
   const obj = (e) => <Option value={e}>{e}</Option>
@@ -141,13 +137,7 @@ const Agent = () => {
       {contextHolder}
       <div className="form">
         <Divider />
-        <Button
-          style={{ color: '#4ed973' }}
-          onClick={() =>dispatch(clients()) }
-                type="dashed"
-              >
-                refresh
-              </Button>
+        
         <Collapse accordion>
           <Panel
             header="Add student , teacher and parent "
@@ -157,9 +147,12 @@ const Agent = () => {
             {getForm()}
           </Panel>
           <Panel header="TOTAL USERS" key="2">
-          
-            {/* {JSON.stringify(data)} */}
-             {/* <List data={data} /> */}
+          <Button style={{ color: '#4ed973' }}
+          onClick={() =>dispatch(clients()) }
+                type="dashed"
+              >
+                refresh
+              </Button>
              <Table  data={data} />
           </Panel>
         </Collapse>

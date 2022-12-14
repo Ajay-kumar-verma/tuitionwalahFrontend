@@ -42,9 +42,12 @@ const { Option } = Select
   }
 
   useEffect(() => {
-    dispatch(clients())
-    setDate(client?.data?.client);
+       setDate(client?.data?.client);
     },[client])
+
+  useEffect(()=>{
+   dispatch(clients())
+   },[])
 
   const obj = (e) => <Option value={e}>{e}</Option>
   

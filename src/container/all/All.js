@@ -2,6 +2,7 @@ import React from 'react'
 import {useSearchParams} from 'react-router-dom'
 import UserProfile from '../userProfile/UserProfile'
 import Nav from '../nav/all/Navbar';
+import Body from '../body/Body';
 import Login from '../login/Login'
 import CreateAccount from '../createAccount/CreateAccount'
 import Contact from '../contact/Contact'
@@ -28,7 +29,7 @@ if(id!==null)
     <>
     <Nav  data={list} />  
     {/* <Outlet /> */}
- 
+   <Body />
     <div   id="login" style={{height:'50px'}} ></div>
      <Login /> 
     <div     id="createAccount" style={{height:"50px"}} ></div>

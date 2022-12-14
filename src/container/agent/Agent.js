@@ -11,16 +11,15 @@ import { PhoneOutlined } from '@ant-design/icons'
 import { Collapse, Select } from 'antd'
 const { Panel } = Collapse
 const { Option } = Select
-const list = (data) =>
-  data.map((e) => (
-    <NavLink className="anchor" to={`${e}`}>
-      {' '}
-      {e}{' '}
-    </NavLink>
-  ))
 
-  const lists = list(['home', 'contact'])
-const Agent = () => {
+ const lists =['home', 'contact'].map((e) => (
+  <NavLink className="anchor" to={`${e}`}>
+    {' '}
+    {e}{' '}
+  </NavLink>
+))
+
+  const Agent = () => {
   const [value, setValue] =useState('')
   const [form] = Form.useForm();
   const {resetFields} = form;
@@ -126,15 +125,15 @@ const Agent = () => {
       </Form>
     )
   }
-// console.log({data});
 
   return (
     <>
-      <nav>
+      {/* <nav>
         <NavBar data={lists} />
       </nav>
       <Outlet />
       {contextHolder}
+
       <div className="form">
         <Divider />
         
@@ -156,9 +155,27 @@ const Agent = () => {
              <Table  data={data} />
           </Panel>
         </Collapse>
-      </div>
+      </div> */}
+ this is agent Page  
     </>
   )
 }
 
-export default Agent
+// export default Agent
+
+const App = ()=>{
+return (
+  <>
+    <nav>
+        <NavBar data={lists} />
+      </nav>
+      <Outlet />
+  "This is agenmt page ..! "
+  
+  </>
+)
+
+}
+
+
+export default App;

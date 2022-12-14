@@ -1,4 +1,3 @@
-import { Loader, Placeholder } from 'rsuite';
 import {Spin,Alert,Row,Col} from 'antd';
 import React, { useEffect ,lazy,Suspense} from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
@@ -153,12 +152,11 @@ useEffect(() => {
     )
 
   if (currentUser === 'agent'){
-    console.log({currentUser})
     return (
       <Routes>
           <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
          <Route path="agent"  element={<Suspense fallback={<Loading />}><Agent /> </Suspense>}>
-          <Route index element={<Suspense fallback={<Loading />}><></></Suspense> } />
+          <Route index element={<Suspense fallback={<Loading />}><>aa</></Suspense> } />
           <Route path="student" element={<Suspense fallback={<Loading />}><Student /></Suspense> } />
           <Route path="teacher" element={<Suspense fallback={<Loading />}><Teacher /></Suspense> } />
           <Route path="parent" element={<Suspense fallback={<Loading />}><Parent /></Suspense> } />

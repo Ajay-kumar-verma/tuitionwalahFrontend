@@ -1,13 +1,13 @@
+import React,{useState,lazy,Suspense} from 'react'
+import './style.css' 
 import {useNavigate} from 'react-router-dom';
-import React,{useState} from 'react'
-import {Button,Drawer,Divider ,Select  } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
-import Logout from '../logout/Logout'
 import action from '../../rtk/actions/index'
-import './style.css'
+import {Button,Drawer,Divider ,Select  } from 'antd';
 const {Option} = Select; 
 
 
+const Logout =lazy(()=>import('../logout/Logout'))
 const Navbar = ({data}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -25,7 +25,6 @@ const Navbar = ({data}) => {
   
 
   const obj=(e,i)=> <Option value={e} key={i} >{e}</Option>
-
   const settings =<Select size={"large"} defaultValue="setting"
   onChange={(value)=>{navigate(`/${value}`)}} style={{width: 150,}}>
   {['changePassword','changePassword','resetPassword','deleteAccount'].map((e,i)=>obj(e,i))}
@@ -66,7 +65,9 @@ const Navbar = ({data}) => {
   {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
   <Divider>{usertypes} </Divider>
   <Divider>  {currentUser!=='user'?null:settings}</Divider>
-  <Divider> <Logout /> </Divider>
+  <Divider> <Suspense fallback="Logging out Please Wait ...">
+  <Logout />
+    </Suspense> </Divider>
     
  
    </Drawer>

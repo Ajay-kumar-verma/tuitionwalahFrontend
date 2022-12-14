@@ -36,6 +36,7 @@
     "react-web-share": "^2.0.2",
     "redux": "^4.2.0",
     "responsive-ant-menu": "^2.0.5",
+    "rsuite": "^5.23.2",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },

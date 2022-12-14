@@ -1,58 +1,76 @@
-import React, { useEffect } from 'react'
+import { Loader, Placeholder } from 'rsuite';
+import {Spin,Alert,Row,Col} from 'antd';
+import React, { useEffect ,lazy,Suspense} from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import action from './rtk/actions/index'
 
-import All from './container/all/All'
-// import Auth from './container/auth/Auth';
-// import Nav from './container/nav/Nav'
+const Loading = () => (
+  <Row justify="space-around" align="middle">
+  <Col span={24}>
 
-import Logout from './container/logout/Logout'
-import Agreement from './container/agreement/Agreement'
+  <Spin tip="Please wait ... ">
+  <Alert
+    message="Conetnt is being fetched "
+    // description=""
+    type="info"
+  />
+</Spin>
+       </Col>
+    </Row>
 
-import User from './container/user/User'
-import Home from './container/user/home/Home'
-import UserContact from './container/user/contact/Contact'
-import Address from './container/user/address/Address'
-import Document from './container/user/document/Document'
-import Payment from './container/payment/Payment'
+  );
 
-import AccountType from './container/user/accountType/AccountType'
+const All =lazy(()=>import('./container/all/All'))
+// const Auth =lazy(()=>import './container/auth/Auth';
+// const Nav =lazy(()=>import './container/nav/Nav'
 
-import Teacher from './container/teacher/Teacher'
-import Education from './container/teacher/education/Education'
-import OtherDetail from './container/teacher/otherDetail/OtherDetail'
+const Logout =lazy(()=>import('./container/logout/Logout'))
+const Agreement =lazy(()=>import('./container/agreement/Agreement'))
 
-// import Setting from './container/user/setting/Setting'
-import ChangePassword from './container/user/setting/changePassword/ChnagePassword'
-import ResetPassword from './container/user/setting/resetPassword/ResetPassword'
-import DeleteAccount from './container/user/setting/deleteAccount/DeleteAccount'
+const User =lazy(()=>import('./container/user/User'))
+const Home =lazy(()=>import('./container/user/home/Home'))
+const UserContact =lazy(()=>import('./container/user/contact/Contact'))
+const Address =lazy(()=>import('./container/user/address/Address'))
+const Document =lazy(()=>import('./container/user/document/Document'))
+const Payment =lazy(()=>import('./container/payment/Payment'))
 
-import Parent from './container/parent/Parent'
-import ParentDetail from './container/parent/parentDetail/ParentDetail'
-import ChildrenDetail from './container/parent/childDetail/ChildDetail'
+const AccountType =lazy(()=>import('./container/user/accountType/AccountType'))
 
-import Agent from './container/agent/Agent'
+const Teacher =lazy(()=>import('./container/teacher/Teacher'))
+const Education =lazy(()=>import('./container/teacher/education/Education'))
+const OtherDetail =lazy(()=>import('./container/teacher/otherDetail/OtherDetail'))
 
-import Admin from './container/admin/Admin'
-import Auser from './container/admin/user/User';
-import Astudent from './container/admin/student/Student';
-import Ateacher from './container/admin/teacher/Teacher';
-import Aparent from './container/admin/parent/Parent';
-import Aagent from './container/admin/agent/Agent';
-import Ateam from './container/admin/team/Team';
-import Aadmin from './container/admin/admin/Admin';
+// const Setting =lazy(()=>import('./container/user/setting/Setting'
+const ChangePassword =lazy(()=>import('./container/user/setting/changePassword/ChnagePassword'))
+const ResetPassword =lazy(()=>import('./container/user/setting/resetPassword/ResetPassword'))
+const DeleteAccount =lazy(()=>import('./container/user/setting/deleteAccount/DeleteAccount'))
 
-import Lead from './container/leads/Lead';
-import Incommingcalls from './container/leads/inCommingCalls/InCommingCall'
-import Outcommingcalls from './container/leads/outGoingCall/OutgoingCall'
+const Parent =lazy(()=>import('./container/parent/Parent'))
+const ParentDetail =lazy(()=>import('./container/parent/parentDetail/ParentDetail'))
+const ChildrenDetail =lazy(()=>import('./container/parent/childDetail/ChildDetail'))
 
-import Student from './container/admin/student/Student'
-import Team from './container/admin/team/Team'
+const Agent =lazy(()=>import('./container/agent/Agent'))
 
-import Main from './container/main/Main'
+const Admin =lazy(()=>import('./container/admin/Admin'))
+const Auser =lazy(()=>import('./container/admin/user/User'));
+const Astudent =lazy(()=>import('./container/admin/student/Student'));
+const Ateacher =lazy(()=>import('./container/admin/teacher/Teacher'));
+const Aparent =lazy(()=>import('./container/admin/parent/Parent'));
+const Aagent =lazy(()=>import('./container/admin/agent/Agent'));
+const Ateam =lazy(()=>import('./container/admin/team/Team'));
+const Aadmin =lazy(()=>import('./container/admin/admin/Admin'));
 
-import NoMatch from './container/noMatch/NoMatch'
+const Lead =lazy(()=>import('./container/leads/Lead'));
+const Incommingcalls =lazy(()=>import('./container/leads/inCommingCalls/InCommingCall'))
+const Outcommingcalls =lazy(()=>import('./container/leads/outGoingCall/OutgoingCall'))
+
+const Student =lazy(()=>import('./container/admin/student/Student'))
+const Team =lazy(()=>import('./container/admin/team/Team'))
+
+const Main =lazy(()=>import('./container/main/Main'))
+
+const NoMatch =lazy(()=>import('./container/noMatch/NoMatch'))
 
 function App() {
   const navigate = useNavigate()
@@ -70,8 +88,7 @@ useEffect(() => {
     navigate(path);
   else if(path==="/")
     navigate(currentUser); 
-
-  setTimeout(()=>dispatch(action.all.changeUser(path.split("/")[1])),0)
+  wait(1).then(()=>dispatch(action.all.changeUser(path.split("/")[1])))
     
 },[currentUser,dispatch,login])
 
@@ -85,46 +102,53 @@ useEffect(() => {
   if (currentUser === '/')
   return (
       <Routes>
-        <Route path="/" element={<All />} />
-        <Route path="agreement" element={<Agreement />} />
-        <Route path="logout" element={<Logout />} />
-        <Route path="*" element={<NoMatch />} />
+       <Route path="/" 
+        element={<Suspense fallback={<Loading />}><All /></Suspense>}
+         />
+      <Route path="agreement" element={<Agreement />} />
+      <Route path="logout"
+        element={<Suspense fallback={<Loading />}><Logout /></Suspense>}
+      />
+      
+      <Route path="*"
+        element={<Suspense fallback={<Loading />}><NoMatch /></Suspense>}
+            />
       </Routes>
     )
 
   if (currentUser === 'user')
     return (
       <Routes>
-          <Route path="logout" element={<Logout />} />
-        <Route path="user" element={<User />}>
-          <Route index element={<Home />} />
-          <Route path="home" element={<Home />} />
-          <Route path="contact" element={<UserContact />} />
-          <Route path="address" element={<Address />} />
-          <Route path="education" element={<Education />} />
-          <Route path="document" element={<Document />} />
-          <Route path="changePassword" element={<ChangePassword />} />
-          <Route path="resetPassword" element={<ResetPassword />} />
-          <Route path="deleteAccount" element={<DeleteAccount />} />
+          <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
+         <Route path="user" element={<Suspense fallback={<Loading />}><User /></Suspense>} >
+          <Route index element={<Suspense fallback={<Loading />}><Home /></Suspense> } />
+          <Route path="home" element={<Suspense fallback={<Loading />}><Home /></Suspense> } />
+          <Route path="contact" element={<Suspense fallback={<Loading />}><UserContact /></Suspense> } />
+          <Route path="address" element={<Suspense fallback={<Loading />}><Address /></Suspense> } />
+          <Route path="education" element={<Suspense fallback={<Loading />}><Education /></Suspense> } />
+          <Route path="document" element={<Suspense fallback={<Loading />}><Document /></Suspense> } />
+          <Route path="changePassword" element={<Suspense fallback={<Loading />}><ChangePassword /></Suspense> } />
+          <Route path="resetPassword" element={<Suspense fallback={<Loading />}><ResetPassword /></Suspense> } />
+          <Route path="deleteAccount" element={<Suspense fallback={<Loading />}><DeleteAccount /></Suspense> } />
 
-          <Route path="parent" element={<Parent />}>
-            <Route index element={<ParentDetail />} />
-            <Route path="parentInfo" element={<ParentDetail />} />
-            <Route path="children" element={<ChildrenDetail />} />
+          <Route path="parent" element={<Suspense fallback={<Loading />}><Parent /> </Suspense>}>
+            <Route index element={<Suspense fallback={<Loading />}><ParentDetail /></Suspense> } />
+            <Route path="parentInfo" element={<Suspense fallback={<Loading />}><ParentDetail /></Suspense> } />
+            <Route path="children" element={<Suspense fallback={<Loading />}><ChildrenDetail /></Suspense> } />
           </Route>
 
-          <Route path="teacher" element={<Teacher />}>
-            <Route index element={<Education />} />
-            <Route path="education" element={<Education />} />
-            <Route path="otherDetail" element={<OtherDetail />} />
+          <Route path="teacher" element={<Suspense fallback={<Loading />}><Teacher /> </Suspense>}>
+            <Route index element={<Suspense fallback={<Loading />}><Education /></Suspense> } />
+            <Route path="education" element={<Suspense fallback={<Loading />}><Education /></Suspense> } />
+            <Route path="otherDetail" element={<Suspense fallback={<Loading />}><OtherDetail /></Suspense> } />
           </Route>
 
-          <Route path="accountType" element={<AccountType />} />
-          <Route path="payment" element={<Payment />} />
+          <Route path="accountType" element={<Suspense fallback={<Loading />}><AccountType /></Suspense> } />
+          <Route path="payment" element={<Suspense fallback={<Loading />}><Payment /></Suspense> } />
         </Route>
 
-        <Route path="logout" element={<Logout />} />
-        <Route path=":id" element={<NoMatch />} />
+        <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
+        <Route path=":id" element={<Suspense fallback={<Loading />}><NoMatch /></Suspense> } />
       </Routes>
     )
 
@@ -132,14 +156,14 @@ useEffect(() => {
     console.log({currentUser})
     return (
       <Routes>
-          <Route path="logout" element={<Logout />} />
-         <Route path="agent"  element={<Agent />} >
-          <Route index element={<></>} />
-          <Route path="student" element={<Student />} />
-          <Route path="teacher" element={<Teacher />} />
-          <Route path="parent" element={<Parent />} />
-          <Route path="team" element={<Team />} />
-          <Route path="*" element={<NoMatch />} />
+          <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
+         <Route path="agent"  element={<Suspense fallback={<Loading />}><Agent /> </Suspense>}>
+          <Route index element={<Suspense fallback={<Loading />}><></></Suspense> } />
+          <Route path="student" element={<Suspense fallback={<Loading />}><Student /></Suspense> } />
+          <Route path="teacher" element={<Suspense fallback={<Loading />}><Teacher /></Suspense> } />
+          <Route path="parent" element={<Suspense fallback={<Loading />}><Parent /></Suspense> } />
+          <Route path="team" element={<Suspense fallback={<Loading />}><Team /></Suspense> } />
+          <Route path="*" element={<Suspense fallback={<Loading />}><NoMatch /></Suspense> } />
         </Route>
       </Routes>
     )}
@@ -147,17 +171,17 @@ useEffect(() => {
   if (currentUser === 'admin')
    return (
     <Routes>
-        <Route path="logout" element={<Logout />} />
-    <Route path="admin" element={<Admin />}>
-      <Route index element={<Auser />} />
-      <Route path="user" element={<Auser />} />
-      <Route path="student" element={<Astudent />} />
-      <Route path="teacher" element={<Ateacher />} />
-      <Route path="parent" element={<Aparent />} />
-      <Route path="agent" element={<Aagent />} />
-      <Route path="team" element={<Ateam />} />
-      <Route path="admin" element={<Aadmin />} />
-      <Route path="*" element={<NoMatch />} />
+        <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
+    <Route path="admin" element={<Suspense fallback={<Loading />}><Admin /> </Suspense> }>
+      <Route index element={<Suspense fallback={<Loading />}><Auser /></Suspense> } />
+      <Route path="user" element={<Suspense fallback={<Loading />}><Auser /></Suspense> } />
+      <Route path="student" element={<Suspense fallback={<Loading />}><Astudent /></Suspense> } />
+      <Route path="teacher" element={<Suspense fallback={<Loading />}><Ateacher /></Suspense> } />
+      <Route path="parent" element={<Suspense fallback={<Loading />}><Aparent /></Suspense> } />
+      <Route path="agent" element={<Suspense fallback={<Loading />}><Aagent /></Suspense> } />
+      <Route path="team" element={<Suspense fallback={<Loading />}><Ateam /></Suspense> } />
+      <Route path="admin" element={<Suspense fallback={<Loading />}><Aadmin /></Suspense> } />
+      <Route path="*" element={<Suspense fallback={<Loading />}><NoMatch /></Suspense> } />
     </Route>
   </Routes>
    )
@@ -165,17 +189,17 @@ useEffect(() => {
    if (currentUser === 'lead')
    return (
     <Routes>
-       <Route path="logout" element={<Logout />} />
-       <Route path="lead" element={<Lead />}>
-      <Route index element={<Incommingcalls />} />
-      <Route path="incommingcalls" element={<Incommingcalls />} />
-      <Route path="outcommingcalls" element={<Outcommingcalls />} />
-      <Route path="outgoingcalls" element={<Ateacher />} />
-      <Route path="parent" element={<Aparent />} />
-      <Route path="agent" element={<Aagent />} />
-      <Route path="team" element={<Ateam />} />
-      <Route path="admin" element={<Aadmin />} />
-      <Route path="*" element={<NoMatch />} />
+       <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
+       <Route path="lead" element={<Suspense fallback={<Loading />}><Lead /> </Suspense> } >
+      <Route index element={<Suspense fallback={<Loading />}><Incommingcalls /></Suspense> } />
+      <Route path="incommingcalls" element={<Suspense fallback={<Loading />}><Incommingcalls /></Suspense> } />
+      <Route path="outcommingcalls" element={<Suspense fallback={<Loading />}><Outcommingcalls /></Suspense> } />
+      <Route path="outgoingcalls" element={<Suspense fallback={<Loading />}><Ateacher /></Suspense> } />
+      <Route path="parent" element={<Suspense fallback={<Loading />}><Aparent /></Suspense> } />
+      <Route path="agent" element={<Suspense fallback={<Loading />}><Aagent /></Suspense> } />
+      <Route path="team" element={<Suspense fallback={<Loading />}><Ateam /></Suspense> } />
+      <Route path="admin" element={<Suspense fallback={<Loading />}><Aadmin /></Suspense> } />
+      <Route path="*" element={<Suspense fallback={<Loading />}><NoMatch /></Suspense> } />
     </Route>
   </Routes>
    )
@@ -184,17 +208,23 @@ useEffect(() => {
   if (currentUser === 'main')
    return (
    <Routes>
-      <Route path="logout" element={<Logout />} />
-    <Route path="main" element={<Main />}>
-      <Route index element={<Team />} />
-      <Route path="team" element={<Team />} />
-      <Route path="user" element={<User />} />
-      <Route path="student" element={<Student />} />
-      <Route path="teacher" element={<Teacher />} />
-      <Route path="parent" element={<Parent />} />
-      <Route path="*" element={<NoMatch />} />
+      <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
+    <Route path="main" element={<Suspense fallback={<Loading />}><Main /> </Suspense> }>
+      <Route index element={<Suspense fallback={<Loading />}><Team /></Suspense> } />
+      <Route path="team" element={<Suspense fallback={<Loading />}><Team /></Suspense> } />
+      <Route path="user" element={<Suspense fallback={<Loading />}><User /></Suspense> } />
+      <Route path="student" element={<Suspense fallback={<Loading />}><Student /></Suspense> } />
+      <Route path="teacher" element={<Suspense fallback={<Loading />}><Teacher /></Suspense> } />
+      <Route path="parent" element={<Suspense fallback={<Loading />}><Parent /></Suspense> } />
+      <Route path="*" element={<Suspense fallback={<Loading />}><NoMatch /></Suspense> } />
     </Route>
   </Routes>)
 }
 
 export default App
+
+function wait(time){
+  return new Promise(resolve =>{
+    setTimeout(resolve,time)
+  }) 
+}

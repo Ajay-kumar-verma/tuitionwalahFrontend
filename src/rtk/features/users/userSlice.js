@@ -22,7 +22,7 @@ const initialState = {
     'home',
     async ()=>{
      try {
-      const {data} = await api.get(`/user/home`)
+      const {data} = await api().get(`/user/home`)
       console.log({data});
        return data; 
     } catch (error) {
@@ -35,7 +35,7 @@ const initialState = {
       'contact',
       async (obj)=>{
        try {
-        const {data} = await api.post(`/user/contact`,obj)
+        const {data} = await api().post(`/user/contact`,obj)
          return data; 
       } catch (error) {
         return error;   
@@ -48,7 +48,7 @@ const initialState = {
       'address',
       async (obj)=>{
       try {
-       const {data} = await  api.post(`/user/address`,obj)
+       const {data} = await  api().post(`/user/address`,obj)
          return data; 
       } catch (error) {
         console.log("error",error);
@@ -61,7 +61,7 @@ const initialState = {
   'education',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/user/address`,obj)
+   const {data} = await  api().post(`/user/address`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -79,7 +79,7 @@ const otherDetail = createAsyncThunk(
   'otherDetail',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/user/otherDetail`,obj)
+   const {data} = await  api().post(`/user/otherDetail`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -92,7 +92,7 @@ const settingChangePassword = createAsyncThunk(
   'settingChangePassword',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/user/`,obj)
+   const {data} = await  api().post(`/user/`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -107,7 +107,7 @@ const settingResetPassword = createAsyncThunk(
   'settingResetPassword',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/user/settingResetPassword`,obj)
+   const {data} = await  api().post(`/user/settingResetPassword`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -122,7 +122,7 @@ const settingDeleteAccount = createAsyncThunk(
   'settingDeleteAccount',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/user/settingDeleteAccount`,obj)
+   const {data} = await  api().post(`/user/settingDeleteAccount`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -137,7 +137,7 @@ const teacherTeacherDetail = createAsyncThunk(
   'teacherTeacherDetail',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/user/teacherTeacherDetail`,obj)
+   const {data} = await  api().post(`/user/teacherTeacherDetail`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -152,7 +152,7 @@ const parentParentDetail = createAsyncThunk(
   'parentParentDetail',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/user/parentParentDetail`,obj)
+   const {data} = await  api().post(`/user/parentParentDetail`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -167,7 +167,7 @@ const parentChildrenDetail = createAsyncThunk(
   'parentChildrenDetail',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/user/parentChildrenDetail`,obj)
+   const {data} = await  api().post(`/user/parentChildrenDetail`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -179,7 +179,7 @@ const parentChildrenDetail = createAsyncThunk(
 const reset = createAsyncThunk(
   'reset',
   async (obj) => {
-    const data = await   api.put(`/user/resetPassword`,obj)
+    const data = await   api().put(`/user/resetPassword`,obj)
     return data.data;
   }
 )
@@ -190,7 +190,7 @@ const reset = createAsyncThunk(
   'delete',
   async () => {
     try {
-    const data = await   api.delete(`/user`)
+    const data = await   api().delete(`/user`)
     return data.data;
     } catch (error) {
        return error;    

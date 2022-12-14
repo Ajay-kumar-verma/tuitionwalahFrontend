@@ -22,7 +22,7 @@ const initialState = {
       'user',
       async (obj)=>{
       try {
-       const {data} = await  api.post(`/admin/user`,obj)
+       const {data} = await  api().post(`/admin/user`,obj)
        console.log({data});
          return data; 
       } catch (error) {
@@ -36,7 +36,7 @@ const initialState = {
   'student',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/admin/student`,obj)
+   const {data} = await  api().post(`/admin/student`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -50,7 +50,7 @@ const teacher = createAsyncThunk(
   'teacher',
   async (obj)=>{
     try {
-      const {data} = await  api.post(`/admin/teacher`,obj)
+      const {data} = await  api().post(`/admin/teacher`,obj)
         return data; 
      } catch (error) {
        console.log("error",error);
@@ -63,7 +63,7 @@ const parent = createAsyncThunk(
   'parent',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/admin/parent`,obj)
+   const {data} = await  api().post(`/admin/parent`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -76,7 +76,7 @@ const agent = createAsyncThunk(
   'agent',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/admin/agent`,obj)
+   const {data} = await  api().post(`/admin/agent`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -91,7 +91,7 @@ const team = createAsyncThunk(
   'team',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/admin/team`,obj)
+   const {data} = await  api().post(`/admin/team`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);
@@ -104,7 +104,7 @@ const admin = createAsyncThunk(
   'admin',
   async (obj)=>{
   try {
-   const {data} = await  api.post(`/admin/admin`,obj)
+   const {data} = await  api().post(`/admin/admin`,obj)
      return data; 
   } catch (error) {
     console.log("error",error);

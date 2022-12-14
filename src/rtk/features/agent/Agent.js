@@ -15,7 +15,7 @@ const add = createAsyncThunk(
     'add',
     async (obj)=>{
       try {
-        const {data} = await  api.post(`/agent/client`,obj)
+        const {data} = await  api().post(`/agent/client`,obj)
           return data; 
        } catch (error) {
          console.log("error",error);
@@ -28,7 +28,7 @@ const add = createAsyncThunk(
     'clients',
     async ()=>{
       try {
-        const {data} = await  api.get(`/agent/client`)
+        const {data} = await  api().get(`/agent/client`)
           return data; 
        } catch (error) {
          console.log("error",error);

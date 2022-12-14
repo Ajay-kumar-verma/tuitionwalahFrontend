@@ -23,7 +23,7 @@ const initialState = {
       'login',
       async (obj) => {
         try {
-        const {data} = await api.post(`/login`,obj);
+        const {data} = await api().post(`/login`,obj);
       console.log({data})
           return data;     
       } catch (error) {
@@ -36,7 +36,7 @@ const initialState = {
     'createAccount',
     async (obj) => {
       console.log({obj})
-      const {data} = await api.post(`/createAccount`,obj);
+      const {data} = await api().post(`/createAccount`,obj);
       console.log("create account data is :",{data});
        return data;   
     }
@@ -46,7 +46,7 @@ const initialState = {
    const reset = createAsyncThunk(
     'reset',
     async (obj) => {
-      const data = await   api.put(`/user/resetPassword`,obj)
+      const data = await   api().put(`/user/resetPassword`,obj)
       return data.data;
     }
   )
@@ -56,7 +56,7 @@ const initialState = {
     async (obj) => {
   console.log("contact ",{obj});
       try { 
-  const {data} = await api.post(`/contact`,obj)
+  const {data} = await api().post(`/contact`,obj)
   return data;
 
 } catch (error) {
@@ -70,7 +70,7 @@ const initialState = {
     async (obj) => {
   // console.log("contact ",{obj});
       try { 
-  const {data} = await api.post(`/userProfile`,obj)
+  const {data} = await api().post(`/userProfile`,obj)
   // console.log({data});
   return data;
 } catch (error) {

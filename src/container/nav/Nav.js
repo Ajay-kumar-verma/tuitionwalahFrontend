@@ -4,7 +4,7 @@ import './style.css'
 import {useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
-import {Button,Drawer,Divider ,Select  } from 'antd';
+import {Button,Drawer,Divider ,Select,List } from 'antd';
 const {Option} = Select; 
 
 
@@ -61,12 +61,12 @@ const Navbar = ({data}) => {
 <Drawer title="TUITION WALAH"  width={220}
  placement="right" onClose={onClose} open={open}>
  
-  <Divider> {MyId} </Divider>
-  {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
-  <Divider>{usertypes} </Divider>
-  <Divider>  {currentUser!=='user'?null:settings}</Divider>
-  <Divider> <Logout /> </Divider>
-    
+ <List
+      // bordered
+      dataSource={[MyId,...data,usertypes,<Logout /> ]}
+      renderItem={(item ,i) =>
+       (<List.Item key={i} >{item}</List.Item>)}
+    />
    </Drawer>
  </>
 )

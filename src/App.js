@@ -156,7 +156,7 @@ useEffect(() => {
       <Routes>
           <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
          <Route path="agent"  element={<Suspense fallback={<Loading />}><Agent /> </Suspense>}>
-          <Route index element={<Suspense fallback={<Loading />}><>aa</></Suspense> } />
+          <Route index element={<Suspense fallback={<Loading />}><></></Suspense> } />
           <Route path="student" element={<Suspense fallback={<Loading />}><Student /></Suspense> } />
           <Route path="teacher" element={<Suspense fallback={<Loading />}><Teacher /></Suspense> } />
           <Route path="parent" element={<Suspense fallback={<Loading />}><Parent /></Suspense> } />

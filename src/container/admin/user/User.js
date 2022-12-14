@@ -48,7 +48,7 @@ const data1 = len===0?[]:data?.slice(0,len/2);
 const data2 = len===0?[]:data?.slice(len/2);
 
 const Lists = (data)=>{
-  console.log({data});
+  //console.log({data});
   
  return  <Collapse accordion>
    {data?.map((e,i)=>{
@@ -98,7 +98,7 @@ const Lists = (data)=>{
         value= <Radio.Group
         //  defaultValue="Active"
           buttonStyle="solid" 
-        // onChange={(e)=>{console.log(e.target)}}
+        // onChange={(e)=>{//console.log(e.target)}}
       >
         <Radio.Button value="Active">Active</Radio.Button>
         <Radio.Button value="Inactive">Inactive</Radio.Button>

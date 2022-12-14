@@ -29,7 +29,6 @@ const { Option } = Select
   const {all,client} = useSelector(({agent:{all,client}}) =>({all,client}))
   const {agent:{add,clients}} = action ;
   console.log({ all,client,add,clients })
-  useEffect(() =>dispatch(clients()),[dispatch,clients]) 
 
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
@@ -43,10 +42,12 @@ const { Option } = Select
   }
 
   useEffect(() => {
+    dispatch(clients())
     setDate(client?.data?.client);
     },[client])
 
   const obj = (e) => <Option value={e}>{e}</Option>
+  
   const getForm = () => {
     return (
       <Form
@@ -107,7 +108,6 @@ const { Option } = Select
           ]}
         >
           <Select defaultValue={'select'}
-          // onChange={(e)=>localStorage.setItem('agentUserType',e)}
           style={{ width: '100%' }}>
             {[
               'student ',
@@ -128,7 +128,7 @@ const { Option } = Select
 
   return (
     <>
-      {/* <nav>
+       <nav>
         <NavBar data={lists} />
       </nav>
       <Outlet />
@@ -143,39 +143,23 @@ const { Option } = Select
            
             key="1"
           >
-            {getForm()}
+         {getForm()} 
           </Panel>
           <Panel header="TOTAL USERS" key="2">
-          <Button style={{ color: '#4ed973' }}
+      <Button style={{ color: '#4ed973' }}
           onClick={() =>dispatch(clients()) }
                 type="dashed"
               >
                 refresh
               </Button>
-             <Table  data={data} />
+             <Table  data={data} /> 
+ 
           </Panel>
         </Collapse>
-      </div> */}
- this is agent Page  
-    </>
+      </div> 
+         </>
   )
 }
 
-// export default Agent
+export default Agent
 
-const App = ()=>{
-return (
-  <>
-    <nav>
-        <NavBar data={lists} />
-      </nav>
-      <Outlet />
-  "This is agenmt page ..! "
-  
-  </>
-)
-
-}
-
-
-export default App;

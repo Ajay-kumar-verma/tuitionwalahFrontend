@@ -114,7 +114,7 @@ const admin = createAsyncThunk(
 )
 
 
-const {reducer ,actions } = createSlice({
+const {reducer } = createSlice({
   name:"admin",
   initialState,
   extraReducers:{

@@ -4,7 +4,7 @@ import './style.css'
 import {useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
-import {Button,Drawer,Divider ,Select,List } from 'antd';
+import {Button,Drawer ,Select,List } from 'antd';
 const {Option} = Select; 
 
 

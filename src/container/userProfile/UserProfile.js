@@ -2,14 +2,14 @@ import React,{useEffect,useState} from 'react';
 import {useSearchParams} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../rtk/actions/index'
-import {List,Col,Row,Button,Divider,Badge,Tag } from 'antd';
+import {List,Col,Row,Button,Divider,Badge } from 'antd';
 import { RWebShare } from "react-web-share"; 
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
 import { QRCode } from 'react-qrcode-logo';
 const App = () => {
   const [userProfile,setUserProfile] = useState([]);
- const [searchParams,setSearchParams] = useSearchParams();
+ const [searchParams] = useSearchParams();
  const state = useSelector(((state)=>state));
  const dispatch = useDispatch();
  //  console.log([...searchParams]);
@@ -27,7 +27,7 @@ const App = () => {
 
 useEffect(() => {
   dispatch(action.all.userProfile({id}));
-},[])
+},[id])
 
 useEffect(() => {
  const {all:{userProfile:{user}}} = state;
@@ -75,9 +75,8 @@ const url= window.location.href;
      />
   </Col>
           <Col span={8}>
-          
-            <a>
-          <RWebShare
+        
+          <RWebShare  rel="noopener"
           data={{
             text: {url} ,
             url ,
@@ -87,8 +86,7 @@ const url= window.location.href;
         >
           <Button style={{color:"#4ed973"}} type="dashed" ghost>Share in web</Button>
         </RWebShare>
-  
-            </a></Col>
+            </Col>
       </Row>     
   
         }
@@ -107,7 +105,7 @@ const url= window.location.href;
            <a href={`tel:+91 ${value}`}><PhoneOutlined /> {value}</a>
            <br />
            <a style={{color:'green'}} href={`https://wa.me/+91${value}?text=Hi ` }
-            data-action="share/whatsapp/share"  
+            data-action="share/whatsapp/share"  rel="noreferrer"
           target="_blank"><FaWhatsapp  />{value}</a>   
            </>
            if(key==='Email')

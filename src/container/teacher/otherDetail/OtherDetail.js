@@ -1,19 +1,11 @@
 import React from 'react'
 import { Form, Input, Button,
-  notification  ,Select ,Divider } from 'antd';
+  notification  ,
+  // Select , 
+   Divider } from 'antd';
 
-  const option = (list)=>list.map((name)=>(<Select.Option allowClear key={name}>{name}</Select.Option>));
-  const selectOption =(placeholder,list) =><Select placeholder={placeholder} mode="tags" style={{width: '100%',}}>{option(list)}</Select>
+  // const option = (list)=>list.map((name)=>(<Select.Option allowClear key={name}>{name}</Select.Option>));
   
-  const selectInput =(...data)=>{
-    return (<>
-     
-        <Form.Item  label={data[0]}  name={data[1]} rules={[{required: true,message: 'required !'}]} >
-        {data[2]!==undefined ? selectOption(data[0],data[2]):null}
-   </Form.Item>
- </>
-    )
- }
  
  const dataInput =(...data)=>{
   const {maxLength} = data[2]; 

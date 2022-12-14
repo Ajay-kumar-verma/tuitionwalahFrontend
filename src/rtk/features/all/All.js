@@ -112,7 +112,6 @@ const {reducer, actions} = createSlice({
        state.login=true;  
       state.userType = userType.reverse();
       state.currentUser=userType[0];
-      window.location.href="/"
     } else{
       localStorage.removeItem('token')
     }

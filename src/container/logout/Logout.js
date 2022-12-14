@@ -1,22 +1,23 @@
 import React from 'react'
-import {Button} from 'antd'; 
 import {GoogleLogout } from 'react-google-login'
 
 import obj from '../../config' 
 
 const Logout = () => {
   const {clientId} = obj;
-  const LoggedOut = ()=>{
-    console.log(`Logginng out`);
+  const LoggedOut = (val)=>{
+    console.log(`Logginng out`,val);
+  return (val)=>{
     localStorage.removeItem('token');
     window.location.href="/"
-   }
+  }
+  }
 
   return <GoogleLogout 
      clientId={clientId}
      buttonText=" Logout "
-     onLogoutSuccess={()=>LoggedOut()}
-     onFailure={()=>LoggedOut()}
+     onLogoutSuccess={LoggedOut}
+     onFailure={LoggedOut}
      />
    
 }

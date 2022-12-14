@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
-import {Button,Drawer  } from 'antd';
+import {Button,Drawer ,List } from 'antd';
 import {CloseCircleOutlined } from '@ant-design/icons';
-
 import './style.css'
 
 const App = ({data}) => {
@@ -17,7 +16,6 @@ return (<>
  <div className="desktop" >
      {data}  
       </div>
- 
 
  {!open?
   <Button type="primary" className="btn" 
@@ -31,10 +29,13 @@ return (<>
 }     
 
 <Drawer title="TUITION WALAH" width='60%' placement="right" onClose={onClose} open={open}>
-{data.map((e,i)=>{
-    if(i===0) return null;
-    return<div>{e}</div>;
-    })}
+  <List
+      // bordered
+      dataSource={data}
+      renderItem={(item ,i) =>
+       (<List.Item key={i} >{i===0?"":item}</List.Item>)}
+    />
+
    </Drawer>
 
 </>)

@@ -1,4 +1,5 @@
-import React,{useState,lazy,Suspense} from 'react'
+import React,{useState} from 'react'
+import Logout from '../logout/Logout'
 import './style.css' 
 import {useNavigate} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
@@ -7,7 +8,6 @@ import {Button,Drawer,Divider ,Select  } from 'antd';
 const {Option} = Select; 
 
 
-const Logout =lazy(()=>import('../logout/Logout'))
 const Navbar = ({data}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -65,11 +65,8 @@ const Navbar = ({data}) => {
   {data.map((e, i)=><Divider key={i} >{e}</Divider>)}
   <Divider>{usertypes} </Divider>
   <Divider>  {currentUser!=='user'?null:settings}</Divider>
-  <Divider> <Suspense fallback="Logging out Please Wait ...">
-  <Logout />
-    </Suspense> </Divider>
+  <Divider> <Logout /> </Divider>
     
- 
    </Drawer>
  </>
 )

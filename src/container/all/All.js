@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import {useSearchParams} from 'react-router-dom'
 import UserProfile from '../userProfile/UserProfile'
 import Nav from '../nav/all/Navbar';

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{memo} from 'react'
 import {List,Row,Col ,Badge  ,Divider } from 'antd';
 import { PhoneOutlined } from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
@@ -70,5 +70,5 @@ return getList(client)
 } 
   
   
-export default  Lists;
+export default  memo(Lists);
 

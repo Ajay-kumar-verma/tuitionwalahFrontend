@@ -1,9 +1,7 @@
 import React from "react";
 import {Row, Col,List,Divider} from 'antd';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
-import { FaWhatsapp } from 'react-icons/fa';
-
-
+import { FaWhatsapp ,FaInstagramSquare} from 'react-icons/fa';
 const data = [
     ['INFROMATION','About Us','terms & Condition ','privacy & policy'],
     ['CONTACT US',
@@ -15,10 +13,12 @@ const data = [
     <h4><a style={{color:'green'}} href={`https://wa.me/+91${9135722324}?text=Hi`}
      data-action="share/whatsapp/share"  rel="noreferrer"
      target="_blank"><FaWhatsapp  /> 9135722324</a></h4>,
-     <h4><a href={`mailto:tuitionwalah@gmail.com`}><MailOutlined /> tuitionwalah@gmail.com</a></h4> ],
+     <h4><a href={`mailto:tuitionwalah@gmail.com`}><MailOutlined /> tuitionwalah@gmail.com</a></h4> ,
+     <h4><a href='https://www.instagram.com/tuitionwalah/'><FaInstagramSquare />  instagram</a></h4>,
+    ],
     ['OPPORTUNITY','Be business partner','Be Agent','Be leader','join us '],
     ['WHO CAN CONTACT US','Student','Teacher','Parent','Schools'],
-     ['ACCOUNT','login Now','create Account','reset password','My Order'],
+    ['ACCOUNT','login Now','create Account','reset password','My Order'],
     ['REGISTERED ADDRESS','Karorichok,phulwarisharif,  Near Aroma Plaza ,Patna (Bihar) 801505'],
  ]
  

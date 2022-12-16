@@ -2,7 +2,7 @@ import React,{useState ,useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
 import { Button,message,Collapse,List,Row,Col,Tag ,Badge  ,Modal,Radio 
-,Divider} from 'antd';
+} from 'antd';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 
 import { FaWhatsapp } from 'react-icons/fa';
@@ -15,20 +15,20 @@ const App = () => {
  const [data ,setData] = useState([]);
  const [messageApi, contextHolder] = message.useMessage()
  const dispatch = useDispatch();
- const state = useSelector(({admin:{user}}) => user)
- const {admin:{user}}  = action;
-
+ const state = useSelector(({main:{user}}) => user)
+ const {main:{user}}  = action;
+console.log({state,user})
 useEffect(() => {
  const {data}  = state ;
- const {users} = data;
+ const {user} = data;
   const type ='success';
     messageApi.open({type,content:data.data})
-    setData(users)
+    setData(user)
 },[state,messageApi])
 
 useEffect(() => {
-  dispatch(user({info:"sent all data"}));
-},[dispatch,user])
+  dispatch(user());
+},[])
   
 const sort =({type}) =>{
   const newData = [...data];
@@ -155,7 +155,7 @@ const Lists = (data)=>{
      reverse </Button>
    <Button  onClick={()=>{sort({type:'name'})}}>
      Name  </Button>
-  <Button  onClick={()=>{dispatch(user({info:"sent all data"}))}} >
+  <Button  onClick={()=>{dispatch(user())}} >
     refresh    
    </Button>
    {contextHolder}

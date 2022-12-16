@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Routes,Route,NavLink ,Outlet} from 'react-router-dom'
+import {NavLink ,Outlet} from 'react-router-dom'
 import NavBar from '../nav/Nav'
 import {Divider} from 'antd'
 

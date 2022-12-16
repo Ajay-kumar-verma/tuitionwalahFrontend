@@ -81,9 +81,9 @@ const getList = (data) => {
 }
 
 const Lists = ({ data }) => {
+  console.log({data})
   if (data === undefined) return 'No data ,refresh or add'
-
-  const { lists } = data
+   const { lists } = data
   if (lists === undefined) return 'No data ,refresh or add'
 
   const client = lists?.map(({ lead, date }) => {

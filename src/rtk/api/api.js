@@ -3,7 +3,7 @@ import config from '../../config'
 const {ENDPOINT} =config ;
 
 
-const timeout=10000;
+const timeout=30000;
 const baseURL=ENDPOINT;
 
 const api =()=>{

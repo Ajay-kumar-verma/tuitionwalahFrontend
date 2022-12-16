@@ -68,7 +68,7 @@ const Student =lazy(()=>import('./container/admin/student/Student'))
 const Team =lazy(()=>import('./container/admin/team/Team'))
 
 const Main =lazy(()=>import('./container/main/Main'))
-
+const Muser =lazy(()=>import('./container/main/user/User'));
 const NoMatch =lazy(()=>import('./container/noMatch/NoMatch'))
 
 function App() {
@@ -169,8 +169,8 @@ useEffect(() => {
   if (currentUser === 'admin')
    return (
     <Routes>
-        <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
-    <Route path="admin" element={<Suspense fallback={<Loading />}><Admin /> </Suspense> }>
+       <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
+      <Route path="admin" element={<Suspense fallback={<Loading />}><Admin /> </Suspense> }>
       <Route index element={<Suspense fallback={<Loading />}><Auser /></Suspense> } />
       <Route path="user" element={<Suspense fallback={<Loading />}><Auser /></Suspense> } />
       <Route path="student" element={<Suspense fallback={<Loading />}><Astudent /></Suspense> } />
@@ -187,8 +187,8 @@ useEffect(() => {
    if (currentUser === 'lead')
    return (
     <Routes>
-       <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
-       <Route path="lead" element={<Suspense fallback={<Loading />}><Lead /> </Suspense> } >
+      <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
+      <Route path="lead" element={<Suspense fallback={<Loading />}><Lead /> </Suspense> } >
       <Route index element={<Suspense fallback={<Loading />}><Incommingcalls /></Suspense> } />
       <Route path="incommingcalls" element={<Suspense fallback={<Loading />}><Incommingcalls /></Suspense> } />
       <Route path="outcommingcalls" element={<Suspense fallback={<Loading />}><Outcommingcalls /></Suspense> } />
@@ -202,15 +202,13 @@ useEffect(() => {
   </Routes>
    )
 
- 
   if (currentUser === 'main')
    return (
-   <Routes>
+     <Routes>
       <Route path="logout" element={<Suspense fallback={<Loading />}><Logout /></Suspense> } />
-    <Route path="main" element={<Suspense fallback={<Loading />}><Main /> </Suspense> }>
-      <Route index element={<Suspense fallback={<Loading />}><Team /></Suspense> } />
-      <Route path="team" element={<Suspense fallback={<Loading />}><Team /></Suspense> } />
-      <Route path="user" element={<Suspense fallback={<Loading />}><User /></Suspense> } />
+      <Route path="main" element={<Suspense fallback={<Loading />}><Main /> </Suspense> }>
+      <Route index element={<Suspense fallback={<Loading />}><Muser /></Suspense> } />
+      <Route path="user" element={<Suspense fallback={<Loading />}><Muser /></Suspense> } />
       <Route path="student" element={<Suspense fallback={<Loading />}><Student /></Suspense> } />
       <Route path="teacher" element={<Suspense fallback={<Loading />}><Teacher /></Suspense> } />
       <Route path="parent" element={<Suspense fallback={<Loading />}><Parent /></Suspense> } />

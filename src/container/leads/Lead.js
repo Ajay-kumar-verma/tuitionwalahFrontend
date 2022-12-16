@@ -11,11 +11,12 @@ const Lead = () => {
  
   return (
   <>
-    <Divider />
+ 
    <nav>
    <NavBar data={data} />
   </nav>
     <Outlet />
+    <Divider />
     </>
     )
 }

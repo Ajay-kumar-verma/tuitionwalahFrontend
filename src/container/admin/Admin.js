@@ -12,13 +12,13 @@ const data =list(
 const Admin = () => {
  
   return (
-  <>
-    <Divider />
+  <div>
    <nav>
    <NavBar data={data} />
   </nav>
     <Outlet />
-    </>
+    <Divider />
+    </div>
     )
 }
 

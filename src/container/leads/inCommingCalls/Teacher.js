@@ -129,7 +129,7 @@ options={data[2].map(e=>({value:e,label:e}))}
         placement:"bottom", 
       });
      
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
   };
   
   return (

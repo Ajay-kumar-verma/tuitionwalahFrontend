@@ -38,13 +38,18 @@ const getList=(data)=>{
           </>
         if(key==='date')
         value=moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a") 
+        
+        if(key === 'demo Date' || key === 'time' || key ==='freeTime')
+          value = String(value[0])+ "\n"+String(value[1]);
 
-
-        return<Row key={String(i)} style={{padding:'1%'}} justify="space-between">
-          <Col span={5}>{key}</Col>
-          <Col span={1}>:</Col>
-          <Col span={16} >{value}</Col>
-       </Row>}}
+        return <List.Item key={String(i)}>
+          <Row   style={{padding:'1%',width: '100%' }}
+           justify="space-between">
+          <Col span={7}>{key}</Col>
+          <Col span={15} >{value}</Col>
+       </Row>
+         </List.Item>
+      }}
           />
      </Badge.Ribbon>
      </Col>
@@ -63,9 +68,54 @@ const Lists = ({data})=>{
   if(lists===undefined) 
   return "No data ,refresh or add"
   
-  const client =lists?.map(({lead,date})=>({...lead,date}));  
+  const client =lists?.map(({lead,date})=>{
+    let obj = {...lead,date};  
+     if(Object.keys(obj).includes('ExtraTeacher')){
+    let val = obj['ExtraTeacher'];
+    delete  obj['ExtraTeacher'];
+    let Extra ={}   
+    val.map(({type,value})=>{
+      Extra[type] =value;
+     return null;
+    })
+   return { ...obj,...Extra}  
+   }
+
+   if(Object.keys(obj).includes('ExtraParent')){
+    let obj = {...lead,date};  
+     if(Object.keys(obj).includes('ExtraParent')){
+    let val = obj['ExtraParent'];
+    delete  obj['ExtraParent'];
+    let Extra ={}   
+    val.map(({type,value})=>{
+     Extra[type] =value;
+     return null;
+    })
+   return { ...obj,...Extra}  
+   }
+  }
+ return obj;   
+ });  
+
+
+
  console.log({client})
  
+ if(client.length===0)
+ return <List 
+ size="small"
+ bordered
+ dataSource={[]} 
+ 
+ />
+ 
+
+//  return  <List 
+//  size="small"
+//  bordered
+//   dataSource={[]} 
+//  />
+
 return getList(client)
 } 
   

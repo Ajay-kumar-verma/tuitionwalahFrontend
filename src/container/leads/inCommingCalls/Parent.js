@@ -198,12 +198,11 @@ const Parent = () => {
 
   const onFinishFailed = (errorInfo) => {
     notification['error']({
-      message: 'Notification Title',
-      description:
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+      message: 'Error',
+      description: JSON.stringify(errorInfo),        
       placement: 'bottom',
     })
-    console.log('Failed:', errorInfo)
+    // console.log('Failed:', errorInfo)
   }
 
   return (

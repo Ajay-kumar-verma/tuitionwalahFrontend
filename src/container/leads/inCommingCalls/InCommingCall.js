@@ -32,7 +32,7 @@ const App = () => {
   useEffect(() => {
     dispatch(list())
   }, [dispatch, list])
-  console.log({ add, list, all, client })
+  // console.log({ add, list, all, client })
 
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
@@ -102,8 +102,7 @@ const App = () => {
                 onClick={() => dispatch(list())}
                 type="dashed"
               >
-                {' '}
-                refresh
+               refresh
               </Button>
 
               <List data={data} />

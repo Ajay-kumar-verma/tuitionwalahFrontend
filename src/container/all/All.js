@@ -14,6 +14,7 @@ const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
   <a href='#createAccount'>CreateAccount</a>,
   <a href='#contact'>Contact</a>,
   <a href='#faq'>FAQ</a>,
+  <ContinueWithGoogle />
  ]
 
 
@@ -28,9 +29,7 @@ if(id!==null)
   return (
     <>
     <Nav  data={list} />  
-   <Body />
- 
-  <div className="form" ><ContinueWithGoogle /></div>
+    {/* <div className="form" ><Body /></div>  */}
     <div   id="login" style={{height:'50px'}} ></div>
      <Login /> 
     <div  id="createAccount" style={{height:"50px"}} ></div>

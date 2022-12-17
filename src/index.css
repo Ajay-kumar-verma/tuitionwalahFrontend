@@ -26,7 +26,8 @@ border-radius: 10px;
     max-width: 800px;
     height:100vh;
     margin:auto;
-    background-color:white;
+    /* background-color:white; */
+    opacity: 9;
   }  
 
  .ImageBox{

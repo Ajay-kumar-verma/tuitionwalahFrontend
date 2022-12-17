@@ -3,22 +3,10 @@ import React, { useEffect ,lazy,Suspense} from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import action from './rtk/actions/index'
+import Loading  from './container/loader/Loader' 
 
-const Loading = () => (
-  <Row justify="space-around" align="middle">
-  <Col span={24}>
-
-  <Spin tip="Please wait ... ">
-  <Alert
-    message="Conetnt is being fetched "
-    // description=""
-    type="info"
-  />
-</Spin>
-       </Col>
-    </Row>
-
-  );
+// const Loading =Loadings[0];
+ 
 
 const All =lazy(()=>import('./container/all/All'))
 // const Auth =lazy(()=>import './container/auth/Auth';
@@ -102,8 +90,7 @@ useEffect(() => {
   return (
       <Routes>
        <Route path="/" 
-        element={<Suspense fallback={<Loading />}><All /></Suspense>}
-         />
+  element={<Suspense fallback={<Loading />}><All /></Suspense>} />
       <Route path="agreement" element={<Agreement />} />
       <Route path="logout"
         element={<Suspense fallback={<Loading />}><Logout /></Suspense>}

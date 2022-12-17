@@ -19,14 +19,14 @@ const Home = () => {
    if(data?.user!==undefined)
    { setInfo(_=>{
      const {user} =data;
-      let {Gender ,Imgae,MyId} =user;
+      let {Gender ,Image,MyId} =user;
      
      return {
       info:Object.keys(user).map(e=>{
         const obj={};
         obj[e]=user[e];
         return obj;
-      }),Gender,ImageLink:Imgae,MyId
+      }),Gender,ImageLink:Image,MyId
      }
    })}
 
@@ -90,10 +90,11 @@ const  UploadImage =()=>(
       renderItem={(item) =>{  
         const key = Object.keys(item)[0];
         let value = Object.values(item)[0];
-        if(key==="_id" || key==="__v" || key ==='Imgae')return null;
+        if(key==="_id" || key==="__v" || key ==='Image')return null;
         if('TimeAtCreated'===key || 'DateOfBirth'===key)
         value = moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a")
         
+
        return <Row justify="space-between">
         <Col span={20}><List.Item>{`${key} : ${value}`}</List.Item></Col>
         <Col span={4}><a href="22" onClick={(e)=>e.preventDefault()} >edit</a></Col>

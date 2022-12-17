@@ -3,7 +3,7 @@ import { GoogleLogin, } from 'react-google-login'
 import { gapi } from 'gapi-script'
 // import { useGoogleOneTapLogin } from 'react-google-one-tap-login'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, Tooltip, Divider } from 'antd'
+import { Button, Checkbox, Form, Input, Tooltip, Divider,Row,Col } from 'antd'
 
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
@@ -12,14 +12,7 @@ import obj from '../../config'
 
 const {clientId} = obj;
 
-const Login = () => {
-  useEffect(() => {
-    gapi.load('client:auth2', () => {
-      gapi.auth2.init({ clientId })
-    })
-  }, [])
-
-  // This code is onetap login
+const Login = () => { 
 
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
@@ -57,22 +50,6 @@ const onFinishFailed = (errorInfo) => {
     if (login) Notification({ type: 'success', content })
     if (!login) Notification({ type: 'warning', content })
   }, [state])
-
-  const responseGoogle = () => {
-    const token=  gapi?.auth2?.getAuthInstance()?.
-     currentUser?.get()?.getAuthResponse()?.id_token;
-    //  console.log({token});
-     dispatch(login({token}))
-  }
- 
-
-  // useGoogleOneTapLogin({
-  //   onError: console.log,
-  //   onSuccess: console.log,
-  //   googleAccountConfigs: {
-  //     client_id: clientId,
-  //   },
-  // })
 
 
   return (
@@ -159,20 +136,22 @@ const onFinishFailed = (errorInfo) => {
           </Button>
         </Form.Item>
       </Tooltip>
-      <p style={{ float: 'right' }}>
-        {' '}
-        Not having account ?<a href="#createAccount">Create account</a>
-      </p>
-      <GoogleLogin
-        clientId={clientId}
-        buttonText="Login with google"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-        isSignedIn={true}
-      />
-      
-   
+      <Row  gutter={{
+        xs: 8,
+        sm: 16,
+        md: 24,
+        lg: 32,
+      }} 
+      justify="space-between"
+      >
+       <Col span={8} >
+       Not having account ?<a href="#createAccount">Create account</a>
+       </Col>
+       <Col  span={8} >
+
+     
+        </Col>
+          </Row>
     </Form>
   )
 }

@@ -8,7 +8,7 @@ import CreateAccount from '../createAccount/CreateAccount'
 import Contact from '../contact/Contact'
 import Faq from '../faq/Faq'
 import Footer from '../footer/Footer'
-
+import ContinueWithGoogle from '../signup-login-with-google/App'
 const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
   <a href='#login'>Login</a>,
   <a href='#createAccount'>CreateAccount</a>,
@@ -28,11 +28,12 @@ if(id!==null)
   return (
     <>
     <Nav  data={list} />  
-    {/* <Outlet /> */}
    <Body />
+ 
+  <div className="form" ><ContinueWithGoogle /></div>
     <div   id="login" style={{height:'50px'}} ></div>
      <Login /> 
-    <div     id="createAccount" style={{height:"50px"}} ></div>
+    <div  id="createAccount" style={{height:"50px"}} ></div>
     <CreateAccount />
     <div     id="contact" style={{height:"30px"}} ></div>
     <Contact />

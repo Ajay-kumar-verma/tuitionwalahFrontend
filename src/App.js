@@ -67,21 +67,6 @@ function App() {
   } = state
   
   const dispatch = useDispatch()
-  
-useEffect(() => {
-  let path = window.location.pathname;
-  path = String(path) 
-   if(!login || (path.startsWith('TW') && path.length === 10 ))
-    return ;
-
-  if(path.split("/")[1]===currentUser)
-    navigate(path);
-  else if(path==="/")
-    navigate(currentUser); 
-  wait(1).then(()=>dispatch(action.all.changeUser(path.split("/")[1])))
-    
-},[currentUser,dispatch,login])
-
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!login && token !== null)
@@ -89,18 +74,50 @@ useEffect(() => {
   }, [dispatch, login ])
 
 
+
+useEffect(() => {
+  const path = window.location.pathname;
+  console.log("1");
+
+  if(!login) return ;
+  console.log("2");
+   if(path?.startsWith('TW') && !!path?.length === 10 )
+   return ;
+   console.log("3");
+  
+   let x= path?.split("/")[1]===currentUser;
+  //  console.log({x})
+   if(x)
+     {
+       navigate(path);
+       console.log({path,currentUser})
+   }
+   else
+   { 
+        navigate(currentUser); 
+        console.log({path,currentUser})
+     }
+    wait(1).then(()=>dispatch(action.all.changeUser(path.split("/")[1])))
+    
+},[currentUser,dispatch,login])
+
+ 
+
   if (currentUser === '/')
   return (
       <Routes>
-       <Route path="/:id" element={<Suspense fallback={<Loading />}><All /></Suspense>} />
-   
-      <Route path="agreement" element={<Agreement />} />
+       <Route path="/:id" element={<Suspense fallback={<Loading />}>
+        <All /></Suspense>} />
+       <Route path="agreement" element={<Agreement />} />
       <Route path="logout"
         element={<Suspense fallback={<Loading />}><Logout /></Suspense>}
       />
       
       <Route path="*"
-        element={<Suspense fallback={<Loading />}><NoMatch /></Suspense>}
+        element={<Suspense fallback={<Loading />}>
+          {/* <NoMatch /> */}
+          <All />
+          </Suspense>}
             />
       </Routes>
     )

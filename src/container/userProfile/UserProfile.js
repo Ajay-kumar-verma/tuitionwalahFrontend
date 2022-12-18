@@ -40,11 +40,10 @@ useEffect(() => {
   }))
 },[state])
 const url= window.location.href;
-
 const Sharebtn = ()=>{
 return <RWebShare  
  rel="noopener"
-data={{ text:"I am open for teaching for teacher required Contact me ! ",url ,
+data={{ text:"I am a home tutor if you have teacher requirement Please contact me .\n",url ,
   title: "I AM OPEN FOR TEACHING  ",
 }}
 onClick={() => console.log("shared successfully!")}

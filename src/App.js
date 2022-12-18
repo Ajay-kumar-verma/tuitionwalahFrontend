@@ -77,20 +77,20 @@ function App() {
 
 useEffect(() => {
   const path = window.location.pathname;
-  console.log("1");
+  // console.log("1");
 
   if(!login) return ;
-  console.log("2");
+  // console.log("2");
    if(path?.startsWith('TW') && !!path?.length === 10 )
    return ;
-   console.log("3");
+  //  console.log("3");
   
    let x= path?.split("/")[1]===currentUser;
-  //  console.log({x})
+  //  console.log({x})z 
    if(x)
      {
        navigate(path);
-       console.log({path,currentUser})
+      //  console.log({path,currentUser})
    }
    else
    { 
@@ -108,6 +108,10 @@ useEffect(() => {
       <Routes>
        <Route path="/:id" element={<Suspense fallback={<Loading />}>
         <All /></Suspense>} />
+       
+       <Route path="/" element={<Suspense fallback={<Loading />}>
+       <All /></Suspense>} />
+        
        <Route path="agreement" element={<Agreement />} />
       <Route path="logout"
         element={<Suspense fallback={<Loading />}><Logout /></Suspense>}
@@ -115,8 +119,8 @@ useEffect(() => {
       
       <Route path="*"
         element={<Suspense fallback={<Loading />}>
-          {/* <NoMatch /> */}
-          <All />
+          <NoMatch />
+          {/* <All /> */}
           </Suspense>}
             />
       </Routes>

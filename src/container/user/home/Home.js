@@ -70,7 +70,7 @@ const  UploadImage =()=>(
         <Col span={8}>MY DETAILS</Col>
         <Col span={8}><RWebShare
         data={{
-          text: `https://www.tuitionwalah.com/?id=${MyId}` ,
+          text: `Create your teacher account and share in web .\n ` ,
           url: `https://www.tuitionwalah.com/?id=${MyId}`,
           title: "I AM OPEN FOR TEACHING  ",
         }}

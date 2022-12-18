@@ -19,7 +19,7 @@ const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
 
 
 const All = () => {
-let {id} = useParams();
+ let {id} = useParams();
 
 id = String(id);   
 if(id.startsWith('TW') && id.length===10)

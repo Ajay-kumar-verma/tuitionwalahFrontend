@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
-
+import {useSearchParams} from 'react-router-dom'
 import {
   Button,
   Checkbox,
@@ -17,6 +17,8 @@ import {
 const { Option } = Select
 
 const App = () => {
+  const [searchParams] = useSearchParams();
+  const referredBy =searchParams.get('id');
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
@@ -25,9 +27,9 @@ const App = () => {
   } = action
   const dispatch = useDispatch()
   const onFinish = (values) =>{
-  const data = {...values,Email:(""+values?.Email)?.toLowerCase()}  
+  const data = {...values,referredBy,Email:(""+values?.Email)?.toLowerCase()}  
   dispatch(createAccount(data))
-
+console.log(data)
   
 }
 

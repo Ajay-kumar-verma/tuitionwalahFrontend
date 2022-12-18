@@ -7,13 +7,13 @@ import { RWebShare } from "react-web-share";
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
 import { QRCode } from 'react-qrcode-logo';
-const App = () => {
+const App = ({id}) => {
   const [userProfile,setUserProfile] = useState([]);
- const [searchParams] = useSearchParams();
+//  const [searchParams] = useSearchParams();
  const state = useSelector(((state)=>state));
  const dispatch = useDispatch();
  //  console.log([...searchParams]);
- const id =searchParams.get('id');
+//  const id =searchParams.get('id');
 //  console.log({id});
  
  //  console.log(Object.fromEntries([...searchParams]))
@@ -23,7 +23,7 @@ const App = () => {
  //  },[searchParams])  
 
 //  console.log({action});
- console.log({state})
+//  console.log({state})
 
 useEffect(() => {
   dispatch(action.all.userProfile({id}));
@@ -39,15 +39,31 @@ useEffect(() => {
     return obj;
   }))
 },[state])
-
 const url= window.location.href;
-    return (
+
+const Sharebtn = ()=>{
+return <RWebShare  
+ rel="noopener"
+data={{ text:"I am open for teaching for teacher required Contact me ! ",url ,
+  title: "I AM OPEN FOR TEACHING  ",
+}}
+onClick={() => console.log("shared successfully!")}
+>
+<Button style={{color:"#4ed973"}} type="dashed" ghost>Share in web</Button>
+</RWebShare>
+
+}
+
+
+
+
+return (
         <div className="form">
         <Divider />
-       
+
      <Divider />
-    <div style={{color:"white",backgroundColor:"blue",textAlign:"center",fontFamily:"sans-serif",
-    height:"45px",
+    <div style={{color:"white",backgroundColor:"blue",textAlign:"center",
+    fontFamily:"sans-serif", height:"45px",
     fontSize:"30px"}} >I AM OPEN FOR TEACHING. </div> 
    <Divider/>     
   
@@ -75,18 +91,8 @@ const url= window.location.href;
      />
   </Col>
           <Col span={8}>
-        
-          <RWebShare  rel="noopener"
-          data={{
-            text: {url} ,
-            url ,
-            title: "I AM OPEN FOR TEACHING  ",
-          }}
-          onClick={() => console.log("shared successfully!")}
-        >
-          <Button style={{color:"#4ed973"}} type="dashed" ghost>Share in web</Button>
-        </RWebShare>
-            </Col>
+         <Sharebtn />
+              </Col>
       </Row>     
   
         }

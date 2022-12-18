@@ -1,5 +1,5 @@
 import React from 'react'
-import {useSearchParams} from 'react-router-dom'
+import {useSearchParams ,useParams} from 'react-router-dom'
 import UserProfile from '../userProfile/UserProfile'
 import Nav from '../nav/all/Navbar';
 import Body from '../body/Body';
@@ -19,13 +19,11 @@ const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
 
 
 const All = () => {
- const [searchParams] = useSearchParams();
-const id =searchParams.get('id');
+let {id} = useParams();
+id = String(id);   
+if(id.startsWith('TW') && id.length===10)
+  return <UserProfile id={id} />
 
-if(id!==null)
- return <UserProfile />
-
-   
   return (
     <>
     <Nav  data={list} />  

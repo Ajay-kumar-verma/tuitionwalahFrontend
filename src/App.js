@@ -69,8 +69,11 @@ function App() {
   const dispatch = useDispatch()
   
 useEffect(() => {
-  if(!login) return ;
- const path = window.location.pathname;
+  let path = window.location.pathname;
+  path = String(path) 
+   if(!login || (path.startsWith('TW') && path.length === 10 ))
+    return ;
+
   if(path.split("/")[1]===currentUser)
     navigate(path);
   else if(path==="/")
@@ -89,8 +92,8 @@ useEffect(() => {
   if (currentUser === '/')
   return (
       <Routes>
-       <Route path="/" 
-  element={<Suspense fallback={<Loading />}><All /></Suspense>} />
+       <Route path="/:id" element={<Suspense fallback={<Loading />}><All /></Suspense>} />
+   
       <Route path="agreement" element={<Agreement />} />
       <Route path="logout"
         element={<Suspense fallback={<Loading />}><Logout /></Suspense>}

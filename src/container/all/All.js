@@ -9,6 +9,7 @@ import Contact from '../contact/Contact'
 import Faq from '../faq/Faq'
 import Footer from '../footer/Footer'
 import ContinueWithGoogle from '../signup-login-with-google/App'
+import Pdf from '../pdf/Pdf'  
 const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
   <a href='#login'>Login</a>,
   <a href='#createAccount'>CreateAccount</a>,
@@ -23,9 +24,10 @@ const All = () => {
 
 id = String(id);   
 if(id.startsWith('TW') && id.length===10)
-  return <UserProfile id={id} />
+   return <UserProfile id={id} />
+const path = window.location.pathname;
 
-  return (
+   return (
     <>
     <Nav  data={list} />  
     {/* <div className="form" ><Body /></div>  */}

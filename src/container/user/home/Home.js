@@ -1,5 +1,5 @@
 import React, { useEffect , useState } from 'react'
-import { Button, Modal,Divider,Image ,List, Row,Col  } from 'antd';
+import { Button, Modal,Divider,Image ,List, Row,Col ,Tooltip  } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux'
 import action from '../../../rtk/actions/index'
@@ -94,9 +94,12 @@ const  UploadImage =()=>(
         if('TimeAtCreated'===key || 'DateOfBirth'===key)
         value = moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a")
         
-
+       if(key === 'referredBy')
+       value = `${value.MyId},${value.FirstName} ${value.LastName}` 
+                     
        return <Row justify="space-between">
-        <Col span={20}><List.Item>{`${key} : ${value}`}</List.Item></Col>
+        <Col span={20}><List.Item>{key} : {value}</List.Item>
+        </Col>
         <Col span={4}><a href="22" onClick={(e)=>e.preventDefault()} >edit</a></Col>
     </Row>        
  

@@ -1,8 +1,12 @@
 import React from "react";
+// import {NavLink } from 'react-router-dom' 
 import {Row, Col,List,Divider} from 'antd';
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 import { FaWhatsapp ,FaInstagramSquare} from 'react-icons/fa';
+
+// const list = (data)=>data.map(e=><NavLink  className="anchor" to={`/${e}`} >{e} </NavLink>) 
 const data = [
+    // ['FREE SERVICE',...list(['Pdf'])],
     ['INFROMATION','About Us','terms & Condition ','privacy & policy'],
     ['CONTACT US',
     <h4><a href={`tel:+918095240976`}><PhoneOutlined />  +91 8095240976 </a></h4>,
@@ -35,18 +39,22 @@ return <Row
    md={{span:11}}
    lg={{span:7}}
  >
- <Divider />
-<List 
+ <List 
  style={{padding:"10px"}}
  dataSource={e}
  renderItem={(item ,i) =>
  (<List.Item  key={i} style={{color:"white"}} >
-   {i===0?<h2 style={{color:"white"}}>{item}</h2>:item}</List.Item>)}
+   {i===0?<h4 style={{color:"white"}}>{item}</h4>:item}</List.Item>)}
    />
 </Col>
 
  })   
 }
+
+<Row>
+ <Col span={24} >© 2022 tuitionwalah.com . All Rights Reserved. </Col>
+
+</Row>
     </Row> ;
 };
 export default Footer;

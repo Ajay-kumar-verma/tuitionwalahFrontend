@@ -140,12 +140,14 @@ const App = () => {
 
                
                     if (key === 'Mobile')
-                      value = (
-                        <>
+                    value = (
+                      <Row justify="space-between">
+                        <Col span={24}>
                           <a href={`tel:+91 ${value}`}>
                             <PhoneOutlined /> {value}
                           </a>
-                          <br />
+                        </Col>
+                        <Col span={24}>
                           <a
                             style={{ color: 'green' }}
                             href={`https://wa.me/+91${value}?text=Hi `}
@@ -156,8 +158,9 @@ const App = () => {
                             <FaWhatsapp />
                             {value}
                           </a>
-                        </>
-                      )
+                        </Col>
+                      </Row>
+                    )
 
                     if (key === 'Email')
                       value = (

@@ -24,7 +24,7 @@ const initialState = {
       async (obj) => {
         try {
         const {data} = await api().post(`/login`,obj);
-     console.log({data})
+    //  console.log({data})
           return data;     
       } catch (error) {
            console.log("Error is : ",error);  

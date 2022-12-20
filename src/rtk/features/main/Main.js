@@ -4,10 +4,7 @@ const {createAsyncThunk,createSlice} = require('@reduxjs/toolkit');
 // read only 
 const initialState = {
    all:{},
-   loading:false,
-   message: '',
-   error:'',
-   user:{apiCall:false, data:{}},
+    user:{loading:false,apiCall:false, data:{}},
   }
   
     const user = createAsyncThunk(
@@ -29,11 +26,11 @@ const {reducer } = createSlice({
   initialState,
   extraReducers:{
     [user.pending]: state => {
-      state.loading = true;
+      state.user.loading = true;
    },
    [user.fulfilled]:(state,{payload}) => {
      state.all = payload;
-     state.loading = false ;
+     state.user.loading = false ;
      state.message=payload?.message;
      state.error=payload?.error;
      state.user.data=payload;
@@ -41,7 +38,7 @@ const {reducer } = createSlice({
     },
    [user.rejected]:(state,{payload}) => {
      state.user =payload; 
-     state.loading = false;
+     state.user.loading = false;
      state.error = payload?.error;
      state.user.data=payload;
      state.message ="request rejected ! ";

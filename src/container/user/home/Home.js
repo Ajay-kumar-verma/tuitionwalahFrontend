@@ -1,5 +1,5 @@
 import React, { useEffect , useState } from 'react'
-import { Button, Modal,Divider,Image ,List, Row,Col ,Tooltip  } from 'antd';
+import { Button, Modal,Divider,Image ,List, Row,Col  } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux'
 import action from '../../../rtk/actions/index'

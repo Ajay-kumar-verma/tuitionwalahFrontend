@@ -24,7 +24,7 @@ const initialState = {
       async (obj) => {
         try {
         const {data} = await api().post(`/login`,obj);
-      console.log({data})
+     console.log({data})
           return data;     
       } catch (error) {
            console.log("Error is : ",error);  
@@ -35,9 +35,9 @@ const initialState = {
   const createAccount = createAsyncThunk(
     'createAccount',
     async (obj) => {
-      console.log({obj})
+      //console.log({obj})
       const {data} = await api().post(`/createAccount`,obj);
-      console.log("create account data is :",{data});
+     // console.log("create account data is :",{data});
        return data;   
     }
    )
@@ -54,7 +54,7 @@ const initialState = {
   const contact = createAsyncThunk(
     'contact',
     async (obj) => {
-  console.log("contact ",{obj});
+  // console.log("contact ",{obj});
       try { 
   const {data} = await api().post(`/contact`,obj)
   return data;
@@ -80,9 +80,6 @@ const initialState = {
   )
  
  
-  
-
-
 const {reducer, actions} = createSlice({
   name:"all",
   initialState,
@@ -104,7 +101,7 @@ const {reducer, actions} = createSlice({
      state.all = payload;
      state.loading = false ;
      const {login,token,message,user,error} =payload;
-    //  console.log({payload})
+      if(!user) return ;
      const {userType} = user;
      if((login===true) && Array.isArray(userType))
       {

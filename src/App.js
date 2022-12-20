@@ -86,7 +86,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!login && token !== null) dispatch(action.all.login({ token }))
-  }, [dispatch, login])
+  },[])
 
   useEffect(() => {
     const path = window.location.pathname

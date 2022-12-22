@@ -137,9 +137,7 @@ const { Option } = Select
       <Outlet />
       {contextHolder}
 
-      <div className="form">
-        <Divider />
-        
+      <div style={{ padding: '10px 1% 0 1%' }}>
         <Collapse accordion>
           <Panel
             header="Add student , teacher and parent "

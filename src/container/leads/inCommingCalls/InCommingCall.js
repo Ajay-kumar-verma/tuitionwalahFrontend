@@ -20,7 +20,7 @@ const { Panel } = Collapse
 const App = () => {
   const [messageApi, contextHolder] = message.useMessage()
   const [userType, SetUserType] = useState('parent')
-  const [data, setDate] = useState()
+  const [data, setDate] = useState([])
   const dispatch = useDispatch()
   const {
     lead: { add, list },
@@ -32,8 +32,8 @@ const App = () => {
   useEffect(() => {
     dispatch(list())
   }, [dispatch, list])
-  // console.log({ add, list, all, client })
 
+  
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
   useEffect(() => {
@@ -47,9 +47,8 @@ const App = () => {
   return (
     <>
       {contextHolder}
-      <div className="form">
-        <Divider />
-        <Collapse accordion>
+      <div style={{ padding: '10px 1% 0 1%' }}>
+           <Collapse accordion>
           <Panel header="Add leads " key="1">
             <Row justify="space-between">
               <Col
@@ -105,7 +104,7 @@ const App = () => {
                refresh
               </Button>
 
-              <List data={data} />
+              <List  data={data} />
             </>
           </Panel>
         </Collapse>

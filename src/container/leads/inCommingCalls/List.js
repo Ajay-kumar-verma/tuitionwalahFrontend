@@ -9,7 +9,7 @@ const getList = (data) => {
     <Row justify="space-between">
       {data.map((e, i) => {
         const keys = Object.keys(e)
-        const { Lead } = e
+        const { Lead ,user} = e
         const indx = keys.indexOf('date')
         keys.splice(indx, 1)
         keys.unshift('date')
@@ -22,10 +22,12 @@ const getList = (data) => {
               color={`#${Math.floor(100000 + Math.random() * 900000)}`}
             >
               <List
+              header={`Added by ${user.FirstName} | +91${user.Mobile} `}
                 size="small"
                 bordered
                 dataSource={keys}
                 renderItem={(key) => {
+                  if(key === `user`) return null;
                   let value = e[key]
                   if (key === 'number')
                     value = (
@@ -81,13 +83,9 @@ const getList = (data) => {
 }
 
 const Lists = ({ data }) => {
-  console.log({data})
-  if (data === undefined) return 'No data ,refresh or add'
-   const { lists } = data
-  if (lists === undefined) return 'No data ,refresh or add'
-
-  const client = lists?.map(({ lead, date }) => {
-    let obj = { ...lead, date }
+  //  console.log({data}, Array.isArray(data.lists))
+  const client = Array.isArray(data?.lists)?data?.lists?.map(({user ,lead, date }) => {
+    let obj = { ...lead, date ,user}
     if (Object.keys(obj).includes('ExtraTeacher')) {
       let val = obj['ExtraTeacher']
       delete obj['ExtraTeacher']
@@ -113,18 +111,9 @@ const Lists = ({ data }) => {
       }
     }
     return obj
-  })
+  }):[]
 
-  console.log({ client })
-
-  if (client.length === 0) return <List size="small" bordered dataSource={[]} />
-
-  //  return  <List
-  //  size="small"
-  //  bordered
-  //   dataSource={[]}
-  //  />
-
+  // console.log({client})
   return getList(client)
 }
 

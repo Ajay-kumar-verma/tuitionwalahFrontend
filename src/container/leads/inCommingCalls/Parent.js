@@ -192,7 +192,7 @@ const Parent = () => {
     lead: { add },
   } = action
   const onFinish = (values) => {
-    dispatch(add({ ...values, Lead: 'parent' }))
+    dispatch(add({ ...values, Lead: 'Parent' }))
     resetFields()
   }
 

@@ -90,12 +90,13 @@ function App() {
 
   useEffect(() => {
     const path = window.location.pathname
-    if (!login || (path?.startsWith('TW') && !!path?.length === 10)) return
+    if (!login || (path.startsWith('TW') && !!path.length === 10)) return
 
-    if (path?.split('/')[1] === currentUser) navigate(path)
+    if (path.split('/')[1] === currentUser) navigate(path)
     else navigate(currentUser)
-    wait(1).then(() => dispatch(action.all.changeUser(path.split('/')[1])))
-  }, [currentUser, dispatch, login])
+
+    // wait(1).then(() => dispatch(action.all.changeUser(path.split('/')[1])))
+  }, [currentUser , login])
 
   if (currentUser === '/')
     return (

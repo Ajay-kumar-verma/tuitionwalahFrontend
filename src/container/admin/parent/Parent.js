@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import action from '../../../rtk/actions';
 
@@ -8,7 +8,10 @@ const state = useSelector(({admin:{parent}}) => parent)
 const {admin:{parent}}  = action;
 
 console.log({ state }, { parent })
-  
+
+useEffect(()=>{
+dispatch(parent())
+},[])
 
   return (
     <div className="form" >

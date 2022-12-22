@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, { useState,Row,Col } from 'react'; 
 import {Table ,Tooltip } from 'antd';
 import {  PhoneOutlined } from '@ant-design/icons'
 import { FaWhatsapp } from 'react-icons/fa';
@@ -58,15 +58,29 @@ const columns = [
     
   ];
 const App = ({data})=>{
-    if(data===undefined)
-    return "No data ,Please refresh or add ";
-  
-  const clientList =  data.map(({client,date})=>({...client,date}));
+   const [info,setInfo]= useState("")
+  let clientList =  data?.map(({client,user,date})=>({...client,date,user}));
   console.log({data,clientList})
-
-return <Table
+ return <Table
 columns={columns} 
-dataSource={clientList}
+
+dataSource={!!clientList?clientList:[]}
+title={() =>{
+if(!!data && data?.length)
+  return `${data?.length} clients || ${!!info? 'Added by '+ info:"unknown"}`
+return "No client"
+}}
+
+onRow={
+  (row,index)=>{
+     return {
+       onMouseEnter:_=> {
+        setInfo(!!row.user?.FirstName?`${row.user?.FirstName} | +91${row.user?.Mobile}`:undefined)
+       }
+     }
+   }
+ }
+
 />
  
 }

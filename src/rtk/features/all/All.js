@@ -100,6 +100,7 @@ const {reducer, actions} = createSlice({
    [login.fulfilled]: (state,{payload}) => {
      state.all = payload;
      state.loading = false ;
+     if(!payload) return ;
      const {login,token,message,user,error} =payload;
       if(!user) return ;
      const {userType} = user;

@@ -13,7 +13,9 @@ const getList = (data) => {
         const indx = keys.indexOf('date')
         keys.splice(indx, 1)
         keys.unshift('date')
+        
         return (
+          
           <Col xs={{ span: 23 }} md={{ span: 23 }} lg={{ span: 11 }}>
             <Divider />
             <Badge.Ribbon
@@ -22,7 +24,7 @@ const getList = (data) => {
               color={`#${Math.floor(100000 + Math.random() * 900000)}`}
             >
               <List
-              header={`Added by ${user.FirstName} | +91${user.Mobile} `}
+              header={`Added by ${user?.FirstName} | +91${user?.Mobile} `}
                 size="small"
                 bordered
                 dataSource={keys}
@@ -83,14 +85,8 @@ const getList = (data) => {
 }
 
 const Lists = ({ data }) => {
-  //  console.log({data}, Array.isArray(data))
-  const client = !Array.isArray(data)? <List
-    size="small"
-    bordered
-    dataSource={[]}
-    renderItem={e =>e } />
-    
-    :data?.map(({user ,lead, date }) => {
+  
+  const client = !Array.isArray(data)?null:data?.map(({user ,lead, date }) => {
     let obj = { ...lead, date ,user}
     if (Object.keys(obj).includes('ExtraTeacher')) {
       let val = obj['ExtraTeacher']
@@ -119,7 +115,15 @@ const Lists = ({ data }) => {
     return obj
   })
 
-  // console.log({client})
+  console.log()
+    if(client.length===0)
+  return <List
+  size="small"
+  bordered
+  dataSource={[]}
+  renderItem={e =>e } 
+  /> 
+
   return getList(client)
 }
 

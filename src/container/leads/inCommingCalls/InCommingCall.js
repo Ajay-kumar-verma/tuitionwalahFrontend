@@ -31,13 +31,13 @@ const App = () => {
   }))
   useEffect(() => {
     dispatch(list())
-  }, [dispatch, list])
+  }, [list])
 
   
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 
   useEffect(() => {
-    setDate(client?.data)
+    setDate(client?.data?.lists)
   }, [client])
 
   useEffect(() => {

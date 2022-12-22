@@ -30,6 +30,10 @@ border-radius: 10px;
     opacity: 9;
   }  
 
+  .container{
+    padding: 10px 1% 0 1%;
+  }
+
  .ImageBox{
   border:1px solid red;
   width:fit-content;

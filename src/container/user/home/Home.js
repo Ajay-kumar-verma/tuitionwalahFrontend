@@ -97,7 +97,8 @@ const  UploadImage =()=>(
         
        if(key === 'referredBy')
        value = `${value.MyId},${value.FirstName} ${value.LastName}` 
-                     
+        if(key === 'userType ') 
+        value = String(value);            
        return <Row justify="space-between">
         <Col span={20}><List.Item>{key} : {value}</List.Item>
         </Col>

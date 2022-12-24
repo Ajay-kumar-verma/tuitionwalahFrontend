@@ -22,13 +22,16 @@ const App = () => {
   const [userType, SetUserType] = useState('parent')
   const [data, setDate] = useState([])
   const dispatch = useDispatch()
+
   const {
     lead: { add, list },
   } = action
+
   const { all, client } = useSelector(({ lead: { all, client } }) => ({
     all,
     client,
   }))
+
   useEffect(() => {
     dispatch(list())
   }, [list])
@@ -46,8 +49,9 @@ const App = () => {
 
   return (
     <>
-      {contextHolder}
+     
       <div style={{ padding: '10px 1% 0 1%' }}>
+      {contextHolder}
            <Collapse accordion>
           <Panel header="Add leads " key="1">
             <Row justify="space-between">

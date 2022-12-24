@@ -683,8 +683,8 @@ function App() {
 
 export default App
 
-function wait(time) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time)
-  })
-}
+// function wait(time) {
+//   return new Promise((resolve) => {
+//     setTimeout(resolve, time)
+//   })
+// }

@@ -26,7 +26,7 @@ const getList = (data) => {
                 size="small"
                 bordered
                 dataSource={keys}
-                renderItem={(key) => {
+                renderItem={(key,i) => {
                   if(key === `user`) return null;
                   let value = e[key]
                   if (key === 'number')

@@ -15,12 +15,13 @@ const Home = () => {
   const { home } = action.user
 
   useEffect(()=>{
-   
-   if(data?.user!==undefined)
-   { setInfo(_=>{
-     const {user} =data;
-      let {Gender ,Image,MyId} =user;
-     
+    if(!data) return ;
+    const {user} = data ;
+    if(!user) return ;
+
+    let {Gender ,Image,MyId} =user;
+      
+    setInfo(_=>{
      return {
       info:Object.keys(user).map(e=>{
         const obj={};
@@ -28,7 +29,7 @@ const Home = () => {
         return obj;
       }),Gender,ImageLink:Image,MyId
      }
-   })}
+   })
 
   },[data])
   // dispatch(home())

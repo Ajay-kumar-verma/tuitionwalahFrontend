@@ -22,7 +22,7 @@ const getList = (data) => {
               color={`#${Math.floor(100000 + Math.random() * 900000)}`}
             >
               <List
-              header={`Added by ${user.FirstName} | +91${user.Mobile} `}
+              header={`Added by ${user?.FirstName} | +91${user?.Mobile} `}
                 size="small"
                 bordered
                 dataSource={keys}

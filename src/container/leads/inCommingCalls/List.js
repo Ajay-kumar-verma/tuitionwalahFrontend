@@ -7,7 +7,7 @@ import moment from 'moment'
 const getList = (data) => {
   return (
     <Row justify="space-between">
-      {data.map((e, i) => {
+      {data?.map((e, i) => {
         const keys = Object.keys(e)
         const { Lead ,user} = e
         const indx = keys.indexOf('date')
@@ -85,10 +85,12 @@ const getList = (data) => {
 const Lists = ({ data }) => {
   //  console.log({data}, Array.isArray(data))
   const client = !Array.isArray(data)? <List
-    size="small"
-    bordered
-    dataSource={[]}
-    renderItem={e =>e } />
+              size="small"
+              bordered
+              dataSource={[]}
+              renderItem={e =>e } 
+              
+    />
     
     :data?.map(({user ,lead, date }) => {
     let obj = { ...lead, date ,user}
@@ -119,8 +121,9 @@ const Lists = ({ data }) => {
     return obj
   })
 
-  // console.log({client})
+  if(Array.isArray(data))
   return getList(client)
+  else return "No data "
 }
 
 export default memo(Lists)

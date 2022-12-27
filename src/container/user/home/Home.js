@@ -77,7 +77,7 @@ info.push({
     {uploadImage?<UploadImage/>:null}
      <br />
   <List
-      size="small"
+      size="middle"
       header={
     <Row justify="space-between">
         <Col span={8}>MY DETAILS</Col>
@@ -116,7 +116,7 @@ info.push({
        return <List.Item >
       <Row style={{width:"100%"}}  justify="space-between">
      <Col span={20}>{key} <b> | </b> {value} </Col>
-     <Col span={2}>Edit</Col>
+     <Col span={2}><a href="modal" onClick={(e)=>e.preventDefault()} > Edit</a></Col>
       </Row>
        </List.Item>  
     }

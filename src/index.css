@@ -23,11 +23,11 @@ border-radius: 10px;
 
 .form{
     padding:5px;
-    max-width: 800px;
+    max-width: 1000px;
     height:100vh;
     margin:auto;
     /* background-color:white; */
-    opacity: 9;
+    /* opacity: 9; */
   }  
 
   .container{

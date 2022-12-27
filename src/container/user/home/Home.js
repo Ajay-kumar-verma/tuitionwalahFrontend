@@ -82,7 +82,7 @@ info.push({
     <Row justify="space-between">
         <Col span={8}>MY DETAILS</Col>
         <Col span={8}><RWebShare
-        data={{
+        data={{ 
           text: `Create your teacher account and share in web .\n ` ,
           url: `${link}/${MyId}`,
           title: "I AM OPEN FOR TEACHING ",

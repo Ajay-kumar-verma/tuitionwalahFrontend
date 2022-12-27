@@ -52,18 +52,30 @@ const  UploadImage =()=>(
 <ImageUpload />
  </Modal>
 ) 
-// console.log({info})
+const link = window.location.href;
+
+info.push({
+"Referal Link":<RWebShare
+        data={{
+          text: `My referral link ` ,
+          url:`${link}/?id=${MyId}`,
+          title: "If you are Teacher Connect with us . ",
+        }}
+        // onClick={() => console.log("shared successfully!")}
+      >
+        <Button style={{color:"#4ed973"}} type="solid" 
+        >share</Button>
+      </RWebShare>
+ 
+})
 
   return (
     <div className="form">
-      <Divider />
      {(<div className="ImageBox">
       <Image width={100} height={100} src={ImageLink!==null?ImageLink:Gender==='male'?maleImage:femaleImage}  /><br/>
      <Button type="text" onClick={()=>{setUploadImage(true)}}>Change Image</Button></div>)} 
     {uploadImage?<UploadImage/>:null}
-      {/* {JSON.stringify(data.user)} */}
-
-  <Divider />
+     <br />
   <List
       size="small"
       header={
@@ -72,12 +84,12 @@ const  UploadImage =()=>(
         <Col span={8}><RWebShare
         data={{
           text: `Create your teacher account and share in web .\n ` ,
-          url: `https://www.tuitionwalah.com/?id=${MyId}`,
-          title: "I AM OPEN FOR TEACHING  ",
+          url: `${link}/${MyId}`,
+          title: "I AM OPEN FOR TEACHING ",
         }}
-        onClick={() => console.log("shared successfully!")}
+        // onClick={() => console.log("shared successfully!")}
       >
-        <Button style={{color:"#4ed973"}} type="dashed" >Share in web</Button>
+        <Button style={{color:"#4ed973"}} type="dashed" >Share your profile </Button>
       </RWebShare>
         </Col>
   <Col span={8}>
@@ -91,20 +103,17 @@ const  UploadImage =()=>(
       renderItem={(item) =>{  
         const key = Object.keys(item)[0];
         let value = Object.values(item)[0];
-        if(key==="_id" || key==="__v" || key ==='Image')return null;
+        if(key==="_id" || key==="__v" || key ==='Image' ||
+         key === 'Active'  || key === 'Block')return null;
         if('TimeAtCreated'===key || 'DateOfBirth'===key)
         value = moment(value).format("dddd, MMMM Do YYYY, h:mm:ss a")
         
        if(key === 'referredBy')
        value = `${value.MyId},${value.FirstName} ${value.LastName}` 
         if(key === 'userType') 
-        {
-            console.log({value})
-          value = value.join('|');
-          console.log({value})
-
-        }           
-       return  <List.Item >
+          value = <b>{value.join(' | ')}</b>;
+                   
+       return <List.Item >
       <Row style={{width:"100%"}}  justify="space-between">
      <Col span={3}>{key}</Col>
      <Col span={15}>{value}</Col>

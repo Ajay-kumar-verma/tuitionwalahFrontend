@@ -115,8 +115,7 @@ info.push({
                    
        return <List.Item >
       <Row style={{width:"100%"}}  justify="space-between">
-     <Col span={10}>{key} | </Col>
-     <Col span={12}>{value}</Col>
+     <Col span={20}>{key} <b> | </b> {value} </Col>
      <Col span={2}>Edit</Col>
       </Row>
        </List.Item>  

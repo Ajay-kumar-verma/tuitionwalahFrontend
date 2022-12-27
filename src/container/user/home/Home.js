@@ -1,11 +1,11 @@
 import React, { useEffect , useState } from 'react'
-import { Button, Modal,Divider,Image ,List, Row,Col  } from 'antd';
+import { Button, Modal,Image ,List, Row,Col  } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux'
 import action from '../../../rtk/actions/index'
 import ImageUpload from './Fileupload';
 import { RWebShare } from "react-web-share";
-import { QRCode } from 'react-qrcode-logo';
+// import { QRCode } from 'react-qrcode-logo';
 import moment from 'moment';
 const Home = () => {
   const [uploadImage, setUploadImage] = useState(false);
@@ -52,7 +52,7 @@ const  UploadImage =()=>(
 <ImageUpload />
  </Modal>
 ) 
-const link = window.location.href;
+const link = `https://www.tuitionwalah.in`;
 
 info.push({
 "Referal Link":<RWebShare
@@ -87,8 +87,8 @@ info.push({
           url: `${link}/${MyId}`,
           title: "I AM OPEN FOR TEACHING ",
         }}
-        // onClick={() => console.log("shared successfully!")}
-      >
+    
+    >
         <Button style={{color:"#4ed973"}} type="dashed" >Share your profile </Button>
       </RWebShare>
         </Col>
@@ -115,9 +115,9 @@ info.push({
                    
        return <List.Item >
       <Row style={{width:"100%"}}  justify="space-between">
-     <Col span={3}>{key}</Col>
-     <Col span={15}>{value}</Col>
-     <Col span={1}>Edit</Col>
+     <Col span={10}>{key} | </Col>
+     <Col span={12}>{value}</Col>
+     <Col span={2}>Edit</Col>
       </Row>
        </List.Item>  
     }

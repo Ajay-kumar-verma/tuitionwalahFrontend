@@ -1,4 +1,3 @@
-import { Spin, Alert, Row, Col } from 'antd'
 import React, { useEffect, lazy, Suspense } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -7,8 +6,6 @@ import Loading from './container/loader/Loader'
 
 import Pdf from './container/pdf/Pdf';
 const All = lazy(() => import('./container/all/All'))
-// const Auth =lazy(()=>import './container/auth/Auth';
-// const Nav =lazy(()=>import './container/nav/Nav'
 
 const Logout = lazy(() => import('./container/logout/Logout'))
 const Agreement = lazy(() => import('./container/agreement/Agreement'))
@@ -30,7 +27,6 @@ const OtherDetail = lazy(() =>
   import('./container/teacher/otherDetail/OtherDetail'),
 )
 
-// const Setting =lazy(()=>import('./container/user/setting/Setting'
 const ChangePassword = lazy(() =>
   import('./container/user/setting/changePassword/ChnagePassword'),
 )
@@ -95,8 +91,7 @@ function App() {
     if (path.split('/')[1] === currentUser) navigate(path)
     else navigate(currentUser)
 
-    // wait(1).then(() => dispatch(action.all.changeUser(path.split('/')[1])))
-  }, [currentUser , login])
+    }, [currentUser , login])
 
   if (currentUser === '/')
     return (

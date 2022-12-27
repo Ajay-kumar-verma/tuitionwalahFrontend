@@ -19,7 +19,7 @@ const initialState = {
 const user = createAsyncThunk('user', async () => {
   try {
     const { data } = await api().get(`/admin/user`)
-    console.log({ data })
+    // console.log({ data })
     return data
   } catch (error) {
     console.log('error', error)

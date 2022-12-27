@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import action from '../../../rtk/actions'
+import React, { useState} from 'react'
 import {
   Button,
-  message,
   Collapse,
   List,
   Row,
@@ -11,8 +8,7 @@ import {
   Tag,
   Badge,
   Modal,
-  Radio,
-  Divider,
+
 } from 'antd'
 import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 
@@ -22,21 +18,19 @@ import moment from 'moment'
 const { Panel } = Collapse
 
 
-  export default function ({data}){
-    // console.log(data);
+ export default function ({data}){
     const [open, setOpen] = useState(false)
-    
-
+  
 const Users =({data})=>{ 
-  console.log(data)
 return  <Collapse accordion>
         {!Array.isArray(data)?"Empty":data?.map((e, i) => {
+          if(!e) return null;
           const { FirstName, LastName, Mobile } = e
           const keys = Object.keys(e)
           const indx = keys.indexOf('TimeAtCreated')
           keys.splice(indx, 1)
           keys.unshift('TimeAtCreated')
-          return (
+       return (
             <Panel
               showArrow={false}
               header={
@@ -159,10 +153,11 @@ return  <Collapse accordion>
 
      }
 
-const len =  data.length;
-const data1 = data.slice(0,len/2) 
-const data2 = data.slice(len/2) 
-   
+ if(!Array.isArray(data)) return "No data";
+let len = parseInt(data.length);
+
+const data1 = data.slice(0,len/2);   
+const data2 = data.slice(len/2);   
    return (<>
   <Modal
         title="Add"
@@ -176,16 +171,17 @@ const data2 = data.slice(len/2)
         <p>some contents...</p>
         <p>some contents...</p>
       </Modal>
+
       <Row justify="space-between">
        <Col  xs={{ span: 24 }} md={{ span: 12 }}  lg={{span: 12}} >
-       <Users data={data1} />
+      {!data1?null:<Users data={data1} />}
        </Col>
        <Col  xs={{ span: 24 }} md={{ span: 12 }} lg={{span: 12}} >
-       <Users data={data2} />
+      {!data2?null:<Users data={data2} />}
+   
      </Col>
      
       </Row>
-        
         
 </>    )
   }

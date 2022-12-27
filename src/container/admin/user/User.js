@@ -4,24 +4,11 @@ import action from '../../../rtk/actions'
 import {
   Button,
   message,
-  Collapse,
-  List,
-  Row,
-  Col,
-  Tag,
-  Badge,
-  Modal,
-  Radio,
-  Divider,
 } from 'antd'
-import { MailOutlined, PhoneOutlined } from '@ant-design/icons'
 
-import { FaWhatsapp } from 'react-icons/fa'
-// import Menu from './Menu';
-import moment from 'moment'
 import Lists from './Lists.js'
 const App = () => {
-   const [data, setData] = useState([])
+  const [data, setData] = useState([])
   const [messageApi, contextHolder] = message.useMessage()
   const dispatch = useDispatch()
   const state = useSelector(({ admin: { user } }) => user)
@@ -31,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     const { data } = state
-    // console.log({data})
+  
     const { users ,message ,recieved } = data
     const type = 'success'
     if(recieved)
@@ -60,7 +47,7 @@ const App = () => {
 
   return (
     <div style={{ padding: '50px 1% 0 1%' }}>
-    
+          {contextHolder}
       <Button
         onClick={() => {
           sort({ type: 'reverse' })
@@ -82,7 +69,7 @@ const App = () => {
       >
         refresh
       </Button>
-      {contextHolder}
+
      <Lists data={data} />
     </div>
   )

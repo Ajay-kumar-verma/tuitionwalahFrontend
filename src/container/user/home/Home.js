@@ -97,22 +97,28 @@ const  UploadImage =()=>(
         
        if(key === 'referredBy')
        value = `${value.MyId},${value.FirstName} ${value.LastName}` 
-        if(key === 'userType ') 
-        value = String(value);            
-       return <Row justify="space-between">
-        <Col span={20}><List.Item>{key} : {value}</List.Item>
-        </Col>
-        <Col span={4}><a href="22" onClick={(e)=>e.preventDefault()} >edit</a></Col>
-    </Row>        
- 
-}
+        if(key === 'userType') 
+        {
+            console.log({value})
+          value = value.join('|');
+          console.log({value})
+
+        }           
+       return  <List.Item >
+      <Row style={{width:"100%"}}  justify="space-between">
+     <Col span={3}>{key}</Col>
+     <Col span={15}>{value}</Col>
+     <Col span={1}>Edit</Col>
+      </Row>
+       </List.Item>  
+    }
   }   
  
    />    
 
       {/* <a href="whatsapp://send?text= Please Visit http://ad-test.easygov.co.in/PanAdvertisement"  rel="nofollow noopener" target="_blank" className="share-icon"><img alt="imag" style={{height:'36px'}}/>Share via Whatsapp</a> */}
       
-     <QRCode 
+     {/* <QRCode 
       // logoImage={ImageLink}
       size={100}
       logoWidth={100}
@@ -125,7 +131,7 @@ const  UploadImage =()=>(
       // value="https://tuitionwalah.com/"
     value={JSON.stringify(info)}
       qrStyle='dots'
-     />,    
+     />,     */}
     </div>
   )
 }

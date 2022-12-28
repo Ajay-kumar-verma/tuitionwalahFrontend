@@ -70,7 +70,7 @@ const Team = lazy(() => import('./container/admin/team/Team'))
 const Main = lazy(() => import('./container/main/Main'))
 const Muser = lazy(() => import('./container/main/user/User'))
 const NoMatch = lazy(() => import('./container/noMatch/NoMatch'))
-const path = window.location.pathname
+
 function App() {
   const navigate = useNavigate()
   const state = useSelector((state) => state)
@@ -79,6 +79,7 @@ function App() {
   } = state
 
   const dispatch = useDispatch()
+  const path = window.location.pathname
   useEffect(() => {
     if (path.startsWith('TW') && !!path.length === 10) return;
     const token = localStorage.getItem('token')

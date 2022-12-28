@@ -70,7 +70,7 @@ const Team = lazy(() => import('./container/admin/team/Team'))
 const Main = lazy(() => import('./container/main/Main'))
 const Muser = lazy(() => import('./container/main/user/User'))
 const NoMatch = lazy(() => import('./container/noMatch/NoMatch'))
-
+const path = window.location.pathname
 function App() {
   const navigate = useNavigate()
   const state = useSelector((state) => state)
@@ -80,18 +80,18 @@ function App() {
 
   const dispatch = useDispatch()
   useEffect(() => {
+    if (path.startsWith('TW') && !!path.length === 10) return;
     const token = localStorage.getItem('token')
     if (!login && token !== null) dispatch(action.all.login({ token }))
   },[])
 
   useEffect(() => {
-    const path = window.location.pathname
-    if (!login || (path.startsWith('TW') && !!path.length === 10)) return
-
+    if ((path.startsWith('TW') && !!path.length === 10) || !login) return
     if (path.split('/')[1] === currentUser) navigate(path)
     else navigate(currentUser)
 
     }, [currentUser , login])
+
 
   if (currentUser === '/')
     return (

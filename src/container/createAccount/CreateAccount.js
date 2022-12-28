@@ -16,9 +16,7 @@ import {
 } from 'antd'
 const { Option } = Select
 
-const App = () => {
-  const [searchParams] = useSearchParams();
-  const referredBy =searchParams.get('id');
+const App = ({referredBy}) => {
   const [messageApi, contextHolder] = message.useMessage()
   const Notification = ({ type, content }) => messageApi.open({ type, content })
 

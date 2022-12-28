@@ -4,13 +4,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import action from '../../rtk/actions/index'
 import { gapi } from 'gapi-script'
 import { useGoogleOneTapLogin } from 'react-google-one-tap-login'
-import {useSearchParams} from 'react-router-dom'
+
 import obj from '../../config'
 const { clientId } = obj
 
-const App = () => {
-  const [searchParams] = useSearchParams();
-  const referredBy =searchParams.get('id');
+const App = ({referredBy}) => {
   const dispatch = useDispatch()
   const state = useSelector(({ all: { loginData } }) => loginData)
   console.log({state})
@@ -24,7 +22,7 @@ const App = () => {
       ?.currentUser?.get()
       ?.getAuthResponse()?.id_token
      dispatch(login({token,referredBy}))
-    console.log({ token }, 'success')
+    // console.log({ token }, 'success')
   }
 
   const onFailure = () => {
@@ -33,7 +31,7 @@ const App = () => {
       ?.currentUser?.get()
       ?.getAuthResponse()?.id_token
      dispatch(login({token}))
-    console.log({ token }, 'failure')
+    // console.log({ token }, 'failure')
   }
 
   

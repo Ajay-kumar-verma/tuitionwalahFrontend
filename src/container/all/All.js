@@ -10,13 +10,6 @@ import Faq from '../faq/Faq'
 import Footer from '../footer/Footer'
 import ContinueWithGoogle from '../signup-login-with-google/App'
 import Pdf from '../pdf/Pdf'  
-const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
-  <a href='#login'>Login</a>,
-  <a href='#createAccount'>CreateAccount</a>,
-  <a href='#contact'>Contact</a>,
-  <a href='#faq'>FAQ</a>,
-  <ContinueWithGoogle />
- ]
 
 
 const All = () => {
@@ -25,16 +18,28 @@ const All = () => {
 id = String(id);   
 if(id.startsWith('TW') && id.length===10)
    return <UserProfile id={id} />
-const path = window.location.pathname;
+
+  const [searchParams] = useSearchParams();
+  const  referredBy=searchParams.get('id');
+ 
+  const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
+  <a href='#login'>Login</a>,
+  <a href='#createAccount'>CreateAccount</a>,
+  <a href='#contact'>Contact</a>,
+  <a href='#faq'>FAQ</a>,
+  <ContinueWithGoogle referredBy={referredBy}  />
+ ]
+
+
 
    return (
     <>
     <Nav  data={list} />  
     {/* <div className="form" ><Body /></div>  */}
     <div   id="login" style={{height:'50px'}} ></div>
-     <Login /> 
+     <Login  /> 
     <div  id="createAccount" style={{height:"50px"}} ></div>
-    <CreateAccount />
+    <CreateAccount referredBy={referredBy} />
     <div     id="contact" style={{height:"30px"}} ></div>
     <Contact />
     <div     id="faq" style={{height:"300px"}} ></div>

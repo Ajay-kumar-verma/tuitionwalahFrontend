@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import action from './rtk/actions/index'
 import Loading from './container/loader/Loader'
-
+import {useSearchParams} from 'react-router-dom'
 import Pdf from './container/pdf/Pdf';
 const All = lazy(() => import('./container/all/All'))
 

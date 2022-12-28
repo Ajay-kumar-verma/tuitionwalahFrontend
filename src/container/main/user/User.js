@@ -42,7 +42,7 @@ const App = () => {
     }
   }
 
-  const len = data?.length
+  const len = parseInt(data?.length)
   const data1 = len === 0 ? [] : data?.slice(0, len / 2)
   const data2 = len === 0 ? [] : data?.slice(len / 2)
 

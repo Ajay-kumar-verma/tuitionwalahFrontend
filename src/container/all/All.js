@@ -26,7 +26,7 @@ const All = () => {
   if (idd.startsWith('TW') && idd.length === 10)
     return <UserProfile id={idd} />
 
-  if (!!(id && t))
+  if (!!(id.startsWith('TW') && idd.length === 10 && t))
     return <ParentTeacher referredBy={id} type={t} />
 
   const referredBy = id;

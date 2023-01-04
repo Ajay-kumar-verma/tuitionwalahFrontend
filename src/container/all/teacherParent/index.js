@@ -1,10 +1,18 @@
 import React from 'react'
 
 const ParentTeacher = ({referredBy,type}) => {
- console.log({referredBy,type})
+
+    // console.log({referredBy,type})
  
     return (
-    <div>index</div>
+    <div>
+  {
+  type==='p'?"Parent":
+  type==='t'?"Teacher":
+  'No match '
+  }
+
+    </div>
   )
 }
 

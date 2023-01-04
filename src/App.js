@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import action from './rtk/actions/index'
 import Loading from './container/loader/Loader'
-import {useSearchParams} from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import Pdf from './container/pdf/Pdf';
 const All = lazy(() => import('./container/all/All'))
 
@@ -57,11 +57,11 @@ const Ateam = lazy(() => import('./container/admin/team/Team'))
 const Aadmin = lazy(() => import('./container/admin/admin/Admin'))
 
 const Lead = lazy(() => import('./container/leads/Lead'))
-const Incommingcalls = lazy(() =>
-  import('./container/leads/inCommingCalls/InCommingCall'),
+const Incommingcalls = lazy(
+  () => import('./container/leads/inCommingCalls/InCommingCall')
 )
-const Outcommingcalls = lazy(() =>
-  import('./container/leads/outGoingCall/OutgoingCall'),
+const Outcommingcalls = lazy(
+  () => import('./container/leads/outGoingCall/OutgoingCall')
 )
 
 const Student = lazy(() => import('./container/admin/student/Student'))
@@ -70,27 +70,27 @@ const Team = lazy(() => import('./container/admin/team/Team'))
 const Main = lazy(() => import('./container/main/Main'))
 const Muser = lazy(() => import('./container/main/user/User'))
 const NoMatch = lazy(() => import('./container/noMatch/NoMatch'))
-const path = window.location.pathname
 function App() {
   const navigate = useNavigate()
-  const state = useSelector((state) => state)
-  const {
-    all: { login, currentUser },
-  } = state
+  const state = useSelector(state => state)
+  const { all: { login, currentUser } } = state
 
+  const path = window.location.pathname
   const dispatch = useDispatch()
+
   useEffect(() => {
-    if (path.startsWith('TW') && !!path.length === 10) return;
+    if ( path.split('/')[1]==='p') return;
     const token = localStorage.getItem('token')
     if (!login && token !== null) dispatch(action.all.login({ token }))
-  },[])
+  }, [])
 
   useEffect(() => {
-    if ((path.startsWith('TW') && !!path.length === 10) || !login) return
+    if ( path.split('/')[1]==='p') return;
+   
     if (path.split('/')[1] === currentUser) navigate(path)
     else navigate(currentUser)
 
-    }, [currentUser , login])
+  }, [currentUser, login])
 
 
   if (currentUser === '/')
@@ -105,17 +105,9 @@ function App() {
           }
         />
 
-        <Route
-          path="/:id"
-          element={
-            <Suspense fallback={<Loading />}>
-              <All />
-            </Suspense>
-          }
-        />
 
         <Route
-          path="/"
+          path="*"
           element={
             <Suspense fallback={<Loading />}>
               <All />
@@ -132,16 +124,16 @@ function App() {
             </Suspense>
           }
         />
-
+{/*  
         <Route
           path="*"
           element={
             <Suspense fallback={<Loading />}>
               <NoMatch />
-              {/* <All /> */}
             </Suspense>
           }
-        />
+        />  */}
+
       </Routes>
     )
 

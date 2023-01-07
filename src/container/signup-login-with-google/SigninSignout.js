@@ -11,7 +11,7 @@ const { clientId } = obj
 const App = ({referredBy}) => {
   const dispatch = useDispatch()
   const state = useSelector(({ all: { loginData } }) => loginData)
-  console.log({state})
+  // console.log({state})
   const {
     all: { login },
   } = action

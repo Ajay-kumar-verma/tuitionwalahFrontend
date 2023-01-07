@@ -1,5 +1,5 @@
 import React from 'react'
-import {useSearchParams ,useParams} from 'react-router-dom'
+import { useSearchParams, useParams } from 'react-router-dom'
 import UserProfile from '../userProfile/UserProfile'
 import Nav from '../nav/all/Navbar';
 import Body from '../body/Body';
@@ -8,44 +8,53 @@ import CreateAccount from '../createAccount/CreateAccount'
 import Contact from '../contact/Contact'
 import Faq from '../faq/Faq'
 import Footer from '../footer/Footer'
-import ContinueWithGoogle from '../signup-login-with-google/App'
-import Pdf from '../pdf/Pdf'  
-
+import ContinueWithGoogle from '../signup-login-with-google/SigninSignout'
+import ParentTeacher from './teacherParent'
 
 const All = () => {
- let {id} = useParams();
+  const prms = useParams();
+  const [searchParams, setSearchParam] = useSearchParams();
+  const srchs = searchParams.entries();
+  const srchObj = {};
 
-id = String(id);   
-if(id.startsWith('TW') && id.length===10)
-   return <UserProfile id={id} />
+  for (const [key, val] of srchs) srchObj[key] = val
+  let { id, t } = srchObj;
+  console.log({ prms, id, t })
 
-  const [searchParams] = useSearchParams();
-  const  referredBy=searchParams.get('id');
- 
-  const list =[<a href="/" style={{width:"40%"}} >TUITION WALAH</a>,
+  const idd = prms['*'].split("/")[1]?.toUpperCase();
+  if (!!idd && idd.startsWith('TW') && idd.length === 10)
+    return <UserProfile id={idd} />
+
+    id= id?.toUpperCase();
+    t=t?.toLowerCase();
+  if (!!id && !!(id.startsWith('TW') && id.length === 10 && t))
+    return <ParentTeacher referredBy={id} type={t} />
+
+  const referredBy = id;
+  const list = [<a href="/" style={{ width: "40%" }} >TUITION WALAH</a>,
   <a href='#login'>Login</a>,
   <a href='#createAccount'>CreateAccount</a>,
   <a href='#contact'>Contact</a>,
   <a href='#faq'>FAQ</a>,
-  <ContinueWithGoogle referredBy={referredBy}  />
- ]
+  <ContinueWithGoogle referredBy={referredBy} />
+  ]
 
 
 
-   return (
+  return (
     <>
-    <Nav  data={list} />  
-    {/* <div className="form" ><Body /></div>  */}
-    <div   id="login" style={{height:'50px'}} ></div>
-     <Login  /> 
-    <div  id="createAccount" style={{height:"50px"}} ></div>
-    <CreateAccount referredBy={referredBy} />
-    <div     id="contact" style={{height:"30px"}} ></div>
-    <Contact />
-    <div     id="faq" style={{height:"300px"}} ></div>
-    <Faq />
-    <div     style={{height:"20px"}} ></div>
-    <Footer />
+      <Nav data={list} />
+      {/* <div className="form" ><Body /></div>  */}
+      <div id="login" style={{ height: '50px' }} ></div>
+      <Login />
+      <div id="createAccount" style={{ height: "50px" }} ></div>
+      <CreateAccount referredBy={referredBy} />
+      <div id="contact" style={{ height: "30px" }} ></div>
+      <Contact />
+      <div id="faq" style={{ height: "300px" }} ></div>
+      <Faq />
+      <div style={{ height: "20px" }} ></div>
+      <Footer />
     </>
   )
 }

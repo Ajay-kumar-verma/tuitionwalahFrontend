@@ -114,7 +114,15 @@ info.push({
           value = <b>{value.join(' | ')}</b>;
                    
        return <List.Item >
-      <Row style={{width:"100%"}}  justify="space-between">
+      <Row style={{width:"100%"}} 
+    
+      gutter={{
+        xs: 1,
+        sm: 2,
+        md: 2,
+        lg: 3,
+      }}
+      justify="space-between">
      <Col span={20}>{key} <b> | </b> {value} </Col>
      <Col span={2}><a href="modal" onClick={(e)=>e.preventDefault()} > Edit</a></Col>
       </Row>

@@ -12,8 +12,7 @@ const User = () => {
     <>
    <nav>
    <NavBar data={data} />
-  
-  </nav>
+   </nav>
 <Outlet />
     </>
  

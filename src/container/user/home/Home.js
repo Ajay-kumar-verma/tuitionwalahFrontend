@@ -58,7 +58,7 @@ info.push({
 "Referal Link":<RWebShare
         data={{
           text: `My referral link ` ,
-          url:`${link}/?id=${MyId}`,
+          url:`${link}/p?id=${MyId}`,
           title: "If you are Teacher Connect with us . ",
         }}
         // onClick={() => console.log("shared successfully!")}
@@ -84,7 +84,7 @@ info.push({
         <Col span={8}><RWebShare
         data={{ 
           text: `Create your teacher account and share in web .\n ` ,
-          url: `${link}/${MyId}`,
+          url: `${link}/p/${MyId}`,
           title: "I AM OPEN FOR TEACHING ",
         }}
     

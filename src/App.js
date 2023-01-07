@@ -84,6 +84,7 @@ function App() {
     if (!login && token !== null) dispatch(action.all.login({ token }))
   }, [])
 
+  
   useEffect(() => {
     if ( path.split('/')[1]==='p') return;
    

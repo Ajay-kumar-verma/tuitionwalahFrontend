@@ -93,22 +93,25 @@ const App = () => {
               <Help />
               </Col>
               <Col
-                xs={{ span: 23, }}
-                md={{ span: 11, }}
-                lg={{ span: 11, }}
-              > 
+               span={23}
+                > 
+            <Button
+                style={{width: '30%' }}
+               >
+              {userType} 
+              </Button>
               
             <Button
-                style={{width: '20%' }}
+                style={{width: '40%' }}
                 onClick={()=>navigator.clipboard.writeText(`${url}/p?id=${MyId}&t=${userType === 'parent'?'p':`t`}`)}
               >
-               Copy 
+               Copy Link
               </Button>
               <Button
-                style={{width: '20%' }}
+                style={{width: '30%' }}
                 onClick={()=>window.open(`${url}/p?id=${MyId}&t=${userType === 'parent'?'p':`t`}`)}
                 >
-              open  
+              Open  
               </Button>
               </Col> 
             </Row>

@@ -184,7 +184,7 @@ const daysOption = selectInput(
 )
 formData.push(daysOption)
 
-const Parent = () => {
+const Parent = ({referredBy}) => {
   const [form] = Form.useForm()
   const { resetFields } = form
   const dispatch = useDispatch()
@@ -192,7 +192,7 @@ const Parent = () => {
     lead: { add },
   } = action
   const onFinish = (values) => {
-    dispatch(add({ ...values, Lead: 'Parent' }))
+    dispatch(add({ ...values, referredBy, Lead: 'Parent' }))
     resetFields()
   }
 

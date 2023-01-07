@@ -111,13 +111,13 @@ options={data[2].map(e=>({value:e,label:e}))}
 ].map((e)=>e+" Rupees " ))
     formData.push(expectedFeeOption);
 
- const Teacher = () => {
+ const Teacher = ({referredBy}) => {
   const [form] = Form.useForm();
   const {resetFields} = form;
   const dispatch = useDispatch();
   const {lead: { add }} = action
   const onFinish = (values) =>{
-       dispatch(add({...values,Lead:'Teacher'}))
+       dispatch(add({...values,referredBy,Lead:'Teacher'}))
         resetFields();
       }
 

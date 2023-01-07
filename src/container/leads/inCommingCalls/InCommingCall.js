@@ -47,6 +47,8 @@ const App = () => {
     Notification({ type: 'info', content: data?.message })
   }, [data])
 
+  const url =  `https://www.tuitionwalah.in`  //window.location.href
+   
   return (
     <>
      
@@ -86,8 +88,33 @@ const App = () => {
                 lg={{ span: 11, order: 2 }}
               >
               <Help />
-               
               </Col>
+              <Col
+                xs={{ span: 23, }}
+                md={{ span: 11, }}
+                lg={{ span: 11, }}
+              > 
+             <Button
+                style={{width: '50%' }}
+                onClick={()=>navigator.clipboard.writeText(`${url}/p?id=twe0001019&t=t`)}
+              >
+               Copy Teacher link 
+              </Button>
+              <Button
+                style={{width: '50%' }}
+                onClick={()=>window.open(`${url}/p?id=twe0001019&t=t`)}
+                >
+              open  Teacher link 
+              </Button>
+              </Col> 
+
+              <Col
+                xs={{ span: 23,  }}
+                md={{ span: 11,  }}
+                lg={{ span: 11,  }}
+              > 
+              </Col> 
+
             </Row>
 
             {userType === 'parent' ? (

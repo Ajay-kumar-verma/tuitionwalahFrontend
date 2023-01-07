@@ -1,18 +1,19 @@
 import React from 'react'
+import Teacher from './TeacherForm'
+import Parent from './ParentForm'
 
 const ParentTeacher = ({referredBy,type}) => {
-
-    // console.log({referredBy,type})
  
-    return (
-    <div>
-  {
-  type==='p'?"Parent":
-  type==='t'?"Teacher":
-  'No match '
-  }
-
-    </div>
+  
+ return (
+     <div  className='form container'>
+ 
+   {type==='p'?<Parent referredBy={referredBy}  />:
+    type==='t'?<Teacher referredBy={referredBy}  />:
+   null
+   }
+ 
+      </div>
   )
 }
 

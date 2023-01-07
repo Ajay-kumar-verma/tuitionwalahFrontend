@@ -10,7 +10,6 @@ import Faq from '../faq/Faq'
 import Footer from '../footer/Footer'
 import ContinueWithGoogle from '../signup-login-with-google/SigninSignout'
 import ParentTeacher from './teacherParent'
-import Pdf from '../pdf/Pdf'
 
 const All = () => {
   const prms = useParams();
@@ -19,14 +18,16 @@ const All = () => {
   const srchObj = {};
 
   for (const [key, val] of srchs) srchObj[key] = val
-  const { id, t } = srchObj;
-  // console.log({ prms, id, t })
+  let { id, t } = srchObj;
+  console.log({ prms, id, t })
 
-  const idd = prms['*'].split("/")[1]
-  if (idd.startsWith('TW') && idd.length === 10)
+  const idd = prms['*'].split("/")[1]?.toUpperCase();
+  if (!!idd && idd.startsWith('TW') && idd.length === 10)
     return <UserProfile id={idd} />
 
-  if (!!(id.startsWith('TW') && idd.length === 10 && t))
+    id= id?.toUpperCase();
+    t=t?.toLowerCase();
+  if (!!id && !!(id.startsWith('TW') && id.length === 10 && t))
     return <ParentTeacher referredBy={id} type={t} />
 
   const referredBy = id;

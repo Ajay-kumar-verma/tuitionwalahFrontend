@@ -22,7 +22,7 @@ const App = () => {
   const [userType, SetUserType] = useState('parent')
   const [data, setDate] = useState([])
   const dispatch = useDispatch()
-
+  let {all:{user:{MyId}}} = useSelector(({all})=>all);
   const {
     lead: { add, list },
   } = action
@@ -47,8 +47,11 @@ const App = () => {
     Notification({ type: 'info', content: data?.message })
   }, [data])
 
-  const url =  `https://www.tuitionwalah.in`  //window.location.href
-   
+  let url =  window.location.href
+
+  url = url.substring(0,url.length-5); 
+  
+  console.log({url})
   return (
     <>
      
@@ -94,27 +97,20 @@ const App = () => {
                 md={{ span: 11, }}
                 lg={{ span: 11, }}
               > 
-             <Button
-                style={{width: '50%' }}
-                onClick={()=>navigator.clipboard.writeText(`${url}/p?id=twe0001019&t=t`)}
+              
+            <Button
+                style={{width: '20%' }}
+                onClick={()=>navigator.clipboard.writeText(`${url}/p?id=${MyId}&t=${userType === 'parent'?'p':`t`}`)}
               >
-               Copy Teacher link 
+               Copy 
               </Button>
               <Button
-                style={{width: '50%' }}
-                onClick={()=>window.open(`${url}/p?id=twe0001019&t=t`)}
+                style={{width: '20%' }}
+                onClick={()=>window.open(`${url}/p?id=${MyId}&t=${userType === 'parent'?'p':`t`}`)}
                 >
-              open  Teacher link 
+              open  
               </Button>
               </Col> 
-
-              <Col
-                xs={{ span: 23,  }}
-                md={{ span: 11,  }}
-                lg={{ span: 11,  }}
-              > 
-              </Col> 
-
             </Row>
 
             {userType === 'parent' ? (

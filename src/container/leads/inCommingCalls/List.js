@@ -83,6 +83,7 @@ const getList = (data) => {
 }
 
 const Lists = ({ data }) => {
+  console.log({data});
   //  console.log({data}, Array.isArray(data))
   const client = !Array.isArray(data)? <List
               size="small"
@@ -91,8 +92,7 @@ const Lists = ({ data }) => {
               renderItem={e =>e } 
               
     />
-    
-    :data?.map(({user ,lead, date }) => {
+        :data?.map(({user ,lead, date }) => {
     let obj = { ...lead, date ,user}
     if (Object.keys(obj).includes('ExtraTeacher')) {
       let val = obj['ExtraTeacher']

@@ -22,7 +22,7 @@ const App = ({referredBy}) => {
       ?.currentUser?.get()
       ?.getAuthResponse()?.id_token
      dispatch(login({token,referredBy}))
-    // console.log({ token }, 'success')
+    console.log({ token }, 'success')
   }
 
   const onFailure = () => {
@@ -31,7 +31,7 @@ const App = ({referredBy}) => {
       ?.currentUser?.get()
       ?.getAuthResponse()?.id_token
      dispatch(login({token}))
-    // console.log({ token }, 'failure')
+    console.log({ token }, 'failure')
   }
 
   

@@ -23,6 +23,7 @@ const initialState = {
       'login',
       async (obj) => {
         try {
+          console.log({obj});
       const {data} = await api().post(`/login`,obj);
       console.log({data})
           return data;     
